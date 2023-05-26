@@ -3,9 +3,13 @@ import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from '../styles/Form.module.css'
 import Image from "next/image";
-import { IconName } from "react-icons/hi";
+import { HiMail, HiFingerPrint } from "react-icons/hi";
+import { useState } from "react";
 
 export default function Login() {
+
+  const[show, setShow] = useState(false);
+
   return (
     <Layout>
       <Head>
@@ -26,14 +30,20 @@ export default function Login() {
               placeholder="Email"
               className={styles.input_text}
             />
+            <span className="icon flex items-center px-4">
+              <HiMail size={25} />
+            </span>
           </div>
           <div className={styles.input_group}>
             <input
-              type="password"
+              type={`${show ? "text" : "password"}`}
               name="password"
               placeholder="Password"
               className={styles.input_text}
             />
+            <span className="icon flex items-center px-4" onClick={() => setShow(!show)}>
+              <HiFingerPrint size={25} />
+            </span>
           </div>
 
           <div className="input-button`">
