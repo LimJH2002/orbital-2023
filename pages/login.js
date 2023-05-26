@@ -3,7 +3,7 @@ import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from '../styles/Form.module.css'
 import Image from "next/image";
-import { HiMail, HiFingerPrint } from "react-icons/hi";
+import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useState } from "react";
 
 export default function Login() {
@@ -18,7 +18,9 @@ export default function Login() {
 
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">FinForce Login</h1>
+          <h1 className="text-gray-800 text-4xl font-bold py-4">
+            FinForce Login
+          </h1>
           <p className="w-3/4 mx-auto text-gray-400">Simplify your wealth</p>
         </div>
 
@@ -31,7 +33,7 @@ export default function Login() {
               className={styles.input_text}
             />
             <span className="icon flex items-center px-4">
-              <HiMail size={25} />
+              <HiAtSymbol size={25} />
             </span>
           </div>
           <div className={styles.input_group}>
@@ -41,7 +43,10 @@ export default function Login() {
               placeholder="Password"
               className={styles.input_text}
             />
-            <span className="icon flex items-center px-4" onClick={() => setShow(!show)}>
+            <span
+              className="icon flex items-center px-4"
+              onClick={() => setShow(!show)}
+            >
               <HiFingerPrint size={25} />
             </span>
           </div>
