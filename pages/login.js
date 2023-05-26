@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Layout from "../layout/layout";
 import Link from "next/link";
+import styles from '../styles/Form.module.css'
+import Image from "next/image";
 
 export default function Login() {
   return (
@@ -16,21 +18,39 @@ export default function Login() {
         </div>
 
         <form className="flex flex-col gap-5">
-          <div className="input-group">
-            <input type="email" name="email" placeholder="Email" />
+          <div className={styles.input_group}>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className={styles.input_text}
+            />
           </div>
-          <div className="input-group">
-            <input type="password" name="password" placeholder="Password" />
+          <div className={styles.input_group}>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className={styles.input_text}
+            />
           </div>
 
           <div className="input-button">
-            <button type="submit">Login</button>
+            <button type="submit" className={styles.button}>
+              Login
+            </button>
           </div>
           <div className="input-button">
-            <button type="submit">Sign in with Google</button>
+            <button type="button" className={styles.button_custom}>
+              <Image src={"/assets/google.svg"} width="20" height="20"></Image>
+              Sign in with Google
+            </button>
           </div>
           <div className="input-button">
-            <button type="submit">Sign in with Github</button>
+            <button type="button" className={styles.button_custom}>
+              <Image src={"/assets/github.svg"} width="25" height="25"></Image>
+              Sign in with Github
+            </button>
           </div>
         </form>
 
