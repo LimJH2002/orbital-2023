@@ -24,7 +24,7 @@ export default function Login() {
           <p className="w-3/4 mx-auto text-gray-400">Simplify your wealth</p>
         </div>
 
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" method="POST">
           <div className={styles.input_group}>
             <input
               type="email"

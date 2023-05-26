@@ -23,7 +23,7 @@ export default function Register() {
         </div>
 
         {/* form */}
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" method="POST">
           <div className={styles.input_group}>
             <input
               type="text"
