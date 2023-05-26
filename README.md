@@ -1,5 +1,7 @@
 # FinForce (5845)
 
+## Link to Documentation
+
 ## Motivation
 One of the primary challenges with existing personal budgeting applications is **their reliance on manual input of data**, which can lead to inaccuracies and inconsistencies due to human error. People often forget to log their expenses or may enter incorrect information, resulting in an inaccurate representation of their financial situation. We believe that in this generation of rising automata, manually logging every single one of our spending is considered tedious and redundant, and there are better solutions to counter this problem.
 
