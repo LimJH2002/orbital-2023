@@ -18,8 +18,8 @@ export default function Login() {
 
       <section className="w-3/4 mx-auto flex flex-col gap-10">
         <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">Explore</h1>
-          <p className="w-3/4 mx-auto text-gray-400">rfjdklj;jksljs;lkjkj</p>
+          <h1 className="text-gray-800 text-4xl font-bold py-4">FinForce Login</h1>
+          <p className="w-3/4 mx-auto text-gray-400">Simplify your wealth</p>
         </div>
 
         <form className="flex flex-col gap-5">
@@ -71,7 +71,6 @@ export default function Login() {
             <a className="text-blue-700">Sign Up</a>
           </Link>
         </p>
-        <div className="title"></div>
       </section>
     </Layout>
   );
