@@ -3,6 +3,7 @@ import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from '../styles/Form.module.css'
 import Image from "next/image";
+import { IconName } from "react-icons/hi";
 
 export default function Login() {
   return (
@@ -35,7 +36,7 @@ export default function Login() {
             />
           </div>
 
-          <div className="input-button">
+          <div className="input-button`">
             <button type="submit" className={styles.button}>
               Login
             </button>
