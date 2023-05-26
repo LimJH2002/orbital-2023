@@ -18,7 +18,7 @@ export default function Register() {
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4">FinForce Register</h1>
           <p className="w-3/4 mx-auto text-gray-400">
-            Get Started Now!
+            Get started now!
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export default function Register() {
           {/* login buttons */}
           <div className="input-button">
             <button type="submit" className={styles.button}>
-              Login
+              Register
             </button>
           </div>
         </form>
