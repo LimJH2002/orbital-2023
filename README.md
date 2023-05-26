@@ -1,3 +1,65 @@
+# FinForce (5845)
+
+## Motivation
+One of the primary challenges with existing personal budgeting applications is
+**their reliance on manual input of data**, which can lead to inaccuracies and
+inconsistencies due to human error. People often forget to log their expenses or
+may enter incorrect information, resulting in an inaccurate representation of their
+financial situation. We believe that in this generation of rising automata, manually
+logging every single one of our spending is considered tedious and redundant,
+and there are better solutions to counter this problem.
+
+Another challenge faced by students and young professionals is the
+**fragmentation of financial management tools**. As stock investing is being
+taught more frequently in universities, and students are taking an increasing
+interest in it, especially when most people can just access trading platforms just
+with their phones. However, individuals often need to rely on multiple apps to
+manage different aspects of their finances, such as budgeting, expense tracking,
+and stock investing. This fragmentation can result in a disjointed experience and
+may discourage users from effectively managing their finances. We believe that
+all of these functionalities could be converged into a single place instead of all over
+the place and having to keep track with app is for what.
+
+## Aim
+**Our goal for our Orbital project is to develop a unified app for personal
+finance management and stock tracking**. Personal finance tracking is an
+essential component of the app, as it enables users to monitor their expenses, set
+budgets, and work towards their financial goals. **Integration with open banking
+APIs** will allow for real-time tracking of account balances and transactions,
+ensuring accurate and up-to-date information.
+
+In addition to personal finance management, the app will offer **stock tracking
+features**, such as customizable watchlists and portfolio performance monitoring.
+Notifications will keep users informed about significant market events and updates,
+helping them make timely and well-informed investment decisions.
+
+As an extension, **gamification elements** will be incorporated to encourage good
+financial habits and user engagement. By setting personal and group challenges,
+users can motivate themselves and others to stay on track with their financial
+goals and compete in a friendly, collaborative environment.
+
+In future, the app could include advanced features, such as **communities and
+forums** where users can share tips and insights on personal wealth management
+and investment ideas. These interactive spaces will facilitate knowledge sharing
+and foster a supportive network for users to learn from one another.
+
+## User Stories
+1. As a user, I want to be able to track my daily expense and income in real-time so that I can have a better understanding of my spending habits.
+2. As a user, I want to be able to connect my bank accounts to the app, so that I can have a comprehensive view of my financial situation without the need of switching back and forth from multiple apps.
+3. As a user, I want to be able to securely store and organize important financial documents, such as receipts, invoices, and tax documents, within the app, so I can easily access them whenever needed.
+4. As a user, I want the app to have a user-friendly interface and intuitive design, making it easy for me to navigate and access all features, regardless of my level of financial expertise.
+5. As a user, I want to keep track of my investment portfolio/watchlist of multiple kinds of investments, such as stocks, cryptocurrency, bonds, forex, etc in a single app and be notified if there’s a major change on my portfolio/watchlist.
+6. As a user, I want to be motivated to manage my wealth and form good financial habits regarding personal finance by making the process fun.
+7. As a user, I want to be able to participate in forums and discussions on personal wealth and finance so that I can learn from others and share my own experiences.
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
