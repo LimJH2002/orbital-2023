@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -84,4 +84,20 @@ function User({ session }) {
       </div>
     </main>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req })
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+  return {
+    props: { session }
+  }
 }
