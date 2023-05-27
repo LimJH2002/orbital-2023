@@ -8,8 +8,20 @@ import { useState } from "react";
 import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
+import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import { initFirebase } from "@/firebase/firebaseApp";
+import { async } from "@firebase/util";
 
 export default function Login() {
+  initFirebase();
+  const googleProvider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+  const signIn = async () => {
+    const result = await signInWithPopup(auth, googleProvider);
+    console.log(result.user);
+  }
+
   const [show, setShow] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -93,7 +105,8 @@ export default function Login() {
           <div className="input-button">
             <button
               type="button"
-              onClick={handleGoogleSignIn}
+              onClick={signIn}
+              //onClick={handleGoogleSignIn}
               className={styles.button_custom}
             >
               <Image src={"/assets/google.svg"} width="20" height="20"></Image>

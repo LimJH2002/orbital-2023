@@ -5,10 +5,14 @@ import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
+import { initFirebase } from "@/firebase/firebaseApp";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
+  const app = initFirebase();
+  console.log(app);
   const { data: session } = useSession();
 
   function handleSignOut() {
