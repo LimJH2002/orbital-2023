@@ -4,20 +4,35 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { getSession, useSession, signOut } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { initFirebase } from "@/firebase/firebaseApp";
+import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
 
-  const app = initFirebase();
-  console.log(app);
-  const { data: session } = useSession();
 
-  function handleSignOut() {
-    signOut()
+  // const app = initFirebase();
+  const auth = getAuth();
+  const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return <div>Loading...</div>
   }
+
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
+
+  // const { data: session } = useSession();
+  // function handleSignOut() {
+  //   signOut()
+  // }
 
   // const[session, setSession] = useState(false);
   return (
@@ -27,7 +42,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {session ? User({ session, handleSignOut }) : Guest()}
+      {User({ auth })}
+
+      {/* {session ? User({ session, signOut }) : Guest()} */}
     </>
   );
 }
@@ -50,19 +67,19 @@ function Guest() {
 }
 
 //Authorize User
-function User({ session, handleSignOut }) {
+function User({ auth }) {
   return (
     <main className="container mx-auto text-center py-20">
       <h3 className="text-4xl font-bold">User Homepage</h3>
 
       <div className="details">
-        <h5>{session.user.name}</h5>
-        <h5>{session.user.email}</h5>
+        {/* <h5>{session.user.name}</h5>
+        <h5>{session.user.email}</h5> */}
       </div>
 
       <div className="flex justify-center">
         <button
-          onClick={handleSignOut}
+          onClick={() => auth.signOut()}
           className="mt-5 px-10 py-1 rounded-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-gray-50"
         >
           Sign Out
@@ -81,18 +98,18 @@ function User({ session, handleSignOut }) {
 }
 
 //Protected Route: Redirect to /login if the user is not signed in
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req })
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req })
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  }
-  return {
-    props: { session }
-  }
-}
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//         permanent: false,
+//       }
+//     }
+//   }
+//   return {
+//     props: { session }
+//   }
+// }

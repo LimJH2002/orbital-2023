@@ -11,11 +11,24 @@ import login_validate from "../lib/validate";
 import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import { initFirebase } from "@/firebase/firebaseApp";
 import { async } from "@firebase/util";
+import { useAuthState, userAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
 
 export default function Login() {
   initFirebase();
   const googleProvider = new GoogleAuthProvider();
   const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (user) {
+  //   router.push("/");
+  //   return <div>Loading...</div>
+  // }
 
   const signIn = async () => {
     const result = await signInWithPopup(auth, googleProvider);
