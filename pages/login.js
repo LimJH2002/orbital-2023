@@ -55,7 +55,7 @@ export default function Login() {
         </div>
 
         <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit} >
-          <div className={styles.input_group}>
+          <div className={`${styles.input_group} ${formik.errors.email && formik.touched.email ? 'border-rose-600' : ''}`}>
             <input
               type="email"
               name="email"
@@ -69,8 +69,9 @@ export default function Login() {
             </span>
             
           </div>
-          {formik.errors.email && formik.touched.email ? <span className="text-rose-500">{formik.errors.email}</span> : <></>}
-          <div className={styles.input_group}>
+          {/* {formik.errors.email && formik.touched.email ? <span className="text-rose-500">{formik.errors.email}</span> : <></>} */}
+          {/* <div className={styles.input_group}> */}
+          <div className={`${styles.input_group} ${formik.errors.password && formik.touched.password ? 'border-rose-600' : ''}`}>
             <input
               type={`${show ? "text" : "password"}`}
               name="password"
@@ -85,7 +86,7 @@ export default function Login() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-            {formik.errors.password && formik.touched.password ? <span className="text-rose-500">{formik.errors.password}</span> : <></>}
+            {/* {formik.errors.password && formik.touched.password ? <span className="text-rose-500">{formik.errors.password}</span> : <></>} */}
           
 
           <div className="input-button`">
