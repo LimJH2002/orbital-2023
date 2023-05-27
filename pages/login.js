@@ -6,9 +6,6 @@ import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useState } from "react";
 import { userSession, signIn, signOut } from "next-auth/react";
-import { async } from "@firebase/util";
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
-import firebaseConfig from "./index.js";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
 
@@ -31,7 +28,6 @@ export default function Login() {
 
   async function handleGoogleSignIn() {
     signIn('google', { callbackUrl: "http://localhost:3000"})
-    // signInWithRedirect(getAuth(), new GoogleAuthProvider()).then((cred) => { redirect: {destination: '/'} })
 
   }
 

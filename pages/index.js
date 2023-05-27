@@ -4,8 +4,6 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
 import { getSession, useSession, signOut } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
