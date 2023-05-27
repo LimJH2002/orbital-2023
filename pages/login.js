@@ -9,10 +9,21 @@ import { userSession, signIn, signOut } from "next-auth/react";
 import { async } from "@firebase/util";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
 import firebaseConfig from "./index.js";
-import { redirect } from "next/dist/server/api-utils";
+import { useFormik } from "formik";
 
 export default function Login() {
   const [show, setShow] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: onSubmit
+  })
+
+  async function onSubmit(values) {
+    console.log(values)
+  }
 
   async function handleGoogleSignIn() {
     signIn('google', { callbackUrl: "http://localhost:3000"})
@@ -39,13 +50,15 @@ export default function Login() {
           <p className="w-3/4 mx-auto text-gray-400">Simplify your wealth</p>
         </div>
 
-        <form className="flex flex-col gap-5" method="POST">
+        <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit} >
           <div className={styles.input_group}>
             <input
               type="email"
               name="email"
               placeholder="Email"
               className={styles.input_text}
+              onChange={formik.handleChange}
+              {...formik.getFieldProps('email')}
             />
             <span className="icon flex items-center px-4">
               <HiAtSymbol size={25} />
@@ -57,6 +70,7 @@ export default function Login() {
               name="password"
               placeholder="Password"
               className={styles.input_text}
+              {...formik.getFieldProps('password')}
             />
             <span
               className="icon flex items-center px-4"
