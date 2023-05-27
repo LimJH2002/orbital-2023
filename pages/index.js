@@ -19,6 +19,7 @@ export default function Home() {
   const auth = getAuth();
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
+  const currentUser = auth.currentUser
 
   if (loading) {
     return <div>Loading...</div>
@@ -29,6 +30,7 @@ export default function Home() {
     return <div>Please sign in to continue</div>;
   }
 
+  console.log(currentUser.email);
   // const { data: session } = useSession();
   // function handleSignOut() {
   //   signOut()
@@ -42,7 +44,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {User({ auth })}
+      {User({ auth, currentUser })}
 
       {/* {session ? User({ session, signOut }) : Guest()} */}
     </>
@@ -67,7 +69,7 @@ function Guest() {
 }
 
 //Authorize User
-function User({ auth }) {
+function User({ auth, currentUser }) {
   return (
     <main className="container mx-auto text-center py-20">
       <h3 className="text-4xl font-bold">User Homepage</h3>
@@ -75,6 +77,8 @@ function User({ auth }) {
       <div className="details">
         {/* <h5>{session.user.name}</h5>
         <h5>{session.user.email}</h5> */}
+        <h5>{currentUser.displayName}</h5>
+        <h5>{currentUser.email}</h5>
       </div>
 
       <div className="flex justify-center">

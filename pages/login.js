@@ -8,7 +8,7 @@ import { useState } from "react";
 // import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
-import { getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { initFirebase } from "@/firebase/firebaseApp";
 import { async } from "@firebase/util";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,13 +27,13 @@ export default function Login() {
     // const result = await signInWithEmailAndPassword(auth, formik.email, formik.password);
     // console.log(result);
     await signInWithEmailAndPassword(auth, formik.email, formik.password)
-      .then((result) => console.log(result))
-      .catch((result) => console.log(error));
+      .then((result) => console.log(result.user));
+    
   }
 
   const googleSignIn = async () => {
     const result = await signInWithRedirect(auth, googleProvider);
-    console.log(result.user);
+    console.log(result.user.uid);
   }
 
   const githubSignIn = async () => {
@@ -52,17 +52,23 @@ export default function Login() {
     onSubmit: emailSignIn
   })
 
-  // console.log(formik.errors)
+  console.log(formik.errors)
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (user) {
     router.push("/");
-    console.log(user.displayName);
+    // console.log(user.displayName);
     return <div>Welcome {user.displayName}</div>
   }
 
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     router.push("/");
+  //     return <div>Welcome {user.displayName}</div>
+  //   }
+  // })
 
   async function onSubmit(values) {
     console.log(values)
