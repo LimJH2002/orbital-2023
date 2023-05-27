@@ -7,12 +7,15 @@ import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useState } from "react";
 import { userSession, signIn, signOut } from "next-auth/react";
 import { async } from "@firebase/util";
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
+import firebaseConfig from "./index.js";
 
 export default function Login() {
   const [show, setShow] = useState(false);
 
   async function handleGoogleSignIn() {
-    signIn("google", { callbackUrl: "http://localhost:5000" });
+    signIn('google', { callbackUrl: "http://localhost:3000"})
+    // signInWithRedirect(getAuth(), new GoogleAuthProvider())
   }
 
   return (

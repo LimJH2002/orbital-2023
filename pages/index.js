@@ -27,6 +27,10 @@ const app = initializeApp(firebaseConfig);
 export default function Home() {
   const { data: session } = useSession();
 
+  function handleSignOut() {
+
+  }
+
   // const[session, setSession] = useState(false);
   return (
     <>
@@ -83,4 +87,21 @@ function User({ session }) {
       </div>
     </main>
   );
+}
+
+//Protected Route: Redirect to /login if the user is not signed in
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req })
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+  return {
+    props: { session }
+  }
 }
