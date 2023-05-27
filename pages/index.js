@@ -5,7 +5,7 @@ import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { useSession } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,14 +18,13 @@ const firebaseConfig = {
   storageBucket: "finforce-o.appspot.com",
   messagingSenderId: "487993412863",
   appId: "1:487993412863:web:bfb24ea755ea9913f490ca",
-  measurementId: "G-JHD0Y2CSY4"
+  measurementId: "G-JHD0Y2CSY4",
 };
 
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
 export default function Home() {
-
   const { data: session } = useSession();
 
   // const[session, setSession] = useState(false);
