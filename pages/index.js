@@ -4,19 +4,24 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDZ4iQxM4SiVncO2W49X2WZkrAoizeR-pw",
-  authDomain: "finforce-orbital.firebaseapp.com",
-  projectId: "finforce-orbital",
-  storageBucket: "finforce-orbital.appspot.com",
-  messagingSenderId: "904834984824",
-  appId: "1:904834984824:web:726eb0d563b9c4cc0d368d",
-  measurementId: "G-TZ5Q6M846M",
+  apiKey: "AIzaSyBL_7OqbwBKtqR5FJHFj11Ay5ENCyKsPXE",
+  authDomain: "finforce-o.firebaseapp.com",
+  projectId: "finforce-o",
+  storageBucket: "finforce-o.appspot.com",
+  messagingSenderId: "487993412863",
+  appId: "1:487993412863:web:bfb24ea755ea9913f490ca",
+  measurementId: "G-JHD0Y2CSY4"
 };
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 export default function Home() {
 
