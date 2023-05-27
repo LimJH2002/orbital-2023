@@ -8,7 +8,10 @@ import { useState } from "react";
 // import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
-import { getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { 
+  getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider, 
+  signInWithEmailAndPassword, onAuthStateChanged, updateProfile
+} from "firebase/auth";
 import { initFirebase } from "@/firebase/firebaseApp";
 import { async } from "@firebase/util";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,8 +30,9 @@ export default function Login() {
     // const result = await signInWithEmailAndPassword(auth, formik.email, formik.password);
     // console.log(result);
     await signInWithEmailAndPassword(auth, formik.email, formik.password)
-      .then((result) => console.log(result.user));
-    
+            .catch((err) => {
+              console.log(err.message)
+            });
   }
 
   const googleSignIn = async () => {
@@ -58,7 +62,11 @@ export default function Login() {
   }
 
   if (user) {
+    updateProfile(auth.currentUser, {
+      displayName: "Test 1"
+    })
     router.push("/");
+
     // console.log(user.displayName);
     return <div>Welcome {user.displayName}</div>
   }
