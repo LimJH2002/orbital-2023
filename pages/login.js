@@ -8,7 +8,7 @@ import { useState } from "react";
 // import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
-import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import { getAuth, signInWithRedirect, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { initFirebase } from "@/firebase/firebaseApp";
 import { async } from "@firebase/util";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -17,14 +17,30 @@ import { useRouter } from "next/router";
 export default function Login() {
   initFirebase();
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
-  const signIn = async () => {
-    const result = await signInWithPopup(auth, googleProvider);
+
+  const emailSignIn = async (formik) => {
+    // const result = await signInWithEmailAndPassword(auth, formik.email, formik.password);
+    // console.log(result);
+    await signInWithEmailAndPassword(auth, formik.email, formik.password)
+      .then((result) => console.log(result))
+      .catch((result) => console.log(error));
+  }
+
+  const googleSignIn = async () => {
+    const result = await signInWithRedirect(auth, googleProvider);
     console.log(result.user);
   }
+
+  const githubSignIn = async () => {
+    const result = await signInWithRedirect(auth, githubProvider);
+    console.log(result.user);
+  }
+
 
   const [show, setShow] = useState(false);
   const formik = useFormik({
@@ -33,7 +49,7 @@ export default function Login() {
       password: ''
     },
     validate: login_validate,
-    onSubmit
+    onSubmit: emailSignIn
   })
 
   // console.log(formik.errors)
@@ -43,8 +59,10 @@ export default function Login() {
 
   if (user) {
     router.push("/");
+    console.log(user.displayName);
     return <div>Welcome {user.displayName}</div>
   }
+
 
   async function onSubmit(values) {
     console.log(values)
@@ -117,7 +135,7 @@ export default function Login() {
           <div className="input-button">
             <button
               type="button"
-              onClick={signIn}
+              onClick={googleSignIn}
               //onClick={handleGoogleSignIn}
               className={styles.button_custom}
             >
@@ -126,7 +144,7 @@ export default function Login() {
             </button>
           </div>
           <div className="input-button">
-            <button type="button" onClick={handleGithubSignIn} className={styles.button_custom}>
+            <button type="button" onClick={githubSignIn} className={styles.button_custom}>
               <Image src={"/assets/github.svg"} width="25" height="25"></Image>
               Sign in with Github
             </button>
