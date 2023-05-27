@@ -5,13 +5,13 @@ import styles from "../styles/Form.module.css";
 import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useState } from "react";
-import { userSession, signIn, signOut } from "next-auth/react";
+// import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
 import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import { initFirebase } from "@/firebase/firebaseApp";
 import { async } from "@firebase/util";
-import { useAuthState, userAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 
 export default function Login() {
@@ -20,15 +20,6 @@ export default function Login() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (user) {
-  //   router.push("/");
-  //   return <div>Loading...</div>
-  // }
 
   const signIn = async () => {
     const result = await signInWithPopup(auth, googleProvider);
@@ -46,6 +37,14 @@ export default function Login() {
   })
 
   // console.log(formik.errors)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    router.push("/");
+    return <div>Welcome {user.displayName}</div>
+  }
 
   async function onSubmit(values) {
     console.log(values)
