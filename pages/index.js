@@ -28,6 +28,10 @@ export default function Home() {
 
   const { data: session } = useSession();
 
+  function handleSignOut() {
+
+  }
+
   // const[session, setSession] = useState(false);
   return (
     <>
@@ -86,6 +90,7 @@ function User({ session }) {
   );
 }
 
+//Protected Route: Redirect to /login if the user is not signed in
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req })
 
