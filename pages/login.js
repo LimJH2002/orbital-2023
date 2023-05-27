@@ -9,6 +9,7 @@ import { userSession, signIn, signOut } from "next-auth/react";
 import { async } from "@firebase/util";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from 'firebase/auth';
 import firebaseConfig from "./index.js";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Login() {
 
@@ -16,7 +17,13 @@ export default function Login() {
 
   async function handleGoogleSignIn() {
     signIn('google', { callbackUrl: "http://localhost:3000"})
-    // signInWithRedirect(getAuth(), new GoogleAuthProvider())
+    // signInWithRedirect(getAuth(), new GoogleAuthProvider()).then((cred) => { redirect: {destination: '/'} })
+
+  }
+
+  async function handleGithubSignIn() {
+    signIn('github', { callbackUrl: "http://localhost:3000"})
+
   }
 
   return (
@@ -72,7 +79,7 @@ export default function Login() {
             </button>
           </div>
           <div className="input-button">
-            <button type="button" className={styles.button_custom}>
+            <button type="button" onClick={handleGithubSignIn} className={styles.button_custom}>
               <Image src={"/assets/github.svg"} width="25" height="25"></Image>
               Sign in with Github
             </button>
