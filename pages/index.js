@@ -73,14 +73,17 @@ function User({ session, handleSignOut }) {
       </div>
 
       <div className="flex justify-center">
-        <button onClick={handleSignOut} className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 bg-gray-50">
+        <button
+          onClick={handleSignOut}
+          className="mt-5 px-10 py-1 rounded-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-gray-50"
+        >
           Sign Out
         </button>
       </div>
 
       <div className="flex justify-center">
-        <Link href={"/profile"} legacyBehavior>
-          <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
+        <Link href={"/comingSoon"} legacyBehavior>
+          <a className="mt-5 px-10 py-1 rounded-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-gray-50">
             Profile Page
           </a>
         </Link>
