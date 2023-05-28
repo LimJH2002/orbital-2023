@@ -36,8 +36,6 @@ export default function Register() {
     
     router.push("/");
     // console.log(user.displayName);
-
-    
     return <div>Welcome {user.displayName}</div>
   }
 
@@ -50,7 +48,7 @@ export default function Register() {
   })
 
   async function createUser(values) {
-    await createUserWithEmailAndPassword(auth, values.email, values.password)
+    createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((cred) => {
         // updateProfile(auth.currentUser, {
         //   displayName: values.username
@@ -58,13 +56,10 @@ export default function Register() {
       })
       .catch((err) => {
         if (err.code == 'auth/email-already-in-use') {
-          alert("Email Exist");
           console.log("redirect");
-          formik.resetForm();
+          signInWithEmailAndPassword(auth, values.email, values.password);
         }
       })
-      
-      
   }
 
   return (
