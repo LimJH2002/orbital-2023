@@ -1,0 +1,121 @@
+[debug] [2023-05-28T10:57:05.775Z] ----------------------------------------------------------------------
+[debug] [2023-05-28T10:57:05.776Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-05-28T10:57:05.777Z] CLI Version:   12.2.1
+[debug] [2023-05-28T10:57:05.777Z] Platform:      darwin
+[debug] [2023-05-28T10:57:05.777Z] Node Version:  v18.16.0
+[debug] [2023-05-28T10:57:05.779Z] Time:          Sun May 28 2023 18:57:05 GMT+0800 (Malaysia Time)
+[debug] [2023-05-28T10:57:05.779Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-28T10:57:05.845Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-28T10:57:05.845Z] > authorizing via signed-in user (finforce0@gmail.com)
+[debug] [2023-05-28T10:57:05.845Z] [iam] checking project finforce-o for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-28T10:57:05.848Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions [none]
+[debug] [2023-05-28T10:57:05.848Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions x-goog-quota-user=projects/finforce-o
+[debug] [2023-05-28T10:57:05.848Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T10:57:06.962Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions 200
+[debug] [2023-05-28T10:57:06.963Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T10:57:06.963Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-05-28T10:57:06.963Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-05-28T10:57:08.075Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions 404
+[debug] [2023-05-28T10:57:08.075Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}}
+[debug] [2023-05-28T10:57:08.076Z] [functions] service account IAM check errored, deploy may fail: HTTP Error: 404, Unknown service account {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Unknown service account","status":404}
+[debug] [2023-05-28T10:57:08.077Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o [none]
+[debug] [2023-05-28T10:57:08.391Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o 200
+[debug] [2023-05-28T10:57:08.391Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o {"projectId":"finforce-o","projectNumber":"487993412863","displayName":"Finforce","name":"projects/finforce-o","resources":{"hostingSite":"finforce-o"},"state":"ACTIVE","etag":"1_7e53558f-e69f-4db1-a32e-b34c2dfd2559"}
+[debug] [2023-05-28T10:57:10.917Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites pageToken=&pageSize=10
+[debug] [2023-05-28T10:57:11.633Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T10:57:11.633Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T10:57:11.633Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 
+[debug] [2023-05-28T10:57:12.306Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T10:57:12.306Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T10:57:12.306Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config [none]
+[debug] [2023-05-28T10:57:13.618Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config 200
+[debug] [2023-05-28T10:57:13.619Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config {"projectId":"finforce-o","appId":"1:487993412863:web:bfb24ea755ea9913f490ca","storageBucket":"finforce-o.appspot.com","apiKey":"AIzaSyBL_7OqbwBKtqR5FJHFj11Ay5ENCyKsPXE","authDomain":"finforce-o.firebaseapp.com","messagingSenderId":"487993412863","measurementId":"G-JHD0Y2CSY4"}
+[debug] [2023-05-28T10:57:26.983Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:885:11)
+    at execSync (node:child_process:957:15)
+    at prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:355:42)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-28T10:58:39.877Z] ----------------------------------------------------------------------
+[debug] [2023-05-28T10:58:39.879Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-05-28T10:58:39.879Z] CLI Version:   12.2.1
+[debug] [2023-05-28T10:58:39.880Z] Platform:      darwin
+[debug] [2023-05-28T10:58:39.880Z] Node Version:  v18.16.0
+[debug] [2023-05-28T10:58:39.894Z] Time:          Sun May 28 2023 18:58:39 GMT+0800 (Malaysia Time)
+[debug] [2023-05-28T10:58:39.894Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-28T10:58:39.973Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-28T10:58:39.974Z] > authorizing via signed-in user (finforce0@gmail.com)
+[debug] [2023-05-28T10:58:39.974Z] [iam] checking project finforce-o for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-28T10:58:39.976Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions [none]
+[debug] [2023-05-28T10:58:39.976Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions x-goog-quota-user=projects/finforce-o
+[debug] [2023-05-28T10:58:39.977Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T10:58:41.122Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions 200
+[debug] [2023-05-28T10:58:41.122Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T10:58:41.122Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-05-28T10:58:41.122Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-05-28T10:58:42.231Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions 404
+[debug] [2023-05-28T10:58:42.231Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}}
+[debug] [2023-05-28T10:58:42.232Z] [functions] service account IAM check errored, deploy may fail: HTTP Error: 404, Unknown service account {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Unknown service account","status":404}
+[debug] [2023-05-28T10:58:42.233Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o [none]
+[debug] [2023-05-28T10:58:42.585Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o 200
+[debug] [2023-05-28T10:58:42.585Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o {"projectId":"finforce-o","projectNumber":"487993412863","displayName":"Finforce","name":"projects/finforce-o","resources":{"hostingSite":"finforce-o"},"state":"ACTIVE","etag":"1_7e53558f-e69f-4db1-a32e-b34c2dfd2559"}
+[debug] [2023-05-28T10:58:45.258Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites pageToken=&pageSize=10
+[debug] [2023-05-28T10:58:45.938Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T10:58:45.938Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T10:58:45.940Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 
+[debug] [2023-05-28T10:58:46.622Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T10:58:46.622Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T10:58:46.623Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config [none]
+[debug] [2023-05-28T10:58:47.637Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config 200
+[debug] [2023-05-28T10:58:47.637Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config {"projectId":"finforce-o","appId":"1:487993412863:web:bfb24ea755ea9913f490ca","storageBucket":"finforce-o.appspot.com","apiKey":"AIzaSyBL_7OqbwBKtqR5FJHFj11Ay5ENCyKsPXE","authDomain":"finforce-o.firebaseapp.com","messagingSenderId":"487993412863","measurementId":"G-JHD0Y2CSY4"}
+[debug] [2023-05-28T10:58:58.544Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:885:11)
+    at execSync (node:child_process:957:15)
+    at prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:355:42)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-28T11:02:15.083Z] ----------------------------------------------------------------------
+[debug] [2023-05-28T11:02:15.085Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-05-28T11:02:15.085Z] CLI Version:   12.2.1
+[debug] [2023-05-28T11:02:15.086Z] Platform:      darwin
+[debug] [2023-05-28T11:02:15.086Z] Node Version:  v18.16.0
+[debug] [2023-05-28T11:02:15.087Z] Time:          Sun May 28 2023 19:02:15 GMT+0800 (Malaysia Time)
+[debug] [2023-05-28T11:02:15.088Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-28T11:02:15.162Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-28T11:02:15.163Z] > authorizing via signed-in user (finforce0@gmail.com)
+[debug] [2023-05-28T11:02:15.163Z] [iam] checking project finforce-o for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-28T11:02:15.165Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions [none]
+[debug] [2023-05-28T11:02:15.165Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions x-goog-quota-user=projects/finforce-o
+[debug] [2023-05-28T11:02:15.166Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T11:02:16.297Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions 200
+[debug] [2023-05-28T11:02:16.298Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/finforce-o:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-28T11:02:16.298Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-05-28T11:02:16.298Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-05-28T11:02:17.412Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions 404
+[debug] [2023-05-28T11:02:17.412Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/finforce-o/serviceAccounts/finforce-o@appspot.gserviceaccount.com:testIamPermissions {"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}}
+[debug] [2023-05-28T11:02:17.413Z] [functions] service account IAM check errored, deploy may fail: HTTP Error: 404, Unknown service account {"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":404,"message":"Unknown service account","status":"NOT_FOUND"}},"response":{"statusCode":404}},"exit":1,"message":"HTTP Error: 404, Unknown service account","status":404}
+[debug] [2023-05-28T11:02:17.414Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o [none]
+[debug] [2023-05-28T11:02:17.853Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o 200
+[debug] [2023-05-28T11:02:17.853Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o {"projectId":"finforce-o","projectNumber":"487993412863","displayName":"Finforce","name":"projects/finforce-o","resources":{"hostingSite":"finforce-o"},"state":"ACTIVE","etag":"1_7e53558f-e69f-4db1-a32e-b34c2dfd2559"}
+[debug] [2023-05-28T11:02:21.214Z] defaultcredentials: writing to file /Users/tanbk/.config/firebase/finforce0_gmail_com_application_default_credentials.json
+[debug] [2023-05-28T11:02:21.215Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites pageToken=&pageSize=10
+[debug] [2023-05-28T11:02:21.943Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T11:02:21.943Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T11:02:21.944Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 
+[debug] [2023-05-28T11:02:22.628Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites 200
+[debug] [2023-05-28T11:02:22.628Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/finforce-o/sites {"sites":[{"name":"projects/finforce-o/sites/finforce-o","defaultUrl":"https://finforce-o.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2023-05-28T11:02:22.628Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config [none]
+[debug] [2023-05-28T11:02:23.691Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config 200
+[debug] [2023-05-28T11:02:23.692Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/finforce-o/webApps/-/config {"projectId":"finforce-o","appId":"1:487993412863:web:bfb24ea755ea9913f490ca","storageBucket":"finforce-o.appspot.com","apiKey":"AIzaSyBL_7OqbwBKtqR5FJHFj11Ay5ENCyKsPXE","authDomain":"finforce-o.firebaseapp.com","messagingSenderId":"487993412863","measurementId":"G-JHD0Y2CSY4"}
+[debug] [2023-05-28T11:02:37.116Z] Error: Command failed: npm i --omit dev --no-audit
+    at checkExecSyncError (node:child_process:885:11)
+    at execSync (node:child_process:957:15)
+    at prepareFrameworks (/usr/local/lib/node_modules/firebase-tools/lib/frameworks/index.js:355:42)
+    at async deploy (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:55:13)
+[error] 
+[error] Error: An unexpected error has occurred.

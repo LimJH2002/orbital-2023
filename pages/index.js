@@ -13,7 +13,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
+  // initFirebase();
 
   // const app = initFirebase();
   const auth = getAuth();
