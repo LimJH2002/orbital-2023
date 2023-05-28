@@ -145,20 +145,19 @@ In future, the app could include advanced features, such as **communities and fo
 | 2  | Update UI draft           | Completed  |
 | 3  | Draft Wireframe           | Completed  |
 | 4  | User Authentication       | Completed  |
-| 5  | Testing 1                 | Completed  |
-| 6  | Documentation I           | Completed  |
-| 7  | Project Poster I          | Completed  |
-| 8  | Project Video I           | Completed  |
-| 9  | Project Log I             | Completed  |
+| 5  | Documentation I           | Completed  |
+| 6  | Project Poster I          | Completed  |
+| 7  | Project Video I           | Completed  |
+| 8  | Project Log I             | Completed  |
 |          |Sprint 3 (29 May - 11 June)   |            |            
 | 1  | Sprint Meeting 3          |            |
 | 2  | Home Page                 |            |
 | 3  | Bank Page                 |            |
-| 4  | Testing 2                 |            |
+| 4  | Testing 1                 |            |
 |         | Sprint 4 (12 June - 25 June)  |            |            
 | 1  | Sprint Meeting 4          |            |
 | 2  | Stocks Page               |            |
-| 3  | Testing 3                 |            |
+| 3  | Testing 2                 |            |
 | 4  | Documentation II          |            |
 | 5  | Project Poster II         |            |
 | 6  | Project Video II          |            |
@@ -167,11 +166,11 @@ In future, the app could include advanced features, such as **communities and fo
 | 1  | Sprint Meeting 5          |            |
 | 2  | Finalize UI Design        |            |
 | 3  | News Page                 |            |
-| 4  | Testing 4                 |            |
+| 4  | Testing 3                 |            |
 |          |Sprint 6 (10 July - 23 July)  |            |            
 | 1  | Sprint Meeting 6          |            |
 | 2  | Gamification Features     |            |
-| 3  | Testing 5                 |            |
+| 3  | Testing 4                 |            |
 | 4  | Documentation III         |            |
 | 5  | Project Poster III        |            |
 | 6  | Project Video III         |            |
@@ -179,10 +178,30 @@ In future, the app could include advanced features, such as **communities and fo
 
 
 ## UI Draft
-![[Pasted image 20230526233537.png]]
-![[Pasted image 20230526233557.png]]
+![UI Draft 1](./images/UI-draft1.png)
+![UI Draft 2](./images/UI-draft2.png)
+
+
+
+## Technical Proof of Concept
+Link to Project: [https://finforce.vercel.app](https://finforce.vercel.app)
+(Click on the link to try out!)
+
+Registration Page
+![Registration Page](./images/registration-page.png)
+
+Login Page
+![Login Page](./images/login-page.png)
+
+Homepage
+![Registration Page](./images/homepage2.png)
+
+Coming Soon
+![Registration Page](./images/coming-soon.png)
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Getting Started
 
