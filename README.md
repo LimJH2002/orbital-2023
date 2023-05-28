@@ -181,7 +181,7 @@ In future, the app could include advanced features, such as **communities and fo
 ![UI Draft 1](./images/UI-draft1.png)
 ![UI Draft 2](./images/UI-draft2.png)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Technical Proof of Concept
 Link to Project: [https://finforce.vercel.app/register](https://finforce.vercel.app/register)
@@ -198,6 +198,10 @@ Homepage
 
 Coming Soon
 ![Registration Page](./images/coming-soon.png)
+
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Getting Started
 
