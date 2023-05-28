@@ -194,7 +194,7 @@ Login Page
 ![Login Page](./images/login-page.png)
 
 Homepage
-![Registration Page](./images/homepage.png)
+![Registration Page](./images/homepage2.png)
 
 Coming Soon
 ![Registration Page](./images/coming-soon.png)
