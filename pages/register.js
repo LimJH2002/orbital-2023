@@ -6,8 +6,15 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "@/lib/validate";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
+
 
 export default function Register() {
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
   const [show, setShow] = useState({ password: false, cpassword: false });
   const formik = useFormik({
     initialValues: {
@@ -17,11 +24,27 @@ export default function Register() {
       cpassword: '',
     },
     validate:registerValidate,
-    onSubmit
+    onSubmit:createUser
   })
 
-  async function onSubmit(values) {
-    console.log(values)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    router.push("/");
+    // console.log(user.displayName);
+    return <div>Welcome {user.displayName}</div>
+  }
+
+  async function createUser(values) {
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .catch((err) => {
+        if (err.code == 'auth/email-already-in-use') {
+          console.log("redirect");
+          signInWithEmailAndPassword(auth, values.email, values.password);
+        }
+      })
   }
 
   return (

@@ -62,9 +62,6 @@ export default function Login() {
   }
 
   if (user) {
-    updateProfile(auth.currentUser, {
-      displayName: "Test 1"
-    })
     router.push("/");
 
     // console.log(user.displayName);
