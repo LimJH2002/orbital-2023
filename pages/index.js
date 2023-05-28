@@ -30,7 +30,7 @@ export default function Home() {
     return <div>Please sign in to continue</div>;
   }
 
-  console.log(currentUser.email);
+  console.log(currentUser.displayName);
   // const { data: session } = useSession();
   // function handleSignOut() {
   //   signOut()

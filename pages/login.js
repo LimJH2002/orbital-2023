@@ -31,7 +31,13 @@ export default function Login() {
     // console.log(result);
     await signInWithEmailAndPassword(auth, formik.email, formik.password)
             .catch((err) => {
-              console.log(err.message)
+              console.log(err.code);
+              if (err.code == "auth/wrong-password") {
+                alert("Wrong password");
+              } else if (err.code == "auth/user-not-found") {
+                alert("User Not Found");
+                router.push("/register");
+              }
             });
   }
 
