@@ -173,7 +173,7 @@ export default function Login() {
               Sign in with Google
             </button>
           </div>
-          <div className="input-button">
+          {/* <div className="input-button">
             <button
               type="button"
               onClick={githubSignIn}
@@ -182,7 +182,7 @@ export default function Login() {
               <Image src={"/assets/github.svg"} width="25" height="25"></Image>
               Sign in with Github
             </button>
-          </div>
+          </div> */}
         </form>
 
         <p className="text-center text-gray-400">
