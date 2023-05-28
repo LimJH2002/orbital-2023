@@ -184,7 +184,7 @@ In future, the app could include advanced features, such as **communities and fo
 
 
 ## Technical Proof of Concept
-Link to Project: [https://finforce.vercel.app/register](https://finforce.vercel.app/register)
+Link to Project: [https://finforce.vercel.app](https://finforce.vercel.app/register)
 (Click on the link to try out!)
 
 Registration Page
