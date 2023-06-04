@@ -13,16 +13,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
-
   // const app = initFirebase();
   const auth = getAuth();
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
-  const currentUser = auth.currentUser
+  const currentUser = auth.currentUser;
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!user) {
@@ -43,7 +41,6 @@ export default function Home() {
         <title>Homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
       {User({ auth, currentUser })}
 
       {/* {session ? User({ session, signOut }) : Guest()} */}
