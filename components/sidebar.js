@@ -9,11 +9,25 @@ import Link from "next/link";
 import { defaultNavItems } from "./navItems";
 import { GoSignOut } from "react-icons/go";
 import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const auth = getAuth();
 const Sidebar = ({ collapsed, setCollapsed }) => {
   // 👇 use the correct icon depending on the state.
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
+  const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+  const currentUser = auth.currentUser;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
   return (
     <div
       className={cn({

@@ -29,7 +29,7 @@ export default function Home() {
     return <div>Please sign in to continue</div>;
   }
 
-  console.log(currentUser.displayName);
+  // console.log(currentUser.displayName);
   // const { data: session } = useSession();
   // function handleSignOut() {
   //   signOut()
@@ -76,8 +76,8 @@ function User({ auth, currentUser }) {
         <div className="details">
           {/* <h5>{session.user.name}</h5>
         <h5>{session.user.email}</h5> */}
-          <h5>{currentUser.displayName}</h5>
-          <h5>{currentUser.email}</h5>
+          {/* <h5>{currentUser.displayName}</h5> */}
+          {/* <h5>{currentUser.email}</h5> */}
         </div>
 
         <div className="flex justify-center">
