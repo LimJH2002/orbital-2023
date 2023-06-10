@@ -2,6 +2,8 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import Sidebar from "./sidebar";
+
 const Layout = (props) => {
   const [collapsed, setSidebarCollapsed] = useState(false);
   return (
@@ -17,11 +19,10 @@ const Layout = (props) => {
       })}
     >
       {/* sidebar */}
-      <div className="bg-indigo-700 text-white">
-        <button onClick={() => setSidebarCollapsed((prev) => !prev)}>
-          <Bars3Icon className="w-10 h-10" />
-        </button>
-      </div>
+      <Sidebar
+        collapsed={collapsed}
+        setCollapsed={() => setSidebarCollapsed((prev) => !prev)}
+      />
       {/* content */}
       <div className=""> {props.children}</div>
     </div>
