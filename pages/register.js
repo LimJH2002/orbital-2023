@@ -1,16 +1,20 @@
 import Head from "next/head";
-import Layout from "../layout/layout";
+import Layout from "../layouts/login-layout";
 import Link from "next/link";
 import styles from "../styles/Form.module.css";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "@/lib/validate";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { FirebaseError } from "firebase/app";
-
 
 export default function Register() {
   const auth = getAuth();
@@ -19,35 +23,33 @@ export default function Register() {
   const [show, setShow] = useState({ password: false, cpassword: false });
   const formik = useFormik({
     initialValues: {
-      username: '',
-      email: '',
-      password: '',
-      cpassword: '',
+      username: "",
+      email: "",
+      password: "",
+      cpassword: "",
     },
-    validate:registerValidate,
-    onSubmit:createUser
-  })
+    validate: registerValidate,
+    onSubmit: createUser,
+  });
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (user) {
-    
     router.push("/");
     // console.log(user.displayName);
 
-    
-    return <div>Welcome {user.displayName}</div>
+    return <div>Welcome {user.displayName}</div>;
   }
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      firebaseDatabase.ref('users/' + user.uid).set({
-        username: formik.username
+      firebaseDatabase.ref("users/" + user.uid).set({
+        username: formik.username,
       });
     }
-  })
+  });
 
   async function createUser(values) {
     await createUserWithEmailAndPassword(auth, values.email, values.password)
@@ -57,14 +59,12 @@ export default function Register() {
         // })
       })
       .catch((err) => {
-        if (err.code == 'auth/email-already-in-use') {
+        if (err.code == "auth/email-already-in-use") {
           alert("Email Exist");
           console.log("redirect");
           formik.resetForm();
         }
-      })
-      
-      
+      });
   }
 
   return (
@@ -89,33 +89,41 @@ export default function Register() {
               name="Username"
               placeholder="Username"
               className={styles.input_text}
-              {...formik.getFieldProps('username')}
+              {...formik.getFieldProps("username")}
             />
             <span className="icon flex items-center px-4">
               <HiOutlineUser size={25} />
             </span>
           </div>
-          {formik.errors.username && formik.touched.username ? <span className="text-rose-500">{formik.errors.username}</span> : <></>}
+          {formik.errors.username && formik.touched.username ? (
+            <span className="text-rose-500">{formik.errors.username}</span>
+          ) : (
+            <></>
+          )}
           <div className={styles.input_group}>
             <input
               type="email"
               name="email"
               placeholder="Email"
               className={styles.input_text}
-              {...formik.getFieldProps('email')}
+              {...formik.getFieldProps("email")}
             />
             <span className="icon flex items-center px-4">
               <HiAtSymbol size={25} />
             </span>
           </div>
-          {formik.errors.email && formik.touched.email ? <span className="text-rose-500">{formik.errors.email}</span> : <></>}
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-rose-500">{formik.errors.email}</span>
+          ) : (
+            <></>
+          )}
           <div className={styles.input_group}>
             <input
               type={`${show.password ? "text" : "password"}`}
               name="password"
               placeholder="Password"
               className={styles.input_text}
-              {...formik.getFieldProps('password')}
+              {...formik.getFieldProps("password")}
             />
             <span
               className="icon flex items-center px-4"
@@ -124,14 +132,18 @@ export default function Register() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {formik.errors.password && formik.touched.password ? <span className="text-rose-500">{formik.errors.password}</span> : <></>}
+          {formik.errors.password && formik.touched.password ? (
+            <span className="text-rose-500">{formik.errors.password}</span>
+          ) : (
+            <></>
+          )}
           <div className={styles.input_group}>
             <input
               type={`${show.cpassword ? "text" : "password"}`}
               name="cpassword"
               placeholder="Confirm Password"
               className={styles.input_text}
-              {...formik.getFieldProps('cpassword')}
+              {...formik.getFieldProps("cpassword")}
             />
             <span
               className="icon flex items-center px-4"
@@ -140,7 +152,11 @@ export default function Register() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {formik.errors.cpassword && formik.touched.cpassword ? <span className="text-rose-500">{formik.errors.cpassword}</span> : <></>}
+          {formik.errors.cpassword && formik.touched.cpassword ? (
+            <span className="text-rose-500">{formik.errors.cpassword}</span>
+          ) : (
+            <></>
+          )}
 
           {/* login buttons */}
           <div className="input-button">
