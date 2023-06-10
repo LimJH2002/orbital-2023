@@ -70,6 +70,7 @@ function Guest() {
 function User({ auth, currentUser }) {
   return (
     <Layout>
+      <div className="bg-blue-500 pt-10 pb-21"></div>
       <main className="container mx-auto text-center py-20">
         <h3 className="text-4xl font-bold">User Homepage</h3>
 

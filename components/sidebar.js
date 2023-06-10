@@ -14,7 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const auth = getAuth();
 const Sidebar = ({ collapsed, setCollapsed }) => {
-  // 👇 use the correct icon depending on the state.
+  // use the correct icon depending on the state.
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
