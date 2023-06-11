@@ -22,7 +22,7 @@ const cards = [
   {
     name: "Money Out",
     icon: FireIcon,
-    amount: "$SGD 200.65",
+    amount: "SGD 200.65",
     lastMonth: "50",
   },
   {
