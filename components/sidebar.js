@@ -52,7 +52,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           <button
             className={cn({
               "grid place-content-center": true, // position
-              "hover:bg-indigo-800 ": true, // colors
+              "hover:bg-gray-800 ": true, // colors
               "w-10 h-10 rounded-full": true, // shape
             })}
             // 👇 set the collapsed state on click
@@ -73,7 +73,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 <li
                   key={index}
                   className={cn({
-                    "text-indigo-100 hover:bg-gray-500 flex": true, //colors
+                    "text-indigo-100 hover:bg-gray-800 flex": true, //colors
                     "transition-colors duration-300": true, //animation
                     "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                     "rounded-full p-2 mx-3 w-10 h-10": collapsed,
@@ -97,7 +97,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           >
             <li
               className={cn({
-                "text-indigo-100 hover:bg-gray-500 flex": true, //colors
+                "text-indigo-100 hover:bg-gray-800 flex": true, //colors
                 "transition-colors duration-300": true, //animation
                 "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
@@ -109,7 +109,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 className="flex gap-2"
               >
                 <GoSignOut className="w-6 h-6" />
-                <span>{!collapsed && <p>Sign Out</p>}</span>
+                <span>{!collapsed && "Sign Out"}</span>
               </Link>
             </li>
           </ul>
