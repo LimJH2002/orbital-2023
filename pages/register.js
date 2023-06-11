@@ -6,7 +6,6 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "@/lib/validate";
-import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 
 
@@ -28,21 +27,6 @@ export default function Register() {
 
   async function createUser(values) {
     await signup(values.email, values.password)
-    // await createUserWithEmailAndPassword(auth, values.email, values.password)
-    //   .then((cred) => {
-    //     // updateProfile(auth.currentUser, {
-    //     //   displayName: values.username
-    //     // })
-    //   })
-    //   .catch((err) => {
-    //     if (err.code == 'auth/email-already-in-use') {
-    //       alert("Email Exist");
-    //       console.log("redirect");
-    //       formik.resetForm();
-    //     }
-    //   })
-      
-      
   }
 
   return (

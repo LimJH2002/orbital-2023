@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
   const { logout, currentUser } = useAuth();
   console.log(currentUser);
 
