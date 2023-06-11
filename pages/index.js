@@ -10,6 +10,7 @@ import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Layout from "@/components/layout";
+import Overlap from "@/components/overlap-banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,34 +71,7 @@ function Guest() {
 function User({ auth, currentUser }) {
   return (
     <Layout>
-      <div className="bg-blue-500 pt-10 pb-21"></div>
-      <main className="container mx-auto text-center py-20">
-        <h3 className="text-4xl font-bold">User Homepage</h3>
-
-        <div className="details">
-          {/* <h5>{session.user.name}</h5>
-        <h5>{session.user.email}</h5> */}
-          {/* <h5>{currentUser.displayName}</h5> */}
-          {/* <h5>{currentUser.email}</h5> */}
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            onClick={() => auth.signOut()}
-            className="mt-5 px-10 py-1 rounded-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-gray-50"
-          >
-            Sign Out
-          </button>
-        </div>
-
-        <div className="flex justify-center">
-          <Link href={"/comingSoon"} legacyBehavior>
-            <a className="mt-5 px-10 py-1 rounded-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-gray-50">
-              Profile Page
-            </a>
-          </Link>
-        </div>
-      </main>
+      <Overlap auth={auth} />
     </Layout>
   );
 }
