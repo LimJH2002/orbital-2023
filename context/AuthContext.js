@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { auth, db } from '@/firebase/firebaseApp';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { 
+    signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut,
+    onAuthStateChanged, signInWithRedirect, signInWithPopup, GoogleAuthProvider, GithubAuthProvider
+} from 'firebase/auth';
+import { useRouter } from "next/router";
 import { doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = React.createContext();
@@ -12,14 +16,62 @@ export function useAuth() {
 export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(null);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+    const router = useRouter();
+
     function signup(email, password) {
         createUserWithEmailAndPassword(auth, email, password);
         return;
     }
 
-    function login(email, password) {
-        signInWithEmailAndPassword(auth, email, password);
-        return;
+    async function login(email, password) {
+        console.log(email, password);
+        const result = await signInWithEmailAndPassword(auth, email, password)
+        .catch(
+            (err) => {
+              console.log(err);
+              if (err.code == "auth/wrong-password") {
+                alert("Wrong password");
+              } else if (err.code == "auth/user-not-found") {
+                alert("User Not Found");
+                router.push("/register");
+              }
+            }
+          );
+        console.log(result);
+        _callback();
+    }
+
+    async function googleSignIn() {
+        const result = await signInWithPopup(auth, googleProvider).catch(
+            (err) => {
+              console.log(err);
+              if (err.code == "auth/account-exists-with-different-credential") {
+                alert("Account exists with different credential");
+              } else if (err.code == "auth/user-not-found") {
+                alert("User Not Found");
+                router.push("/register");
+              }
+            }
+          )
+        // console.log(result.user.uid);
+    }
+
+    async function githubSignIn() {
+        const result = await signInWithPopup(auth, githubProvider)
+        .catch(
+            (err) => {
+              console.log(err);
+              if (err.code == "auth/account-exists-with-different-credential") {
+                alert("Account exists with different credential");
+              } else if (err.code == "auth/user-not-found") {
+                alert("User Not Found");
+                router.push("/register");
+              }
+            }
+          );
+        console.log(result);
     }
 
     function logout() {
@@ -30,6 +82,7 @@ export function AuthProvider({children}) {
         const unsubscribe = onAuthStateChanged(auth, async user => {
             setCurrentUser(user);
             setLoading(false);
+            router.push("/");
         })
         return unsubscribe;
     }, [])
@@ -37,6 +90,8 @@ export function AuthProvider({children}) {
     const value = {
         currentUser,
         login,
+        googleSignIn,
+        githubSignIn,
         signup,
         logout,
     }

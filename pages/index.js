@@ -32,6 +32,8 @@ function User({ logout, currentUser }) {
         <h3 className="text-4xl font-bold">User Homepage</h3>
 
         <div className="details">
+          <h3>{currentUser && currentUser.displayName}</h3>
+          <h3>{currentUser && currentUser.email}</h3>
         </div>
 
         <div className="flex justify-center">
