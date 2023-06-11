@@ -1,4 +1,5 @@
-import DatePicker from "./date-picker";
+import { label } from "@/data/table-data";
+import LabelSelection from "./label-selection";
 
 export default function EditTransactionForm({ transaction, func }) {
   return (
@@ -49,6 +50,29 @@ export default function EditTransactionForm({ transaction, func }) {
                 >
                   <option>Money-in</option>
                   <option>Money-out</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="type"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              >
+                Transaction Category
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <select
+                  id="type"
+                  name="type"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                  defaultValue={transaction.label}
+                >
+                  <option>Food</option>
+                  <option>Transport</option>
+                  <option>Online Shopping</option>
+                  <option>Subscription</option>
+                  <option>Others</option>
                 </select>
               </div>
             </div>

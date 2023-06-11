@@ -1,5 +1,5 @@
 import { BanknotesIcon, FireIcon } from "@heroicons/react/24/outline";
-import { transactions } from "@/data/table-data";
+import { label, transactions } from "@/data/table-data";
 import EditTransaction from "./edit-transaction-window";
 
 function checkIcon(type) {
@@ -51,6 +51,12 @@ export default function Table() {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
                       Amount
                     </th>
                     <th
@@ -81,6 +87,9 @@ export default function Table() {
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {transaction.type}
                       </td>
+                      <td className=" px-3 py-4 text-sm">
+                        {label(transaction.label)}
+                      </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {transaction.amount}
                       </td>
@@ -88,13 +97,6 @@ export default function Table() {
                         {transaction.date}
                       </td>
                       <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-6">
-                        {/* <a
-                          href="#"
-                          className="text-indigo-600 hover:text-indigo-900 px-3"
-                        >
-                          Edit Transaction
-                          <span className="sr-only">, {transaction.name}</span>
-                        </a> */}
                         <EditTransaction transaction={transaction} />
                       </td>
                     </tr>
