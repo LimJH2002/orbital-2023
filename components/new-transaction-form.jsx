@@ -23,10 +23,10 @@ export default function NewTransactionForm({ func }) {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
                   <input
+                    required
                     type="text"
                     name="title"
                     id="title"
-                    autoComplete="username"
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
                 </div>
@@ -42,6 +42,7 @@ export default function NewTransactionForm({ func }) {
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
+                  required
                   id="type"
                   name="type"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
@@ -61,6 +62,7 @@ export default function NewTransactionForm({ func }) {
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
+                  required
                   id="type"
                   name="type"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
@@ -87,8 +89,11 @@ export default function NewTransactionForm({ func }) {
                     $
                   </span>
                   <input
-                    type="text"
+                    required
+                    type="number"
+                    min="0.01"
                     name="amount"
+                    step=".01"
                     id="amount"
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
@@ -106,6 +111,7 @@ export default function NewTransactionForm({ func }) {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div class="relative max-w-sm">
                   <input
+                    required
                     type="date"
                     id="date"
                     name="date"

@@ -23,11 +23,11 @@ export default function EditTransactionForm({ transaction, func }) {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
                   <input
+                    required
                     type="text"
                     name="title"
                     id="title"
-                    autoComplete="username"
-                    value={transaction.title}
+                    defaultValue={transaction.title}
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
                 </div>
@@ -90,8 +90,11 @@ export default function EditTransactionForm({ transaction, func }) {
                     $
                   </span>
                   <input
-                    type="text"
+                    required
+                    type="number"
+                    min="0.01"
                     name="amount"
+                    step=".01"
                     id="amount"
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                     defaultValue={transaction.amount}
@@ -110,6 +113,7 @@ export default function EditTransactionForm({ transaction, func }) {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div class="relative max-w-sm">
                   <input
+                    required
                     type="date"
                     id="date"
                     name="date"
