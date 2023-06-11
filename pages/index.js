@@ -25,7 +25,7 @@ export default function Home() {
 //Authorize User
 function User({ logout, currentUser }) {
   return (
-    <Layout>
+    <Layout logout={logout}>
       <Overlap logout={logout} />
     </Layout>
   );

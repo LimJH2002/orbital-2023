@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "./sidebar";
 
 const Layout = (props) => {
@@ -21,6 +20,7 @@ const Layout = (props) => {
       <Sidebar
         collapsed={collapsed}
         setCollapsed={() => setSidebarCollapsed((prev) => !prev)}
+        logout={props.logout}
       />
       {/* content */}
       <div className=""> {props.children}</div>

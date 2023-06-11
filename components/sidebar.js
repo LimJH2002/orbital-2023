@@ -13,21 +13,17 @@ import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const auth = getAuth();
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar = ({ collapsed, setCollapsed, logout }) => {
   // use the correct icon depending on the state.
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
-  const currentUser = auth.currentUser;
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   if (!user) {
     router.push("/login");
     return <div>Please sign in to continue</div>;
   }
+
   return (
     <div
       className={cn({
@@ -105,7 +101,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             >
               <Link
                 href="/"
-                onClick={() => auth.signOut()}
+                onClick={() => logout()}
                 className="flex gap-2"
               >
                 <GoSignOut className="w-6 h-6" />
