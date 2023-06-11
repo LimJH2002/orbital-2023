@@ -103,7 +103,11 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
               })}
             >
-              <Link href="/" onClick={() => auth.signOut()} className="flex gap-2">
+              <Link
+                href="/"
+                onClick={() => auth.signOut()}
+                className="flex gap-2"
+              >
                 <GoSignOut className="w-6 h-6" />
                 <span>{!collapsed && <p>Sign Out</p>}</span>
               </Link>

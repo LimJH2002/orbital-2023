@@ -1,4 +1,5 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -18,6 +19,9 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        cyan: colors.cyan,
+      },
       gridTemplateColumns: {
         sidebar: "300px auto", //for sidebar layout
         "sidebar-collapsed": "64px auto", //for collapsed sidebar layout
