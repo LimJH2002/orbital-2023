@@ -5,10 +5,7 @@ import Layout from "@/components/layout";
 import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
-
   const { logout, currentUser } = useAuth();
   console.log(currentUser);
 
@@ -16,12 +13,11 @@ export default function Home() {
     <>
       <Head>
         <title>Dashboard</title>
+        <link rel="icon" sizes="any" href="/LogoF.ico"></link>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      { User({logout, currentUser})}
-
-      {/* {session ? User({ session, signOut }) : Guest()} */}
+      {User({ logout, currentUser })}
     </>
   );
 }
