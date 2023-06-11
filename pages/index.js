@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Homepage</title>
+        <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -30,7 +30,7 @@ export default function Home() {
 function User({ logout, currentUser }) {
   return (
     <Layout>
-      <Overlap auth={auth} />
+      <Overlap logout={logout} />
     </Layout>
   );
 }

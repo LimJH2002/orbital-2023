@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Card from "./card";
 import Table from "./table";
 
-export default function Overlap({ auth }) {
+export default function Overlap({ logout }) {
   return (
     <Fragment>
       <div className="min-h-full">
@@ -12,7 +12,7 @@ export default function Overlap({ auth }) {
               <h1 className="text-3xl font-bold text-white">Dashboard</h1>
               <div class="w-48 ml-auto">
                 <button
-                  onClick={() => auth.signOut()}
+                  onClick={() => logout()}
                   className="px-12 py-1 rounded-sm bg-gray-700 text-gray-50"
                 >
                   Sign Out
