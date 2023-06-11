@@ -14,7 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const auth = getAuth();
 const Sidebar = ({ collapsed, setCollapsed }) => {
-  // 👇 use the correct icon depending on the state.
+  // use the correct icon depending on the state.
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
@@ -31,7 +31,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   return (
     <div
       className={cn({
-        "bg-indigo-700 text-zinc-50 z-20": true,
+        "bg-gray-900 text-zinc-50 z-20": true,
       })}
     >
       <div
@@ -43,7 +43,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         {/* logo and collapse button */}
         <div
           className={cn({
-            "flex items-center border-b border-b-indigo-800": true,
+            "flex items-center border-b border-b-gray-800": true,
             "p-4 justify-between": !collapsed,
             "py-4 justify-center": collapsed,
           })}
@@ -52,7 +52,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           <button
             className={cn({
               "grid place-content-center": true, // position
-              "hover:bg-indigo-800 ": true, // colors
+              "hover:bg-gray-800 ": true, // colors
               "w-10 h-10 rounded-full": true, // shape
             })}
             // 👇 set the collapsed state on click
@@ -73,7 +73,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 <li
                   key={index}
                   className={cn({
-                    "text-indigo-100 hover:bg-indigo-900 flex": true, //colors
+                    "text-indigo-100 hover:bg-gray-800 flex": true, //colors
                     "transition-colors duration-300": true, //animation
                     "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                     "rounded-full p-2 mx-3 w-10 h-10": collapsed,
@@ -97,15 +97,19 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           >
             <li
               className={cn({
-                "text-indigo-100 hover:bg-indigo-900 flex": true, //colors
+                "text-indigo-100 hover:bg-gray-800 flex": true, //colors
                 "transition-colors duration-300": true, //animation
                 "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
               })}
             >
-              <Link href="/" onClick={() => auth.signOut()} className="flex gap-2">
+              <Link
+                href="/"
+                onClick={() => auth.signOut()}
+                className="flex gap-2"
+              >
                 <GoSignOut className="w-6 h-6" />
-                <span>{!collapsed && <p>Sign Out</p>}</span>
+                <span>{!collapsed && "Sign Out"}</span>
               </Link>
             </li>
           </ul>
