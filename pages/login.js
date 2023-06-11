@@ -5,57 +5,21 @@ import styles from "../styles/Form.module.css";
 import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useState } from "react";
-// import { userSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
-import {
-  getAuth,
-  signInWithRedirect,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile,
-  signInWithPopup,
-} from "firebase/auth";
-import { initFirebase } from "@/firebase/firebaseApp";
-import { async } from "@firebase/util";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext"; 
 
 export default function Login() {
-  initFirebase();
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
-  const auth = getAuth();
-  const [user, loading] = useAuthState(auth);
+  
   const router = useRouter();
+  const { googleSignIn, githubSignIn, login } = useAuth();
 
   const emailSignIn = async (formik) => {
-    // const result = await signInWithEmailAndPassword(auth, formik.email, formik.password);
-    // console.log(result);
-    await signInWithEmailAndPassword(auth, formik.email, formik.password).catch(
-      (err) => {
-        console.log(err.code);
-        if (err.code == "auth/wrong-password") {
-          alert("Wrong password");
-        } else if (err.code == "auth/user-not-found") {
-          alert("User Not Found");
-          router.push("/register");
-        }
-      }
-    );
+    console.log(formik.email, formik.password)
+    return await login(formik.email, formik.password)
   };
 
-  const googleSignIn = async () => {
-    const result = await signInWithPopup(auth, googleProvider);
-    console.log(result.user.uid);
-  };
-
-  const githubSignIn = async () => {
-    const result = await signInWithRedirect(auth, githubProvider);
-    console.log(result.user);
-  };
 
   const [show, setShow] = useState(false);
   const formik = useFormik({
@@ -68,34 +32,9 @@ export default function Login() {
   });
 
   console.log(formik.errors);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (user) {
-    router.push("/");
-
-    // console.log(user.displayName);
-    return <div>Welcome {user.displayName}</div>;
-  }
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     router.push("/");
-  //     return <div>Welcome {user.displayName}</div>
-  //   }
-  // })
 
   async function onSubmit(values) {
     console.log(values);
-  }
-
-  async function handleGoogleSignIn() {
-    signIn("google", { callbackUrl: "http://localhost:3000" });
-  }
-
-  async function handleGithubSignIn() {
-    signIn("github", { callbackUrl: "http://localhost:3000" });
   }
 
   return (
@@ -173,7 +112,7 @@ export default function Login() {
               Sign in with Google
             </button>
           </div>
-          {/* <div className="input-button">
+          <div className="input-button">
             <button
               type="button"
               onClick={githubSignIn}
@@ -182,7 +121,7 @@ export default function Login() {
               <Image src={"/assets/github.svg"} width="25" height="25"></Image>
               Sign in with Github
             </button>
-          </div> */}
+          </div>
         </form>
 
         <p className="text-center text-gray-400">

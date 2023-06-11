@@ -6,17 +6,12 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { useState } from "react";
 import { useFormik } from "formik";
 import { registerValidate } from "@/lib/validate";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from "next/router";
-import { FirebaseError } from "firebase/app";
+import { useAuth } from "@/context/AuthContext";
 
 
 export default function Register() {
-  const auth = getAuth();
-  const [user, loading] = useAuthState(auth);
-  const router = useRouter();
   const [show, setShow] = useState({ password: false, cpassword: false });
+  const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -28,43 +23,10 @@ export default function Register() {
     onSubmit:createUser
   })
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
-  if (user) {
-    
-    router.push("/");
-    // console.log(user.displayName);
-
-    
-    return <div>Welcome {user.displayName}</div>
-  }
-
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      firebaseDatabase.ref('users/' + user.uid).set({
-        username: formik.username
-      });
-    }
-  })
 
   async function createUser(values) {
-    await createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((cred) => {
-        // updateProfile(auth.currentUser, {
-        //   displayName: values.username
-        // })
-      })
-      .catch((err) => {
-        if (err.code == 'auth/email-already-in-use') {
-          alert("Email Exist");
-          console.log("redirect");
-          formik.resetForm();
-        }
-      })
-      
-      
+    await signup(values.email, values.password)
   }
 
   return (
