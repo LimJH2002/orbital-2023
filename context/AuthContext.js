@@ -21,12 +21,17 @@ export function AuthProvider({children}) {
     const router = useRouter();
 
     function signup(email, password) {
-        createUserWithEmailAndPassword(auth, email, password);
+        createUserWithEmailAndPassword(auth, email, password).catch((err) => {
+            if (err.code == 'auth/email-already-in-use') {
+              alert("Email Exist");
+              console.log("redirect");
+              formik.resetForm();
+            }
+          });
         return;
     }
 
     async function login(email, password) {
-        console.log(email, password);
         const result = await signInWithEmailAndPassword(auth, email, password)
         .catch(
             (err) => {
