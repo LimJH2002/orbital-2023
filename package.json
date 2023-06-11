@@ -21,7 +21,6 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.1.4",
     "firebase": "^9.22.1",
-    "flowbite": "^1.6.5",
     "formik": "^2.4.0",
     "lucide-react": "^0.241.0",
     "next": "^13.4.3",
