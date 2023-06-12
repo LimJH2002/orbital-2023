@@ -1,8 +1,10 @@
 import { Fragment } from "react";
 import Card from "./card";
 import Table from "./table";
+import { useAuth } from "@/context/AuthContext";
 
-export default function Overlap({ logout }) {
+export default function Overlap() {
+  const { logout, currentUser } = useAuth();
   return (
     <Fragment>
       <div className="min-h-full">
