@@ -1,7 +1,9 @@
 import { BanknotesIcon, FireIcon } from "@heroicons/react/24/outline";
-import { label, transactions } from "@/data/table-data";
+import { label } from "@/data/table-data";
 import EditTransaction from "./edit-transaction-window";
 import NewTransaction from "./new-transaction-window";
+import { useAuth } from "@/context/AuthContext";
+import useSWR from "swr";
 
 function checkIcon(type) {
   return type === "Money-out" ? (
@@ -11,8 +13,18 @@ function checkIcon(type) {
   );
 }
 
+// const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function Table() {
-  return (
+  const { currentUser } = useAuth();
+  console.log(currentUser ? currentUser.uid : 10);
+  const uid = currentUser ? currentUser.uid : "master";
+  const { data, error, isLoading } = useSWR('/api/list?userId=' + uid, fetcher);
+  if (isLoading) return <div>loading...</div>
+  if (error) return <div>failed to load</div>
+  console.log(data);
+  const transactions = data;
+    return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
