@@ -23,10 +23,10 @@ export default function Home() {
 }
 
 //Authorize User
-function User({ logout, currentUser }) {
+function User() {
   return (
-    <Layout logout={logout}>
-      <Overlap logout={logout} />
+    <Layout>
+      <Overlap />
     </Layout>
   );
 }
