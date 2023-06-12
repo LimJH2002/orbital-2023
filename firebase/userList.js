@@ -9,6 +9,7 @@ export async function getList(req, res) {
         const docRef = doc(db, 'list', currentUser.uid);
         const docSnap = await getDoc(docRef);
 
+
         console.log(docSnap);
         res.status(200).json(docSnap.data());
     } catch (err) {
@@ -38,6 +39,7 @@ export async function getUserList(req, res) {
     }
 }
 
+
 // POST: http://localhost:3000/api/list/1
 export async function addTransaction(req, res) {
     // const { currentUser } = useAuth();
@@ -63,5 +65,31 @@ export async function addTransaction(req, res) {
     } catch (err) {
         console.log(err);
         res.status(404);
+    }
+}
+
+//PATCH: http://localhost:3000/api/list/1
+//Need to include id in form data
+export async function updateTransaction(req, res) {
+    const { userId } = req.query;
+    
+    try {
+        const docRef = doc(db, 'users', userId);
+        const formData = req.body;
+        console.log(formData)
+        const getSnap = await getDoc(docRef);
+        const transaction = getSnap.data().transactions[formData.id];
+
+        await updateDoc(docRef, {
+            transactions: arrayRemove({...transaction})
+        })
+        await updateDoc(docRef, {
+            transactions: arrayUnion({...formData})
+        })
+        const newSnap = await getDoc(docRef);
+        res.status(200).json(newSnap.data().transactions);
+    } catch (err) {
+        console.log(err);
+        res.status(404)
     }
 }

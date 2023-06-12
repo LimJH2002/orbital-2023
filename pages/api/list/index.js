@@ -1,4 +1,4 @@
-import { getList, addTransaction, getUserList } from "@/firebase/userList";
+import { getList, addTransaction, getUserList, updateTransaction } from "@/firebase/userList";
 
 export default async function handler(req, res) {
     const { method } = req;
@@ -9,6 +9,9 @@ export default async function handler(req, res) {
             break;
         case 'POST':
             addTransaction(req, res);
+            break;
+        case 'PATCH':
+            updateTransaction(req, res);
             break;
         default : 
             res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
