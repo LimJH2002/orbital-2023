@@ -10,6 +10,7 @@ import { useEffect } from "react";
 export default function Home() {
   const { logout, currentUser } = useAuth();
   const router = useRouter();
+  console.log(currentUser);
   useEffect(() => {
     if(!currentUser) {
       router.push("/login");  
