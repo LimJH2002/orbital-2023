@@ -1,6 +1,35 @@
+import { useReducer } from "react";
+import { useAuth } from "@/context/AuthContext";
+const formReducer = (state, event) => {
+  return {
+      ...state,
+      [event.target.name]: event.target.value
+  }
+}
+
 export default function NewTransactionForm({ func }) {
+
+  const { currentUser } = useAuth();
+  const uid = currentUser.uid;
+  const [formData, setFormData] = useReducer(formReducer, {});
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(Object.keys(formData).length == 0) return console.log("Don't have Form Data");
+    console.log(formData);
+    
+    fetch('/api/list?userId=' + uid, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+  }
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
@@ -27,6 +56,7 @@ export default function NewTransactionForm({ func }) {
                     type="text"
                     name="title"
                     id="title"
+                    onChange={setFormData}
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
                 </div>
@@ -45,6 +75,7 @@ export default function NewTransactionForm({ func }) {
                   required
                   id="type"
                   name="type"
+                  onChange={setFormData}
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 >
                   <option>Money-in</option>
@@ -63,8 +94,9 @@ export default function NewTransactionForm({ func }) {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
                   required
-                  id="type"
-                  name="type"
+                  id="category"
+                  name="category"
+                  onChange={setFormData}
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 >
                   <option>Food</option>
@@ -94,6 +126,7 @@ export default function NewTransactionForm({ func }) {
                     min="0.01"
                     name="amount"
                     step=".01"
+                    onChange={setFormData}
                     id="amount"
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
@@ -113,6 +146,7 @@ export default function NewTransactionForm({ func }) {
                   <input
                     required
                     type="date"
+                    onChange={setFormData}
                     id="date"
                     name="date"
                     max={new Date().toISOString().split("T")[0]}

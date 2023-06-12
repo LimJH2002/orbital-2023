@@ -1,6 +1,6 @@
 import { db } from "@/firebase/firebaseApp"
 import { useAuth } from "@/context/AuthContext"
-import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, getDoc, setDoc } from "firebase/firestore";
 
 // GET: http://localhost:3000/api/list
 export async function getList(req, res) {
@@ -37,6 +37,13 @@ export async function addTransaction(req, res) {
     try {
         const formData = req.body;
         const docRef = doc(db, 'users', userId);
+        
+        const getSnap = await getDoc(docRef);
+        if (!getSnap.data()) {
+            await setDoc(docRef, {
+                uid:userId
+            });
+        }
         const docSnap = await getDoc(docRef);
         const n = docSnap.data().transactions ? docSnap.data().transactions.length : 0;
         console.log(n);

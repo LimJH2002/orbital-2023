@@ -45,7 +45,7 @@ export function AuthProvider({children}) {
             }
           );
         console.log(result);
-        _callback();
+        // _callback();
     }
 
     async function googleSignIn() {
