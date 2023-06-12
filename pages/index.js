@@ -4,10 +4,14 @@ import Link from "next/link";
 import Layout from "@/components/layout";
 import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const { logout, currentUser } = useAuth();
-  console.log(currentUser);
+  const router = useRouter();
+  if (!currentUser) {
+    router.push("/login")
+  }
 
   return (
     <>
