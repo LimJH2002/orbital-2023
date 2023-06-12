@@ -15,16 +15,21 @@ function checkIcon(type) {
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then(res => res.json())
+
 export default function Table() {
   const { currentUser } = useAuth();
   console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
+
+
   const { data, error, isLoading } = useSWR('/api/list?userId=' + uid, fetcher);
   if (isLoading) return <div>loading...</div>
-  if (error) return <div>failed to load</div>
+  // if (error) return <div>No data</div>
   console.log(data);
   const transactions = data;
-    return (
+  
+  
+  return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
@@ -88,7 +93,7 @@ export default function Table() {
                   </tr>
                 </thead>
                 <tbody className="bg-white">
-                  {transactions.map((transaction, transactionIdx) => (
+                  {transactions && transactions.map((transaction, transactionIdx) => (
                     <tr
                       key={transaction.title}
                       className={

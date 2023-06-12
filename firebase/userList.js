@@ -8,6 +8,7 @@ export async function getList(req, res) {
     try {
         const docRef = doc(db, 'list', currentUser.uid);
         const docSnap = await getDoc(docRef);
+
         console.log(docSnap);
         res.status(200).json(docSnap.data());
     } catch (err) {
@@ -21,8 +22,15 @@ export async function getUserList(req, res) {
     const { userId } = req.query;
     try {
         const docRef = doc(db, 'users', userId);
-        const docSnap = await getDoc(docRef);
+        
         // console.log(docSnap.data());
+        const getSnap = await getDoc(docRef);
+        if (!getSnap.data()) {
+            await setDoc(docRef, {
+                uid:userId
+            });
+        }
+        const docSnap = await getDoc(docRef);
         res.status(200).json(docSnap.data().transactions);
     } catch (err) {
         console.log(err);
