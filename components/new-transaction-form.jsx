@@ -1,5 +1,9 @@
 import { useReducer } from "react";
 import { useAuth } from "@/context/AuthContext";
+// import useSWR from "swr";
+// import Table from "./table";
+// import useFetchLists from "@/hooks/fetchLists";
+
 const formReducer = (state, event) => {
   return {
       ...state,
@@ -7,18 +11,23 @@ const formReducer = (state, event) => {
   }
 }
 
-export default function NewTransactionForm({ func }) {
+// const fetcher = (...args) => fetch(...args).then(res => res.json());
+
+export default function NewTransactionForm({ func, onSave }) {
 
   const { currentUser } = useAuth();
   const uid = currentUser.uid;
-  const [formData, setFormData] = useReducer(formReducer, {});
-  
+  // const { lists, setLists } = useFetchLists();
+  const [formData, setFormData] = useReducer(formReducer, {"type":"Money-in", "category":"Food"});
+  // setFormData({type:"Money-in"});
+  console.log(formData)
+  // const { data, error, isLoading, mutate } = useSWR('/api/list?userId=' + uid, fetcher);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(Object.keys(formData).length == 0) return console.log("Don't have Form Data");
-    console.log(formData);
-    
+    // console.log(formData);
+    // setLists([...lists, formData]);
     fetch('/api/list?userId=' + uid, {
       method: 'POST',
       headers: {
@@ -26,6 +35,9 @@ export default function NewTransactionForm({ func }) {
       },
       body: JSON.stringify(formData),
     })
+    // setLists('');
+    
+    // Table();
   }
 
   return (
