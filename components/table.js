@@ -107,7 +107,7 @@ export default function Table() {
                         {transaction.type}
                       </td>
                       <td className=" px-3 py-4 text-sm">
-                        {label(transaction.label)}
+                        {label(transaction.category)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {transaction.amount}
