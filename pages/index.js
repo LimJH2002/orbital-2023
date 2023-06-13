@@ -6,17 +6,26 @@ import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  const { logout, currentUser } = useAuth();
-  const router = useRouter();
-  console.log(currentUser);
-  useEffect(() => {
-    if(!currentUser) {
-      router.push("/login");  
+
+function Home() {
+    const auth = getAuth();
+    const router = useRouter();
+    const [user, loading] = useAuthState(auth);
+    const currentUser = auth.currentUser;
+
+    if (loading) {
+      return <div>Loading...</div>;
     }
-  })
-  console.log(currentUser);
+
+    if (!user) {
+      router.push("/login");
+      return <div>Please sign in to continue</div>;
+    }
+
   return (
     <>
       <Head>
@@ -25,16 +34,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {User({ logout, currentUser })}
+      {User({ auth, currentUser })}
     </>
   );
 }
 
 //Authorize User
-function User() {
+function User(props) {
   return (
-    <Layout>
-      <Overlap />
+    <Layout auth={props.auth}>
+      <Overlap auth={props.auth} />
     </Layout>
   );
 }
+
+export default dynamic (() => Promise.resolve(Home), {ssr: false})
+

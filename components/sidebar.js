@@ -9,11 +9,12 @@ import Link from "next/link";
 import { defaultNavItems } from "./navItems";
 import { GoSignOut } from "react-icons/go";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
-// use the correct icon depending on the state.
-const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
-const { logout, currentUser } = useAuth();
+const Sidebar = ({ collapsed, setCollapsed, auth }) => {
+  // use the correct icon depending on the state.
+  const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
 
   return (
     <div
@@ -90,11 +91,7 @@ const { logout, currentUser } = useAuth();
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
               })}
             >
-              <Link
-                href="/"
-                onClick={() => logout()}
-                className="flex gap-2"
-              >
+              <Link href="/" onClick={() => auth.signOut()} className="flex gap-2">
                 <GoSignOut className="w-6 h-6" />
                 <span>{!collapsed && "Sign Out"}</span>
               </Link>

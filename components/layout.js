@@ -20,7 +20,7 @@ const Layout = (props) => {
       <Sidebar
         collapsed={collapsed}
         setCollapsed={() => setSidebarCollapsed((prev) => !prev)}
-        logout={props.logout}
+        auth={props.auth}
       />
       {/* content */}
       <div className=""> {props.children}</div>
