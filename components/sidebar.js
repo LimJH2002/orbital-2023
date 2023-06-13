@@ -36,7 +36,10 @@ const Sidebar = ({ collapsed, setCollapsed, auth }) => {
             "py-4 justify-center": collapsed,
           })}
         >
-          {!collapsed && <Image src="/Logo.png" width={90} height={50} />}
+          {!collapsed && (
+            <Image src="/Logo.png" width={90} height={50} className="ml-2" />
+          )}
+
           <button
             className={cn({
               "grid place-content-center": true, // position
@@ -51,13 +54,13 @@ const Sidebar = ({ collapsed, setCollapsed, auth }) => {
         </div>
         {/* NavItems */}
         <nav className="flex-grow">
-          <ul
-            className={cn({
-              "my-2 flex flex-col gap-2 items-stretch": true,
-            })}
-          >
-            {defaultNavItems.map((item, index) => {
-              return (
+          {defaultNavItems.map((item, index) => {
+            return (
+              <ul
+                className={cn({
+                  "my-2 flex flex-col gap-2 items-stretch": true,
+                })}
+              >
                 <li
                   key={index}
                   className={cn({
@@ -71,9 +74,9 @@ const Sidebar = ({ collapsed, setCollapsed, auth }) => {
                     {item.icon} <span>{!collapsed && item.label}</span>
                   </Link>
                 </li>
-              );
-            })}
-          </ul>
+              </ul>
+            );
+          })}
         </nav>
 
         {/* Sign Out */}
@@ -81,21 +84,18 @@ const Sidebar = ({ collapsed, setCollapsed, auth }) => {
           <ul
             className={cn({
               "my-2 flex flex-col gap-2 items-stretch": true,
+              "text-indigo-100 hover:bg-gray-800 flex": true, //colors
+              "transition-colors duration-300": true, //animation
             })}
+            onClick={() => auth.signOut()}
           >
             <li
               className={cn({
-                "text-indigo-100 hover:bg-gray-800 flex": true, //colors
-                "transition-colors duration-300": true, //animation
                 "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
               })}
             >
-              <Link
-                href="/"
-                onClick={() => auth.signOut()}
-                className="flex gap-2"
-              >
+              <Link href="/" className="flex gap-2">
                 {<GoSignOut className="w-6 h-6" />}{" "}
                 <span>{!collapsed && "Logout"}</span>
               </Link>
