@@ -13,36 +13,42 @@ const formReducer = (state, event) => {
 
 // const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-export default function NewTransactionForm({ func, onSave }) {
-
+export default function NewTransactionForm({ closeWindow, onSave }) {
   const { currentUser } = useAuth();
   const uid = currentUser.uid;
   // const { lists, setLists } = useFetchLists();
-  const [formData, setFormData] = useReducer(formReducer, {"type":"Money-in", "category":"Food"});
+  const [formData, setFormData] = useReducer(formReducer, {
+    type: "Money-in",
+    category: "Food",
+  });
   // setFormData({type:"Money-in"});
-  console.log(formData)
+  console.log(formData);
   // const { data, error, isLoading, mutate } = useSWR('/api/list?userId=' + uid, fetcher);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(Object.keys(formData).length == 0) return console.log("Don't have Form Data");
+    if (Object.keys(formData).length == 0)
+      return console.log("Don't have Form Data");
     // console.log(formData);
     // setLists([...lists, formData]);
-    fetch('/api/list?userId=' + uid, {
-      method: 'POST',
+    fetch("/api/list?userId=" + uid, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-    func();
+    });
+    closeWindow();
     // setLists('');
-    
+
     // Table();
-  }
+  };
 
   return (
-    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+    <form
+      className="space-y-8 divide-y divide-gray-200"
+      onSubmit={handleSubmit}
+    >
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
@@ -176,7 +182,7 @@ export default function NewTransactionForm({ func, onSave }) {
           <button
             type="button"
             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={func}
+            onClick={closeWindow}
           >
             Cancel
           </button>

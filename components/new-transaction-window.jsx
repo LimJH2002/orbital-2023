@@ -20,7 +20,7 @@ export default function NewTransaction() {
         {...bindings}
       >
         <Modal.Body>
-          <NewTransactionForm func={() => setVisible(false)} />
+          <NewTransactionForm closeWindow={() => setVisible(false)} />
         </Modal.Body>
       </Modal>
     </div>

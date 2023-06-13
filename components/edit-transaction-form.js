@@ -1,4 +1,4 @@
-export default function EditTransactionForm({ transaction, func }) {
+export default function EditTransactionForm({ transaction, closeWindow }) {
   return (
     <form className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -132,13 +132,14 @@ export default function EditTransactionForm({ transaction, func }) {
           <button
             type="button"
             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={func}
+            onClick={closeWindow}
           >
             Cancel
           </button>
           <button
             type="button"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            onClick={closeWindow}
           >
             Delete
           </button>

@@ -21,7 +21,7 @@ export default function EditTransaction({ transaction }) {
         <Modal.Body>
           <EditTransactionForm
             transaction={transaction}
-            func={() => setVisible(false)}
+            closeWindow={() => setVisible(false)}
           />
         </Modal.Body>
       </Modal>
