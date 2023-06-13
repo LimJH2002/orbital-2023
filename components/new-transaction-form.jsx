@@ -35,6 +35,7 @@ export default function NewTransactionForm({ func, onSave }) {
       },
       body: JSON.stringify(formData),
     })
+    func();
     // setLists('');
     
     // Table();
