@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Layout from "@/components/layout";
+import Layout from "@/components/sidebar-layout";
 
 export default function comingSoon() {
   return (
-    <Layout>
       <div className="bg-gray-900 mx-auto h-screen flex flex-col md:flex-row justify-between items-center">
         <div className="flex flex-col gap-5">
           <p
@@ -15,8 +14,12 @@ export default function comingSoon() {
           </p>
 
           <p className="text-6xl font-bold text-white">Stay Tuned!</p>
-          <p className="text-2xl font-bold text-white">We are working hard on it</p>
-          <p className="text-base text-white">Don't worry your data is safe with us.</p>
+          <p className="text-2xl font-bold text-white">
+            We are working hard on it
+          </p>
+          <p className="text-base text-white">
+            Don't worry your data is safe with us.
+          </p>
           <Link href={"/"} legacyBehavior>
             <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl hover:scale-95 duration-300 transition text-gray-50 shadow-xl font-medium">
               Back to Homepage
@@ -25,6 +28,5 @@ export default function comingSoon() {
         </div>
         <img src="/assets/travel.png" className="max-w-3xl" />
       </div>
-    </Layout>
   );
 }

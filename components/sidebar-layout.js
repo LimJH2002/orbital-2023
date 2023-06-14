@@ -1,8 +1,11 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import Sidebar from "./sidebar";
+import { useRouter } from "next/router";
 
-const Layout = (props) => {
+const SidebarLayout = (props) => {
+  const { pathname } = useRouter();
+  console.log(pathname);
   const [collapsed, setSidebarCollapsed] = useState(false);
   return (
     <div
@@ -27,4 +30,4 @@ const Layout = (props) => {
     </div>
   );
 };
-export default Layout;
+export default SidebarLayout;

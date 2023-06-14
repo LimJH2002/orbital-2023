@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import Layout from "@/components/layout";
+import SidebarLayout from "@/components/sidebar-layout";
 import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
 import { useRouter } from "next/router";
@@ -10,21 +10,20 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import dynamic from "next/dynamic";
 
-
 function Home() {
-    const auth = getAuth();
-    const router = useRouter();
-    const [user, loading] = useAuthState(auth);
-    const currentUser = auth.currentUser;
+  const auth = getAuth();
+  const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+  const currentUser = auth.currentUser;
 
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (!user) {
-      router.push("/login");
-      return <div>Please sign in to continue</div>;
-    }
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
 
   return (
     <>
@@ -41,12 +40,7 @@ function Home() {
 
 //Authorize User
 function User(props) {
-  return (
-    <Layout auth={props.auth}>
-      <Overlap auth={props.auth} />
-    </Layout>
-  );
+  return <Overlap auth={props.auth} />;
 }
 
-export default dynamic (() => Promise.resolve(Home), {ssr: false})
-
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
