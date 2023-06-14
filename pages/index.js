@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import SidebarLayout from "@/components/sidebar-layout";
+import SidebarLayout from "@/components/sidebar";
 import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
 import { useRouter } from "next/router";
