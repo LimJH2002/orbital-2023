@@ -86,9 +86,18 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
-                  <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                    $
-                  </span>
+                  <div className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                    <select
+                      id="currency"
+                      name="currency"
+                      defaultValue={transaction.currency}
+                      className="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                    >
+                      <option>SGD</option>
+                      <option>MYR</option>
+                      <option>USD</option>
+                    </select>
+                  </div>
                   <input
                     required
                     type="number"
