@@ -4,6 +4,7 @@ import EditTransaction from "./edit-transaction-window";
 import NewTransaction from "./new-transaction-window";
 import { useAuth } from "@/context/AuthContext";
 import useSWR from "swr";
+import Loading from "@/pages/loading";
 
 function checkIcon(type) {
   return type === "Money-out" ? (
@@ -14,21 +15,22 @@ function checkIcon(type) {
 }
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Table() {
   const { currentUser } = useAuth();
   console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
+  const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
+  const isLoading = !data && !error;
 
-  const { data, error, isLoading } = useSWR('/api/list?userId=' + uid, fetcher);
-  if (isLoading) return <div>loading...</div>
-  // if (error) return <div>No data</div>
+  if (isLoading) return <Loading />;
+  if (error) return <div>Error occurred: {error.message}</div>;
+
   console.log(data);
   const transactions = data;
-  
-  
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -93,34 +95,35 @@ export default function Table() {
                   </tr>
                 </thead>
                 <tbody className="bg-white">
-                  {transactions && transactions.map((transaction, transactionIdx) => (
-                    <tr
-                      key={transaction.title}
-                      className={
-                        transactionIdx % 2 === 0 ? undefined : "bg-gray-50"
-                      }
-                    >
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        {transaction.title}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {transaction.type}
-                      </td>
-                      <td className=" px-3 py-4 text-sm">
-                        {label(transaction.category)}
-                      </td>
-                      {/* Default value for currency is SGD */}
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {transaction.currency || "SGD"} {transaction.amount}
-                      </td>
-                      <td className="whitespace-nowrap py-4 text-sm text-gray-500">
-                        {transaction.date}
-                      </td>
-                      <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-6">
-                        <EditTransaction transaction={transaction} />
-                      </td>
-                    </tr>
-                  ))}
+                  {transactions &&
+                    transactions.map((transaction, transactionIdx) => (
+                      <tr
+                        key={transaction.title}
+                        className={
+                          transactionIdx % 2 === 0 ? undefined : "bg-gray-50"
+                        }
+                      >
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                          {transaction.title}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {transaction.type}
+                        </td>
+                        <td className=" px-3 py-4 text-sm">
+                          {label(transaction.category)}
+                        </td>
+                        {/* Default value for currency is SGD */}
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {transaction.currency || "SGD"} {transaction.amount}
+                        </td>
+                        <td className="whitespace-nowrap py-4 text-sm text-gray-500">
+                          {transaction.date}
+                        </td>
+                        <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-6">
+                          <EditTransaction transaction={transaction} />
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

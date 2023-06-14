@@ -8,9 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { defaultNavItems } from "./navItems";
 import { GoSignOut } from "react-icons/go";
-import { useAuth } from "@/context/AuthContext";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
   // use the correct icon depending on the state.
@@ -54,13 +51,13 @@ const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
         </div>
         {/* NavItems */}
         <nav className="flex-grow">
-          {defaultNavItems.map((item, index) => {
-            return (
-              <ul
-                className={cn({
-                  "my-2 flex flex-col gap-2 items-stretch": true,
-                })}
-              >
+          <ul
+            className={cn({
+              "my-2 flex flex-col gap-2 items-stretch": true,
+            })}
+          >
+            {defaultNavItems.map((item, index) => {
+              return (
                 <li
                   key={index}
                   className={cn({
@@ -74,9 +71,9 @@ const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
                     {item.icon} <span>{!collapsed && item.label}</span>
                   </Link>
                 </li>
-              </ul>
-            );
-          })}
+              );
+            })}
+          </ul>
         </nav>
 
         {/* Sign Out */}

@@ -6,7 +6,7 @@ const Bank = () => {
   const router = useRouter();
   router.push("/comingSoon"); 
   return (
-    <div>B</div>
+    <div></div>
   )
 }
 

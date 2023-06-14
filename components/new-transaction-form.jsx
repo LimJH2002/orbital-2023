@@ -6,10 +6,10 @@ import { useAuth } from "@/context/AuthContext";
 
 const formReducer = (state, event) => {
   return {
-      ...state,
-      [event.target.name]: event.target.value
-  }
-}
+    ...state,
+    [event.target.name]: event.target.value,
+  };
+};
 
 // const fetcher = (...args) => fetch(...args).then(res => res.json());
 
