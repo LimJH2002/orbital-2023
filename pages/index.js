@@ -1,14 +1,10 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
-import Link from "next/link";
-import SidebarLayout from "@/components/sidebar";
-import { useAuth } from "@/context/AuthContext";
 import Overlap from "@/components/overlap-banner";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import dynamic from "next/dynamic";
+import Loading from "./loading";
 
 function Home() {
   const auth = getAuth();
@@ -17,7 +13,7 @@ function Home() {
   const currentUser = auth.currentUser;
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (!user) {
