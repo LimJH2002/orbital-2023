@@ -32,7 +32,7 @@ export default function Profile() {
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
                 <div className="col-span-full flex items-center gap-x-8">
                   <Image
-                    src={user.photoURL}
+                    src={user.photoURL ? user.photoURL : "/DefaultAvatar.png"}
                     alt="Profile Picture"
                     width={1000}
                     height={1000}
