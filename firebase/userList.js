@@ -96,7 +96,7 @@ export async function updateTransaction(req, res) {
 
 //DELETE: http://localhost:3000/api/list/1
 //Need to include id in form data
-export async function updateTransaction(req, res) {
+export async function deleteTransaction(req, res) {
     const { userId } = req.query;
     
     try {
