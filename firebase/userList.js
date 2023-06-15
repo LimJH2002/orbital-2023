@@ -103,6 +103,7 @@ export async function deleteTransaction(req, res) {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
         console.log(formData)
+        // console.log(req);
         const getSnap = await getDoc(docRef);
         const transaction = getSnap.data().transactions[formData.id];
 
@@ -110,7 +111,8 @@ export async function deleteTransaction(req, res) {
             transactions: arrayRemove({...transaction})
         })
         const newSnap = await getDoc(docRef);
-        res.status(204).json(newSnap.data().transactions);
+        
+        res.status(200).json(newSnap.data().transactions);
     } catch (err) {
         console.log(err);
         res.status(404)

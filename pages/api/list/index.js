@@ -1,4 +1,4 @@
-import { getList, addTransaction, getUserList, updateTransaction } from "@/firebase/userList";
+import { getList, addTransaction, getUserList, updateTransaction, deleteTransaction } from "@/firebase/userList";
 
 export default async function handler(req, res) {
     const { method } = req;
@@ -13,8 +13,11 @@ export default async function handler(req, res) {
         case 'PATCH':
             updateTransaction(req, res);
             break;
+        case 'PUT':
+            deleteTransaction(req, res);
+            break;
         default : 
-            res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
+            res.setHeader('Allow', ['GET', 'POST', 'PATCH', 'PUT']);
             res.status(405).end(`Method ${method} Not Allowed`);
             break;
     }
