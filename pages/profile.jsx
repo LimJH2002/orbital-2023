@@ -7,12 +7,12 @@ import Loading from "./loading";
 export default function Profile() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
-  console.log(user)
+  console.log(user);
 
   if (loading) {
     return <Loading />;
   }
-  
+
   return (
     <Fragment>
       <main className="pl-10">
@@ -192,7 +192,29 @@ export default function Profile() {
             </form>
           </div>
 
-          
+          <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+            <div>
+              <h2 className="text-base font-semibold leading-7 text-white">
+                Delete account
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                Breaking up with us?
+              </p>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                This action is not reversible. All information will be deleted
+                forever.
+              </p>
+            </div>
+
+            <form className="items-start flex md:col-span-2">
+              <button
+                type="submit"
+                className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
+              >
+                Yes, delete my account
+              </button>
+            </form>
+          </div>
         </div>
       </main>
     </Fragment>
