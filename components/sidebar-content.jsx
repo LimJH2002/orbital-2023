@@ -80,9 +80,7 @@ const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
         <nav>
           <ul
             className={cn({
-              "my-2 flex flex-col gap-2 items-stretch": true,
-              "text-indigo-100 hover:bg-gray-800 flex": true, //colors
-              "transition-colors duration-300": true, //animation
+              "my-5 flex flex-col": true,
             })}
             onClick={() => auth.signOut()}
           >
@@ -90,6 +88,8 @@ const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
               className={cn({
                 "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                 "rounded-full p-2 mx-3 w-10 h-10": collapsed,
+                "transition-colors duration-300": true, //animation
+                "text-indigo-100 hover:bg-gray-800 flex": true, //colors
               })}
             >
               <Link href="/" className="flex gap-2">

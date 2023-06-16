@@ -25,8 +25,8 @@ module.exports = {
         cyan: colors.cyan,
       },
       gridTemplateColumns: {
-        sidebar: "300px auto", //for sidebar layout
-        "sidebar-collapsed": "64px auto", //for collapsed sidebar layout
+        sidebar: "15rem auto", //for sidebar layout
+        "sidebar-collapsed": "4rem auto", //for collapsed sidebar layout
       },
       colors: {
         border: "hsl(var(--border))",
