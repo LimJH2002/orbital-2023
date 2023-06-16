@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 // import useSWR from "swr";
 // import Table from "./table";
 // import useFetchLists from "@/hooks/fetchLists";
@@ -14,6 +15,7 @@ const formReducer = (state, event) => {
 // const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function NewTransactionForm({ closeWindow, onSave }) {
+  const router = useRouter();
   const { currentUser } = useAuth();
   const uid = currentUser.uid;
   // const { lists, setLists } = useFetchLists();
@@ -39,6 +41,8 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
       body: JSON.stringify(formData),
     });
     closeWindow();
+    router.reload();
+
     // setLists('');
 
     // Table();

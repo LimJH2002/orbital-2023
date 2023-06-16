@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 const formReducer = (state, event) => {
   return {
@@ -10,15 +11,16 @@ const formReducer = (state, event) => {
 
 export default function EditTransactionForm({ transaction, closeWindow }) {
   const { currentUser } = useAuth();
+  const router = useRouter();
   const uid = currentUser.uid;
 
   const [formData, setFormData] = useReducer(formReducer, {
-    "title": transaction.title,
-    "type": transaction.type,
-    "category": transaction.category,
-    "amount": transaction.amount,
-    "date": transaction.date,
-    "id": transaction.id,
+    title: transaction.title,
+    type: transaction.type,
+    category: transaction.category,
+    amount: transaction.amount,
+    date: transaction.date,
+    id: transaction.id,
   });
 
   const handleEdit = (e) => {
@@ -33,18 +35,19 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
       body: JSON.stringify(formData),
     });
     closeWindow();
+    router.reload();
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
     const deleteData = {
-      "title": transaction.title,
-    "type": transaction.type,
-    "category": transaction.category,
-    "amount": transaction.amount,
-    "date": transaction.date,
-    "id": transaction.id,
-    }
+      title: transaction.title,
+      type: transaction.type,
+      category: transaction.category,
+      amount: transaction.amount,
+      date: transaction.date,
+      id: transaction.id,
+    };
     console.log("deleteData", deleteData);
     if (Object.keys(deleteData).length == 0)
       return console.log("Don't have Form Data");
@@ -55,10 +58,11 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
       },
       body: JSON.stringify(deleteData),
     });
+
     closeWindow();
+    router.reload();
   };
 
-  
   return (
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleEdit}>
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -221,7 +225,6 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
           <button
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            
           >
             Save
           </button>
