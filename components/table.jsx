@@ -5,14 +5,7 @@ import NewTransaction from "./new-transaction-window";
 import { useAuth } from "@/context/AuthContext";
 import useSWR from "swr";
 import Loading from "@/pages/loading";
-
-function checkIcon(type) {
-  return type === "Money-out" ? (
-    <FireIcon className="h-6 w-6 text-gray-400" />
-  ) : (
-    <BanknotesIcon className="h-6 w-6 text-gray-400" />
-  );
-}
+import { DateTime } from "luxon";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -28,9 +21,17 @@ export default function Table() {
   if (isLoading) return <Loading />;
   // if (error) return <div>Error occurred: {error.message}</div>;
 
-  console.log("data", data);
   const transactions = data;
   console.log(transactions)
+
+  const sortedTransactions = transactions.sort((a, b) => {
+    const beforeDate = DateTime.fromFormat(a.date, "yyyy-m-d");
+    const afterDate = DateTime.fromFormat(b.date, "yyyy-m-d");
+    return afterDate - beforeDate;
+  });
+
+  console.log(sortedTransactions);
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -96,7 +97,7 @@ export default function Table() {
                 </thead>
                 <tbody className="bg-white">
                   {transactions &&
-                    transactions.map((transaction, transactionIdx) => (
+                    sortedTransactions.map((transaction, transactionIdx) => (
                       <tr
                         key={transaction.title}
                         className={
