@@ -26,11 +26,11 @@ export default function Table() {
   const isLoading = !data && !error;
 
   if (isLoading) return <Loading />;
-  if (error) return <div>Error occurred: {error.message}</div>;
+  // if (error) return <div>Error occurred: {error.message}</div>;
 
-  console.log(data);
+  console.log("data", data);
   const transactions = data;
-
+  console.log(transactions)
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">

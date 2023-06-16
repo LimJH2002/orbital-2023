@@ -32,6 +32,7 @@ export async function getUserList(req, res) {
             });
         }
         const docSnap = await getDoc(docRef);
+        console.log("transactions: ",docSnap.data().transactions)
         res.status(200).json(docSnap.data().transactions);
     } catch (err) {
         console.log(err);
