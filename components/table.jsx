@@ -44,7 +44,7 @@ export default function Table() {
           >
             Add Transaction
           </button> */}
-          <SelectDate />
+          <SelectDate transaction={sortedTransactions} />
           <NewTransaction />
         </div>
       </div>
