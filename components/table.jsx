@@ -69,9 +69,7 @@ export default function Table() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">
-            Monthly Transactions
-          </h1>
+          <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-16">
           {/* <button
