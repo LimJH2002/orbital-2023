@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
@@ -27,8 +27,22 @@ while (year >= 2020) {
 }
 
 export default function SelectDate(props) {
-  const [selectedMonth, setSelectedMonth] = useState(months[month]);
-  const [selectedYear, setSelectedYear] = useState(years[0]);
+  const data1 = window.localStorage.getItem("MONTH_STATE");
+  const data2 = window.localStorage.getItem("YEAR_STATE");
+  const [selectedMonth, setSelectedMonth] = useState(
+    data1 !== null ? JSON.parse(data1) : months[month]
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    data2 !== null ? JSON.parse(data2) : years[0]
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
+  }, [selectedMonth]);
+
+  useEffect(() => {
+    window.localStorage.setItem("YEAR_STATE", JSON.stringify(selectedYear));
+  }, [selectedYear]);
 
   return (
     <Fragment>
