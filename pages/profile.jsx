@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Image from "next/image";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -7,7 +7,11 @@ import Loading from "./loading";
 export default function Profile() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
-  console.log(user);
+  const [fileName, setFileName] = useState("No file chosen");
+
+  function handleChange(event) {
+    setFileName(event.target.files[0].name);
+  }
 
   if (loading) {
     return <Loading />;
@@ -43,17 +47,18 @@ export default function Profile() {
                       id="user-photo"
                       name="user-photo"
                       type="file"
+                      onChange={handleChange}
                       hidden={true}
                     />
                     <label
                       type="button"
-                      for="user-photo"
+                      htmlFor="user-photo"
                       className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
                     >
                       Change Avatar
                     </label>
-                    <span id="file-chosen" className="px-2 text-white">
-                      No file chosen
+                    <span id="file-chosen" className="px-2 text-white text-sm">
+                      {fileName}
                     </span>
                   </div>
                 </div>
