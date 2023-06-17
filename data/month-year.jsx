@@ -1,4 +1,4 @@
-export const Months = [
+export const months = [
   { name: "January", value: "01" },
   { name: "February", value: "02" },
   { name: "March", value: "03" },
@@ -17,7 +17,7 @@ let current = new Date();
 export let year = current.getFullYear();
 export let month = current.getMonth();
 
-export const Years = [];
+export const years = [];
 while (year >= 2020) {
-  Years.push(year--);
+  years.push(year--);
 }
