@@ -1,4 +1,3 @@
-import { BanknotesIcon, FireIcon } from "@heroicons/react/24/outline";
 import { label } from "@/data/table-data";
 import EditTransaction from "./edit-transaction-window";
 import NewTransaction from "./new-transaction-window";
@@ -6,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import useSWR from "swr";
 import Loading from "@/pages/loading";
 import { DateTime } from "luxon";
+import SelectDate from "./select-date";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -22,15 +22,12 @@ export default function Table() {
   // if (error) return <div>Error occurred: {error.message}</div>;
 
   const transactions = data;
-  console.log(transactions)
 
   const sortedTransactions = transactions.sort((a, b) => {
     const beforeDate = DateTime.fromFormat(a.date, "yyyy-m-d");
     const afterDate = DateTime.fromFormat(b.date, "yyyy-m-d");
     return afterDate - beforeDate;
   });
-
-  console.log(sortedTransactions);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -40,13 +37,14 @@ export default function Table() {
             Monthly Transactions
           </h1>
         </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+        <div className="flex mt-4 sm:mt-0 sm:ml-16">
           {/* <button
             type="button"
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
           >
             Add Transaction
           </button> */}
+          <SelectDate />
           <NewTransaction />
         </div>
       </div>
