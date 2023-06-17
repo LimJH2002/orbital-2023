@@ -51,6 +51,7 @@ export default function Profile() {
                       id="user-photo"
                       name="user-photo"
                       type="file"
+                      accept=".png, .jpg"
                       onChange={handleChange}
                       hidden={true}
                     />
@@ -64,6 +65,9 @@ export default function Profile() {
                     <span id="file-chosen" className="px-2 text-white text-sm">
                       {fileName}
                     </span>
+                    <p className="mt-2 text-xs leading-5 text-gray-400">
+                      JPG or PNG only.
+                    </p>
                   </div>
                 </div>
 
