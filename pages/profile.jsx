@@ -10,7 +10,11 @@ export default function Profile() {
   const [fileName, setFileName] = useState("No file chosen");
 
   function handleChange(event) {
-    setFileName(event.target.files[0].name);
+    setFileName(
+      event.target.files.length < 1
+        ? "No file chosen"
+        : event.target.files[0].name
+    );
   }
 
   if (loading) {
