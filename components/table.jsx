@@ -40,10 +40,15 @@ export default function Table() {
 
   const condition = (trans) => {
     let [currYear, currMonth] = trans.date.split("-");
-    return (
-      currYear === selectedYear.toString() &&
-      currMonth === selectedMonth.value.toString()
-    );
+    return selectedMonth.value.toString() === "0" &&
+      selectedYear.toString() === "All Year"
+      ? true
+      : selectedMonth.value.toString() === "0"
+      ? currYear === selectedYear.toString()
+      : selectedYear.toString() === "All Year"
+      ? currMonth === selectedMonth.value.toString()
+      : currYear === selectedYear.toString() &&
+        currMonth === selectedMonth.value.toString();
   };
   //Filter Mechanism End
 
