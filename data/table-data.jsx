@@ -26,7 +26,7 @@ export const LabelCategories = [
 
 export function label(str) {
   return str === LabelCategories[0] ? (
-    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+    <span className="inline-flex items-center px-3 py-0.5 rounded-full !bg-yellow-100 text-yellow-800">
       Food
     </span>
   ) : str === LabelCategories[1] ? (
