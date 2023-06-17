@@ -126,10 +126,7 @@ export default function Table() {
                     >
                       Date
                     </th>
-                    <th
-                      scope="col"
-                      className="relative px-3 py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
+                    <th scope="col" className=" px-3 py-3.5 pl-3 pr-4 sm:pr-6">
                       <span className="sr-only">Edit</span>
                     </th>
                   </tr>
@@ -160,7 +157,7 @@ export default function Table() {
                           <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                             {transaction.date}
                           </td>
-                          <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-6">
+                          <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
                             <EditTransaction transaction={transaction} />
                           </td>
                         </tr>
