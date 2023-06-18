@@ -1,22 +1,3 @@
-export const transactions = [
-  {
-    title: "GrabFood",
-    label: "Food",
-    type: "Money-out",
-    currency: "SGD",
-    amount: "30.00",
-    date: new Date("2023-6-11").toISOString().split("T")[0],
-  },
-  {
-    title: "Shopee",
-    label: "Online Shopping",
-    type: "Money-out",
-    currency: "MYR",
-    amount: "68.77",
-    date: new Date("2023-6-12").toISOString().split("T")[0],
-  },
-];
-
 export const LabelCategories = [
   "Food",
   "Transport",
