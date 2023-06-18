@@ -77,12 +77,19 @@ export async function updateTransaction(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
-        console.log(formData)
+        console.log("update:", formData)
         const getSnap = await getDoc(docRef);
-        const transaction = getSnap.data().transactions[formData.id];
+        const transaction = getSnap.data().transactions.filter(t => {
+            const bool = formData.id === t.id && formData.title === t.title
+            && formData.amount === t.amount && formData.type === t.type
+            && formData.category === t.category && formData.date === t.date;
+            console.log(bool);
+            return bool;
+        })
+        console.log("tr: ", transaction);
 
         await updateDoc(docRef, {
-            transactions: arrayRemove({...transaction})
+            transactions: arrayRemove({...transaction[0]})
         })
         await updateDoc(docRef, {
             transactions: arrayUnion({...formData})
@@ -103,16 +110,23 @@ export async function deleteTransaction(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
-        console.log(formData)
+        console.log("delete: ", formData)
         // console.log(req);
         const getSnap = await getDoc(docRef);
-        const transaction = getSnap.data().transactions[formData.id];
+        const transaction = getSnap.data().transactions.filter(t => {
+            const bool = formData.id === t.id && formData.title === t.title
+            && formData.amount === t.amount && formData.type === t.type
+            && formData.category === t.category && formData.date === t.date;
+            console.log(bool);
+            return bool;
+        })
+        console.log("tr: ", transaction);
 
         await updateDoc(docRef, {
-            transactions: arrayRemove({...transaction})
+            transactions: arrayRemove({...transaction[0]})
         })
         const newSnap = await getDoc(docRef);
-        
+        console.log(newSnap.data().transactions)
         res.status(200).json(newSnap.data().transactions);
     } catch (err) {
         console.log(err);

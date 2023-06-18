@@ -156,7 +156,7 @@ export default function Table() {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            <EditTransaction transaction={transaction} />
+                            <EditTransaction transaction={...transaction} />
                           </td>
                         </tr>
                       )
