@@ -28,7 +28,12 @@ export async function getUserList(req, res) {
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
-                uid:userId
+                uid:userId,
+            });
+        }
+        if (!getSnap.data().count) {
+            await setDoc(docRef, {
+                count:0
             });
         }
         const docSnap = await getDoc(docRef);
@@ -55,12 +60,18 @@ export async function addTransaction(req, res) {
                 uid:userId
             });
         }
+        if (!getSnap.data().count) {
+            await setDoc(docRef, {
+                count:0
+            });
+        }
         const docSnap = await getDoc(docRef);
-        const n = docSnap.data().transactions ? docSnap.data().transactions.length : 0;
+        const n = docSnap.data().count;
         console.log(n);
         await updateDoc(docRef, {
             transactions: arrayUnion({...formData, "id": n})
         })
+        await updateDoc(docRef, {count:n+1});
         const newSnap = await getDoc(docRef);
         res.status(200).json(newSnap.data().transactions);
     } catch (err) {
