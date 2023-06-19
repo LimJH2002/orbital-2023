@@ -3,6 +3,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import Sidebar from "@/components/sidebar";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
+import Layout from "./layout";
 
 function App({ Component, pageProps }) {
   const auth = getAuth();
@@ -11,9 +12,9 @@ function App({ Component, pageProps }) {
     // <SessionProvider session={pageProps.session}>
     <AuthProvider>
       {pathname !== "/login" && pathname !== "/register" ? (
-        <Sidebar auth={auth}>
+        <Layout auth={auth}>
           <Component {...pageProps} />
-        </Sidebar>
+        </Layout>
       ) : (
         <Component {...pageProps} />
       )}
