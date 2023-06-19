@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 
 const Bank = () => {
   const router = useRouter();
-  router.push("/comingSoon"); 
+  useEffect(() => {
+    router.push("/comingSoon");
+  });
   return (
     <div></div>
   )

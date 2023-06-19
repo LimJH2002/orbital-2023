@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 
 const Stocks = () => {
   const router = useRouter();
-  router.push("/comingSoon");
+  useEffect(() => {
+    router.push("/comingSoon");
+  });
   return <div></div>;
 };
 
