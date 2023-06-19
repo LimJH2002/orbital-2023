@@ -55,7 +55,7 @@ export default function Table() {
   // Check loading
   if (isLoading) return <Loading />;
 
-  const transactions = data;
+  const transactions = data === undefined ? [] : data;
   const sortedTransactions = transactions.sort((a, b) => {
     const beforeDate = DateTime.fromFormat(a.date, "yyyy-m-d");
     const afterDate = DateTime.fromFormat(b.date, "yyyy-m-d");
