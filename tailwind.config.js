@@ -26,7 +26,7 @@ module.exports = {
         cyan: colors.cyan,
       },
       gridTemplateColumns: {
-        sidebar: "15rem auto", //for sidebar layout
+        "sidebar": "15rem auto", //for sidebar layout
         "sidebar-collapsed": "4rem auto", //for collapsed sidebar layout
       },
       colors: {
