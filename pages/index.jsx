@@ -3,10 +3,9 @@ import Overlap from "@/components/overlap-banner";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import dynamic from "next/dynamic";
 import Loading from "./loading";
 
-function Home() {
+export default function Home() {
   const auth = getAuth();
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
@@ -39,4 +38,3 @@ function User(props) {
   return <Overlap auth={props.auth} />;
 }
 
-export default dynamic(() => Promise.resolve(Home), { ssr: false });
