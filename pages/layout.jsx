@@ -10,7 +10,14 @@ const Layout = (props) => {
         collapsed={collapsed}
         setSidebarCollapsed={setSidebarCollapsed}
       />
-      <div className={collapsed ? "pl-16" : "pl-60"}> {props.children} </div>
+      <div
+        className={`transition-spacing duration-300 ease-in-out ${
+          !collapsed ? "pl-60" : "pl-16"
+        }`}
+      >
+        {" "}
+        {props.children}{" "}
+      </div>
     </div>
   );
 };
