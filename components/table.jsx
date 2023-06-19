@@ -24,7 +24,7 @@ export default function Table() {
   const data1 = window.localStorage.getItem("MONTH_STATE");
   const data2 = window.localStorage.getItem("YEAR_STATE");
   const [selectedMonth, setSelectedMonth] = useState(
-    data1 !== null ? JSON.parse(data1) : months[month]
+    data1 !== null ? JSON.parse(data1) : months[0]
   );
   const [selectedYear, setSelectedYear] = useState(
     data2 !== null ? JSON.parse(data2) : years[0]
@@ -63,7 +63,7 @@ export default function Table() {
   });
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
-  console.log("FFF", filteredSortedTransactions);
+  // console.log("FFF", filteredSortedTransactions);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
