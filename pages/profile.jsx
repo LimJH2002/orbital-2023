@@ -4,6 +4,9 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
 import { useReducer } from "react";
+import useSWR from "swr";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 const formReducer = (state, event) => {
   return {
@@ -12,12 +15,28 @@ const formReducer = (state, event) => {
   };
 };
 
+
 export default function Profile() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [fileName, setFileName] = useState("No file chosen");
-  const uid = user.uid;
-
+  const [username, setUsername] = useState();
+  const { currentUser } = useAuth();
+  const uid = currentUser ? currentUser.uid : "master";
+  console.log(user)
+  const getUsername = async () => { 
+    const response = await fetch("/api/user?userId=" + uid, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+    }).then(e => e.json());
+    setUsername(response);
+    console.log("userData",username);
+  }
+  useEffect(() => {
+    getUsername();
+  }, []);
   const [formData, setFormData] = useReducer(formReducer, {
     currency:"SGD"
   });
@@ -29,6 +48,17 @@ export default function Profile() {
         : event.target.files[0].name
     );
   }
+  const usernameData = username ? username.username : "";
+
+  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  // const fetcher = (url) => fetch(url).then((res) => res.json());
+  // const { userData, error } = useSWR("/api/list?userId=" + uid, fetcher);
+  // console.log("err", error);
+  // if (!userData) return <div>Loading...</div>
+  
+  
+  
+
 
   const handleUserProfile = (e) => {
     e.preventDefault();
@@ -114,7 +144,7 @@ export default function Profile() {
                         onChange={setFormData}
                         autoComplete="username"
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                        defaultValue={user.displayName}
+                        defaultValue=""
                       />
                     </div>
                   </div>

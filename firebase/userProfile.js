@@ -29,9 +29,10 @@ export async function getUserProfile(req, res) {
         // }
         const newSnap = await getDoc(docRef);
         const userData = {
-            name:newSnap.data().name,
+            username:newSnap.data().username,
             currency:newSnap.data().currency
         }
+        console.log("api getUser", userData)
         res.status(200).json(userData);
     } catch (err) {
         console.log(err);

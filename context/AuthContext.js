@@ -91,7 +91,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
       setLoading(false);
-      router.push("/" + router.asPath);
+      router.push(router.asPath);
     });
     return unsubscribe;
   }, []);
