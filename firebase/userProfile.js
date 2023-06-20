@@ -12,7 +12,8 @@ export async function getUserProfile(req, res) {
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
-                uid:userId
+                uid:userId,
+                count:0
             });
         }
         console.log(getSnap.data());
@@ -48,14 +49,12 @@ export async function updateUserProfile(req, res) {
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
-                uid:userId
+                uid:userId,
+                count:0
             });
         }
         console.log(formData)
         const docSnap = await getDoc(docRef);
-        if (!docSnap.name) {
-            name:""
-        }
         if (formData.username) {
             await updateDoc(docRef, {
                 username:formData.username
@@ -68,7 +67,7 @@ export async function updateUserProfile(req, res) {
         }
         const newSnap = await getDoc(docRef);
         const updatedData = {
-            name:newSnap.data().name,
+            username:newSnap.data().username,
             currency:newSnap.data().currency
         }
         res.status(200).json(updatedData);

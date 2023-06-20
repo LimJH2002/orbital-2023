@@ -27,6 +27,15 @@ export default function Register() {
 
   async function createUser(values) {
     await signup(values.email, values.password)
+    fetch("/api/list?userId=" + uid, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username:values.username
+      }),
+    });
   }
 
   return (
