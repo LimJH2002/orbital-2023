@@ -2,6 +2,7 @@ import { db } from "@/firebase/firebaseApp"
 import { useAuth } from "@/context/AuthContext"
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
+
 //GET http://localhost:3000/api/user/1
 export async function getUserProfile(req, res) {
     const { userId } = req.query;
@@ -50,11 +51,21 @@ export async function updateUserProfile(req, res) {
                 uid:userId
             });
         }
+        console.log(formData)
         const docSnap = await getDoc(docRef);
-        await updateDoc(docRef, {
-            name:formData.name,
-            currency:formData.currency,
-        })
+        if (!docSnap.name) {
+            name:""
+        }
+        if (formData.name) {
+            await updateDoc(docRef, {
+                name:formData.name
+            })
+        }
+        if (formData.currency) {
+            await updateDoc(docRef, {
+                currency:formData.currency
+            })
+        }
         const newSnap = await getDoc(docRef);
         const updatedData = {
             name:newSnap.data().name,

@@ -3,11 +3,23 @@ import Image from "next/image";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
+import { useReducer } from "react";
+
+const formReducer = (state, event) => {
+  return {
+    ...state,
+    [event.target.name]: event.target.value,
+  };
+};
 
 export default function Profile() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [fileName, setFileName] = useState("No file chosen");
+  const uid = user.uid;
+
+  const [formData, setFormData] = useReducer(formReducer, {
+  });
 
   function handleChange(event) {
     setFileName(
@@ -15,6 +27,20 @@ export default function Profile() {
         ? "No file chosen"
         : event.target.files[0].name
     );
+  }
+
+  const handleUserProfile = (e) => {
+    e.preventDefault();
+    if (Object.keys(formData).length == 0)
+      return console.log("Don't have Form Data");
+    console.log(formData);
+    fetch("/api/user?userId=" + uid, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
   }
 
   if (loading) {
@@ -36,7 +62,7 @@ export default function Profile() {
               </p>
             </div>
 
-            <form className="md:col-span-2">
+            <form className="md:col-span-2" onSubmit={handleUserProfile}>
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
                 <div className="col-span-full flex items-center gap-x-8">
                   <Image
@@ -84,6 +110,7 @@ export default function Profile() {
                         type="text"
                         name="username"
                         id="username"
+                        onChange={setFormData}
                         autoComplete="username"
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
                         defaultValue={user.displayName}
@@ -103,6 +130,7 @@ export default function Profile() {
                     <select
                       id="timezone"
                       name="timezone"
+                      onChange={setFormData}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black"
                     >
                       <option value="SGD">Singapore Dollar</option>
