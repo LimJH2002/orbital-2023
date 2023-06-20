@@ -16,16 +16,16 @@ export async function getUserProfile(req, res) {
             });
         }
         console.log(getSnap.data());
-        if (!getSnap.data().name) {
-            await updateDoc(docRef, {
-                name:"",
-            })
-        }
-        if (!getSnap.data().currency) {
-            await updateDoc(docRef, {
-                currency:"",
-            })
-        }
+        // if (!getSnap.data().username) {
+        //     await updateDoc(docRef, {
+        //         username:"",
+        //     })
+        // }
+        // if (!getSnap.data().currency) {
+        //     await updateDoc(docRef, {
+        //         currency:"",
+        //     })
+        // }
         const newSnap = await getDoc(docRef);
         const userData = {
             name:newSnap.data().name,
@@ -56,9 +56,9 @@ export async function updateUserProfile(req, res) {
         if (!docSnap.name) {
             name:""
         }
-        if (formData.name) {
+        if (formData.username) {
             await updateDoc(docRef, {
-                name:formData.name
+                username:formData.username
             })
         }
         if (formData.currency) {
