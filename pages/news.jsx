@@ -1,6 +1,7 @@
 import { posts } from "@/data/news-posts";
 import { Posts } from "@/data/news-posts";
 import { Res } from "@/data/news-posts";
+import SortingDate from "@/functions/Sorting";
 import dynamic from "next/dynamic";
 
 function News() {
@@ -18,7 +19,7 @@ function News() {
 
         {/* <Posts /> */}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {Res.map((post) => (
+          {SortingDate(Res).map((post) => (
             <article
               key={post.id}
               className="flex flex-col items-start"
@@ -34,7 +35,7 @@ function News() {
               <div className="max-w-xl">
                 <div className="mt-8 flex items-center gap-x-4 text-xs">
                   <time dateTime={post.datetime} className="text-gray-300">
-                    {post.date.substring(0, 10)}
+                    {post.date}
                   </time>
                   {/* <a
                     href={post.category.href}

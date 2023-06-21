@@ -4,10 +4,10 @@ import NewTransaction from "./new-transaction-window";
 import { useAuth } from "@/context/AuthContext";
 import useSWR from "swr";
 import Loading from "@/pages/loading";
-import { DateTime } from "luxon";
 import SelectDate from "./select-date";
 import { useState, useEffect } from "react";
-import { months, years, month } from "@/data/month-year";
+import { months, years } from "@/data/month-year";
+import SortingDate from "@/functions/Sorting";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -56,11 +56,7 @@ export default function Table() {
   if (isLoading) return <Loading />;
 
   const transactions = data === undefined ? [] : data;
-  const sortedTransactions = transactions.sort((a, b) => {
-    const beforeDate = DateTime.fromFormat(a.date, "yyyy-m-d");
-    const afterDate = DateTime.fromFormat(b.date, "yyyy-m-d");
-    return afterDate - beforeDate;
-  });
+  const sortedTransactions = SortingDate(transactions);
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
   // console.log("FFF", filteredSortedTransactions);
