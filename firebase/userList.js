@@ -8,8 +8,6 @@ export async function getList(req, res) {
     try {
         const docRef = doc(db, 'list', currentUser.uid);
         const docSnap = await getDoc(docRef);
-
-
         console.log(docSnap);
         res.status(200).json(docSnap.data());
     } catch (err) {
