@@ -1,13 +1,16 @@
+import { getUserSummary, setBudget } from "@/firebase/userSummary";
+
 export default async function handler(req, res) {
     const { method } = req;
 
     switch(method) {
         case 'GET':
-            getUserList(req, res);
+            getUserSummary(req, res);
             break;
         case 'POST':
             break;
         case 'PATCH':
+            setBudget(req, res);
             break;
         case 'PUT':
             break;
