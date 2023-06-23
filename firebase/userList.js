@@ -1,6 +1,7 @@
 import { db } from "@/firebase/firebaseApp"
 import { useAuth } from "@/context/AuthContext"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc, setDoc } from "firebase/firestore";
+import { getMonth } from "./userSummary";
 
 // GET: http://localhost:3000/api/list
 export async function getList(req, res) {
@@ -27,7 +28,15 @@ export async function getUserList(req, res) {
         if (!getSnap.data()) {
             await setDoc(docRef, {
                 uid:userId,
-                count:0
+                count:0,
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
             });
         }
         const docSnap = await getDoc(docRef);
@@ -52,7 +61,15 @@ export async function addTransaction(req, res) {
         if (!getSnap.data()) {
             await setDoc(docRef, {
                 uid:userId,
-                count:0
+                count:0,
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
             });
         }
         // if (!getSnap.data().count) {
@@ -137,5 +154,30 @@ export async function deleteTransaction(req, res) {
     } catch (err) {
         console.log(err);
         res.status(404)
+    }
+}
+
+export async function updateSummary(userId, transaction) {
+    try {
+        const formData = req.body;
+        const docRef = doc(db, 'users', userId);      
+        const docSnap = await getDoc(docRef);
+        var newSummary = docSnap.data().summary;
+        const currMonth = getMonth();
+        if (transaction.date.substring(0,7) == getMonth()) {
+            if (transaction.type == "Money-in") {
+                newSummary.moneyIn += parseInt(transaction.amount);
+            } else {
+                const today = new Date();
+                newSummary.moneyOut += parseInt(transaction.amount);
+                newSummary.budgetLeft -= parseInt(transaction.amount);
+                newSummary.daily = newSummary.budgetLeft / (32 - today.getDate());
+            }
+        }
+        await updateDoc(docRef, {
+            summary: newSummary,
+        })
+    } catch (err) {
+
     }
 }

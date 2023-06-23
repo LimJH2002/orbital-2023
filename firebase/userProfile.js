@@ -13,7 +13,15 @@ export async function getUserProfile(req, res) {
         if (!getSnap.data()) {
             await setDoc(docRef, {
                 uid:userId,
-                count:0
+                count:0,
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
             });
         }
         console.log(getSnap.data());
@@ -51,7 +59,15 @@ export async function updateUserProfile(req, res) {
         if (!getSnap.data()) {
             await setDoc(docRef, {
                 uid:userId,
-                count:0
+                count:0,
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
             });
         }
         console.log(formData)
