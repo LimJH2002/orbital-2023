@@ -6,7 +6,7 @@ const NewsModal = (props) => {
   return (
     <Modal
       scroll
-      width="600px"
+      width="70%"
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
       {...props.bindings}
@@ -199,9 +199,6 @@ const NewsModal = (props) => {
       <Modal.Footer>
         <Button auto flat color="error" onPress={() => props.setVisible(false)}>
           Close
-        </Button>
-        <Button auto onPress={() => props.setVisible(false)}>
-          Agree
         </Button>
       </Modal.Footer>
     </Modal>
