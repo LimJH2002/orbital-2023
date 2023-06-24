@@ -31,7 +31,7 @@ export const Res = ActualPosts.map((news) => ({
   title: news.content.title,
   date: news.content.pubDate.substring(0, 10),
   datetime: news.content.pubDate,
-  href: news.content.clickThroughUrl,
+  href: news.content.previewUrl,
   imageUrl: news.content.thumbnail.resolutions[0].url,
   author: {
     name: news.content.provider.displayName,

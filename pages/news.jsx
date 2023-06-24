@@ -18,12 +18,10 @@ function News() {
         </div>
 
         {/* <Posts /> */}
+        {console.log(Res)}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {SortingDate(Res).map((post) => (
-            <article
-              key={post.id}
-              className="flex flex-col items-start"
-            >
+            <article key={post.id} className="flex flex-col items-start">
               <div className="relative w-full">
                 <img
                   src={post.imageUrl}
@@ -54,6 +52,16 @@ function News() {
                   {/* <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-300">
                     {post.description}
                   </p> */}
+                </div>
+                <div className="relative mt-8 flex items-center gap-x-4">
+                  <div className="text-sm leading-6">
+                    <p className="font-semibold text-white">
+                      <a>
+                        <span className="absolute inset-0" />
+                        {post.author.name}
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </article>
