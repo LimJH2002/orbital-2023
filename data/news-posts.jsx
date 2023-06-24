@@ -59,7 +59,6 @@ export const Posts = [
     },
   },
   {
-    id: 1,
     id: 2,
     title: "Boost your conversion rate",
     href: "#",
@@ -79,7 +78,6 @@ export const Posts = [
     },
   },
   {
-    id: 1,
     id: 3,
     title: "Boost your conversion rate",
     href: "#",
