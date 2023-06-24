@@ -1,13 +1,12 @@
-import { Res } from "@/data/news-posts";
 import SortingDate from "@/functions/Sorting";
 import dynamic from "next/dynamic";
 import { Posts } from "@/data/news-posts";
 import { useModal } from "@nextui-org/react";
 import NewsModal from "@/components/ui/news-modal";
-import { useState, useEffect } from "react";
+import { useState, useEffect,  } from "react";
 import Loading from "./loading";
 
-export default function News() {
+function News() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -21,8 +20,9 @@ export default function News() {
       });
   }, []);
 
-  // if (isLoading) return <Loading />;
-  // if (!data) return <p>No profile data</p>;
+  if (isLoading) return <Loading />;
+  if (!data) return <Loading />;
+
   console.log(data);
 
   return (
@@ -40,20 +40,20 @@ export default function News() {
         {/* <Posts /> */}
         {/* {console.log(Res)} */}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {SortingDate(Posts).map((post) => {
+          {SortingDate(data).map((post) => {
             const { setVisible, bindings } = useModal();
-
             return (
-              <button onClick={() => setVisible((prevState) => !prevState)}>
+              <button
+                onClick={() => setVisible((prevState) => !prevState)}
+                key={post.id}
+                className="flex flex-col items-start bg-gray-800 rounded-2xl"
+              >
                 <NewsModal
                   setVisible={setVisible}
                   bindings={bindings}
                   id={post.id}
                 />
-                <article
-                  key={post.id}
-                  className="flex flex-col items-start bg-gray-800 rounded-2xl"
-                >
+                <article key={post.id}>
                   <div className="relative w-full">
                     <img
                       src={post.imageUrl}
@@ -106,4 +106,4 @@ export default function News() {
   );
 }
 
-// export default dynamic(() => Promise.resolve(News), { ssr: false });
+export default dynamic(() => Promise.resolve(News), { ssr: false });
