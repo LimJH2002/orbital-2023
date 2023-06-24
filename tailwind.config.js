@@ -12,6 +12,7 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+    "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
     container: {
@@ -26,7 +27,7 @@ module.exports = {
         cyan: colors.cyan,
       },
       gridTemplateColumns: {
-        "sidebar": "15rem auto", //for sidebar layout
+        sidebar: "15rem auto", //for sidebar layout
         "sidebar-collapsed": "4rem auto", //for collapsed sidebar layout
       },
       colors: {
@@ -88,5 +89,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("tailwindcss-animate")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwindcss-animate"),
+    require("flowbite/plugin"),
+  ],
 };
