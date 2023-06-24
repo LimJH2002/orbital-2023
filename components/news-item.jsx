@@ -67,7 +67,7 @@ export const NewsItem = ({ post }) => {
             {post.title}
           </Text>
         </Modal.Header>
-        <Modal.Body>{showMore && <Content />}</Modal.Body>
+        <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
           <Button
             auto
