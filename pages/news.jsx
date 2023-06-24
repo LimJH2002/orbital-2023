@@ -2,10 +2,29 @@ import { Res } from "@/data/news-posts";
 import SortingDate from "@/functions/Sorting";
 import dynamic from "next/dynamic";
 import { Posts } from "@/data/news-posts";
-import { Modal, useModal, Button, Text } from "@nextui-org/react";
+import { useModal } from "@nextui-org/react";
 import NewsModal from "@/components/ui/news-modal";
+import { useState, useEffect } from "react";
+import Loading from "./loading";
 
-function News() {
+export default function News() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/news")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  // if (isLoading) return <Loading />;
+  // if (!data) return <p>No profile data</p>;
+  console.log(data);
+
   return (
     <div className="py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -25,7 +44,7 @@ function News() {
             const { setVisible, bindings } = useModal();
 
             return (
-              <button onClick={() => setVisible(prevState => !prevState)}>
+              <button onClick={() => setVisible((prevState) => !prevState)}>
                 <NewsModal
                   setVisible={setVisible}
                   bindings={bindings}
@@ -87,4 +106,4 @@ function News() {
   );
 }
 
-export default dynamic(() => Promise.resolve(News), { ssr: false });
+// export default dynamic(() => Promise.resolve(News), { ssr: false });

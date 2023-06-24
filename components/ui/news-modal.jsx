@@ -17,9 +17,7 @@ const NewsModal = (props) => {
         </Text>
       </Modal.Header>
       <Modal.Body>
-        <Text id="modal-description">
-          {props.id}
-        </Text>
+        <Text id="modal-description">{props.id}</Text>
       </Modal.Body>
       <Modal.Footer>
         <Button auto flat color="error" onPress={() => props.setVisible(false)}>
