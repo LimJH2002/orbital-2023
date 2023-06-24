@@ -25,7 +25,7 @@ function News() {
             const { setVisible, bindings } = useModal();
 
             return (
-              <button onClick={() => setVisible(true)}>
+              <button onClick={() => setVisible(prevState => !prevState)}>
                 <NewsModal
                   setVisible={setVisible}
                   bindings={bindings}
