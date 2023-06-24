@@ -1,8 +1,24 @@
-import { useModal, Modal, Button, Text } from "@nextui-org/react";
-
-import React, { Fragment } from "react";
+import { Modal, Button, Text } from "@nextui-org/react";
+import React, { Fragment, useState, useEffect } from "react";
+import Loading from "@/pages/loading";
 
 const NewsModal = (props) => {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/news-content")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+    if (isLoading) return <Loading />;
+    if (!data) return <Loading />;
+    console.log(data);
+
   return (
     <Fragment>
       <Modal
@@ -12,16 +28,23 @@ const NewsModal = (props) => {
         aria-describedby="modal-description"
         {...props.bindings}
       >
-        <Modal.Header>
+        <Modal.Header className="bg-slate-100">
           <Text id="modal-title" size={18}>
-            Modal with a lot of content
+            {props.post.title}
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <Text id="modal-description">{props.id}</Text>
+          <Text id="modal-description">
+            <div dangerouslySetInnerHTML={{ __html: data.markup }} />
+          </Text>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onPress={() => props.setVisible(false)}>
+          <Button
+            auto
+            flat
+            color="error"
+            onPress={() => props.setVisible(false)}
+          >
             Close
           </Button>
         </Modal.Footer>

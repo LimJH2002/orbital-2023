@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios.request(options);
-    console.log(response.data.data.main.stream);
+    // console.log(response.data.data.main.stream);
     ActualPosts = response.data.data.main.stream;
   } catch (error) {
     console.error(error);
