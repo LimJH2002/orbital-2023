@@ -1,8 +1,7 @@
-import { posts } from "@/data/news-posts";
-import { Posts } from "@/data/news-posts";
 import { Res } from "@/data/news-posts";
 import SortingDate from "@/functions/Sorting";
 import dynamic from "next/dynamic";
+import { Posts } from "@/data/news-posts";
 
 function News() {
   return (
@@ -18,10 +17,10 @@ function News() {
         </div>
 
         {/* <Posts /> */}
-        {console.log(Res)}
+        {/* {console.log(Res)} */}
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {SortingDate(Res).map((post) => (
-            <article key={post.id} className="flex flex-col items-start">
+          {SortingDate(Posts).map((post) => (
+            <article key={post.id} className="flex flex-col items-start bg-gray-800 rounded-2xl">
               <div className="relative w-full">
                 <img
                   src={post.imageUrl}
@@ -31,7 +30,7 @@ function News() {
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
               </div>
               <div className="max-w-xl">
-                <div className="mt-8 flex items-center gap-x-4 text-xs">
+                <div className="mt-8 flex items-center gap-x-4 text-xs mx-2">
                   <time dateTime={post.datetime} className="text-gray-300">
                     {post.date}
                   </time>
@@ -42,7 +41,7 @@ function News() {
                     {post.category.title}
                   </a> */}
                 </div>
-                <div className="group relative">
+                <div className="group relative mx-2">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300 group-hover:text-gray-500">
                     <a href={post.href}>
                       <span className="absolute inset-0" />
@@ -53,7 +52,7 @@ function News() {
                     {post.description}
                   </p> */}
                 </div>
-                <div className="relative mt-8 flex items-center gap-x-4">
+                <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2">
                   <div className="text-sm leading-6">
                     <p className="font-semibold text-white">
                       <a>
