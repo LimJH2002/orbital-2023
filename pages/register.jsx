@@ -54,7 +54,7 @@ export default function Register() {
 
         {/* form */}
         <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit}>
-          <div className={styles.input_group}>
+          {/* <div className={styles.input_group}>
             <input
               type="text"
               name="Username"
@@ -65,7 +65,7 @@ export default function Register() {
             <span className="icon flex items-center px-4">
               <HiOutlineUser size={25} />
             </span>
-          </div>
+          </div> */}
           {formik.errors.username && formik.touched.username ? <span className="text-rose-500">{formik.errors.username}</span> : <></>}
           <div className={styles.input_group}>
             <input
