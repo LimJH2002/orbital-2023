@@ -29,7 +29,10 @@ export default async function handler(req, res) {
     date: news.content.pubDate.substring(0, 10),
     datetime: news.content.pubDate,
     href: news.content.previewUrl,
-    imageUrl: news.content.thumbnail.resolutions[0].url,
+    imageUrl:
+      news.content.thumbnail == undefined
+        ? "https://s.yimg.com/ny/api/res/1.2/WZPUwNQc9NaXkNltlrghSQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtjZj13ZWJw/https://s.yimg.com/uc/fin/img/non-sub-report-thumb.png"
+        : news.content.thumbnail.resolutions[0].url,
     author: {
       name: news.content.provider.displayName,
     },

@@ -23,7 +23,7 @@ export default function Profile() {
   const [username, setUsername] = useState();
   const { currentUser } = useAuth();
   const uid = currentUser ? currentUser.uid : "master";
-  console.log(user)
+  // console.log(user)
   const getUsername = async () => { 
     const response = await fetch("/api/user?userId=" + uid, {
     method: "GET",
@@ -34,9 +34,11 @@ export default function Profile() {
     setUsername(response);
     console.log("userData",username);
   }
+
   useEffect(() => {
     getUsername();
   }, []);
+
   const [formData, setFormData] = useReducer(formReducer, {
     currency:"SGD"
   });
@@ -55,10 +57,6 @@ export default function Profile() {
   // const { userData, error } = useSWR("/api/list?userId=" + uid, fetcher);
   // console.log("err", error);
   // if (!userData) return <div>Loading...</div>
-  
-  
-  
-
 
   const handleUserProfile = (e) => {
     e.preventDefault();
@@ -143,6 +141,27 @@ export default function Profile() {
                         id="username"
                         onChange={setFormData}
                         autoComplete="username"
+                        className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
+                        defaultValue={usernameData}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label
+                    htmlFor="username"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Monthly Budget
+                  </label>
+                  <div className="mt-2">
+                    <div className="pl-3 flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                      <input
+                        type="number"
+                        name="budget"
+                        id="budget"
+                        onChange={setFormData}
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
                         defaultValue=""
                       />
