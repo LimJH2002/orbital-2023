@@ -3,21 +3,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import Loading from "@/pages/loading";
 
 const NewsModal = (props) => {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/news-content")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
-
-    if (isLoading) return <Loading />;
-    if (!data) return <Loading />;
-    console.log(data);
 
   return (
     <Fragment>

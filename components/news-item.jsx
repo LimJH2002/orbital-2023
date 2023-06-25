@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { useModal } from "@nextui-org/react";
-import NewsModal from "@/components/ui/news-modal";
 import dynamic from "next/dynamic";
 import { Modal, Button, Text } from "@nextui-org/react";
-import NewsBody from "./news-body";
+import CutWord from "@/functions/CutWord";
 
 export const NewsItem = ({ post }) => {
   const { visible, setVisible, bindings } = useModal();
@@ -17,7 +16,7 @@ export const NewsItem = ({ post }) => {
           setVisible(true);
           setShowMore(true);
         }}
-        className="flex flex-col items-start bg-gray-800 rounded-2xl"
+        className="flex flex-col items-start bg-gray-800 rounded-2xl hover:bg-gray-700"
       >
         <article>
           <div className="relative w-full">
@@ -34,22 +33,27 @@ export const NewsItem = ({ post }) => {
                 {post.date}
               </time>
             </div>
-            <div className="group relative mx-2">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300 group-hover:text-gray-500">
-                <a href={post.href}>
-                  <span className="absolute inset-0" />
-                  {post.title}
-                </a>
+            <div className="group relative mx-2 text-left">
+              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
+                {CutWord(post.title)}
               </h3>
             </div>
-            <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2">
-              <div className="text-sm leading-6">
+            <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2 text-left">
+              <div className="text-sm leading-6 absolute inset-x-0 bottom-0">
                 <p className="font-semibold text-white">
                   <a>
                     <span className="absolute inset-0" />
                     {post.author.name}
                   </a>
                 </p>
+                {/* <button
+                  type="button"
+                  className="z-10 mx-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <a href={post.href} target="_blank">
+                    Open Original
+                  </a>
+                </button> */}
               </div>
             </div>
           </div>
@@ -69,6 +73,19 @@ export const NewsItem = ({ post }) => {
         </Modal.Header>
         <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
+          <Button
+            auto
+            flat
+            color="neutral"
+            onPress={() => {
+              setVisible(false);
+              setShowMore(false);
+            }}
+          >
+            <a href={post.href} target="_blank">
+              Open Original
+            </a>
+          </Button>
           <Button
             auto
             flat
