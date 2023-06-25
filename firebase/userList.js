@@ -103,9 +103,10 @@ export async function updateTransaction(req, res) {
         console.log("update:", formData)
         const getSnap = await getDoc(docRef);
         const transaction = getSnap.data().transactions.filter(t => {
-            const bool = formData.id === t.id && formData.title === t.title
-            && formData.amount === t.amount && formData.type === t.type
-            && formData.category === t.category && formData.date === t.date;
+            const bool = formData.id === t.id; 
+            // && formData.title === t.title
+            // && formData.amount === t.amount && formData.type === t.type
+            // && formData.category === t.category && formData.date === t.date;
             console.log(bool);
             return bool;
         })
