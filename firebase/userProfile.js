@@ -39,7 +39,7 @@ export async function getUserProfile(req, res) {
       username: newSnap.data().username,
       currency:
         newSnap.data().currency == undefined
-          ? "Singapore Dollar"
+          ? "SGD"
           : newSnap.data().currency,
     };
     console.log("api getUser", userData);

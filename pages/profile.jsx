@@ -15,32 +15,34 @@ const formReducer = (state, event) => {
   };
 };
 
-
 export default function Profile() {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
+  const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState("No file chosen");
   const [username, setUsername] = useState();
   const { currentUser } = useAuth();
   const uid = currentUser ? currentUser.uid : "master";
   // console.log(user)
-  const getUsername = async () => { 
+  const getUsername = async () => {
+    setIsLoading(true);
     const response = await fetch("/api/user?userId=" + uid, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    }
-    }).then(e => e.json());
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((e) => e.json());
     setUsername(response);
-    console.log("userData",username);
-  }
+    setIsLoading(false);
+    console.log("userData", username);
+  };
 
   useEffect(() => {
     getUsername();
   }, []);
 
   const [formData, setFormData] = useReducer(formReducer, {
-    currency:"SGD"
+    currency: "SGD",
   });
 
   function handleChange(event) {
@@ -70,11 +72,10 @@ export default function Profile() {
       },
       body: JSON.stringify(formData),
     });
-  }
+  };
 
-  if (loading) {
-    return <Loading />;
-  }
+
+  if (loading || isLoading) return <Loading />;
 
   return (
     <Fragment>
@@ -181,8 +182,10 @@ export default function Profile() {
                       id="currency"
                       name="currency"
                       onChange={setFormData}
+                      defaultValue={username}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black"
                     >
+                      {console.log("aaaaa", username)}
                       <option value="SGD">Singapore Dollar</option>
                       <option value="MYR">Malaysian Ringgit</option>
                       <option value="USD">United States Dollar</option>

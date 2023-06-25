@@ -1,5 +1,4 @@
 import SortingDate from "@/functions/Sorting";
-import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import NewsItem from "@/components/news-item";
