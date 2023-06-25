@@ -83,10 +83,16 @@ export async function updateUserProfile(req, res) {
         currency: formData.currency,
       });
     }
+    if (formData.budget) {
+        await updateDoc(docRef, {
+          budget: formData.budget,
+        });
+      }
     const newSnap = await getDoc(docRef);
     const updatedData = {
       username: newSnap.data().username,
       currency: newSnap.data().currency,
+      budget: newSnap.data().budget,
     };
     res.status(200).json(updatedData);
   } catch (err) {
