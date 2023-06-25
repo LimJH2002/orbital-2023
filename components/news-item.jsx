@@ -17,7 +17,7 @@ export const NewsItem = ({ post }) => {
           setVisible(true);
           setShowMore(true);
         }}
-        className="flex flex-col items-start bg-gray-800 rounded-2xl"
+        className="flex flex-col items-start bg-gray-800 rounded-2xl hover:bg-gray-700"
       >
         <article>
           <div className="relative w-full">
@@ -36,7 +36,7 @@ export const NewsItem = ({ post }) => {
             </div>
             <div className="group relative mx-2">
               <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
-                  {post.title}
+                {post.title}
               </h3>
             </div>
             <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2">

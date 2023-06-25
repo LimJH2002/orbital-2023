@@ -11,9 +11,9 @@ export default function Intro() {
 
   return (
     <motion.div
-      className="z-10"
+      className="z-10 grid place-items-center h-screen"
       exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3, type: "spring" }}
+      transition={{ duration: 0.5, type: "spring" }}
     >
       <motion.div
         variants={{
