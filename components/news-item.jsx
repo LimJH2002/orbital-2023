@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { useModal } from "@nextui-org/react";
-import NewsModal from "@/components/ui/news-modal";
 import dynamic from "next/dynamic";
 import { Modal, Button, Text } from "@nextui-org/react";
-import NewsBody from "./news-body";
+import CutWord from "@/functions/CutWord";
 
 export const NewsItem = ({ post }) => {
   const { visible, setVisible, bindings } = useModal();
@@ -34,13 +33,13 @@ export const NewsItem = ({ post }) => {
                 {post.date}
               </time>
             </div>
-            <div className="group relative mx-2">
+            <div className="group relative mx-2 text-left">
               <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
-                {post.title}
+                {CutWord(post.title)}
               </h3>
             </div>
-            <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2">
-              <div className="text-sm leading-6 flex">
+            <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2 text-left">
+              <div className="text-sm leading-6 absolute inset-x-0 bottom-0">
                 <p className="font-semibold text-white">
                   <a>
                     <span className="absolute inset-0" />
