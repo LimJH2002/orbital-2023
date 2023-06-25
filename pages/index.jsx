@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
+import { useEffect } from "react";
 
 export default function Home() {
   const auth = getAuth();
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const currentUser = auth.currentUser;
+  const passedIntro = true;
 
   if (loading) {
     return <Loading />;
@@ -18,6 +20,12 @@ export default function Home() {
   if (!user) {
     router.push("/login");
     return <div>Please sign in to continue</div>;
+  }
+
+  if (!passedIntro) {
+    router.push("/intro");
+    console.log(passed)
+    return <div>You're still a newbie!</div>;
   }
 
   return (
@@ -37,4 +45,3 @@ export default function Home() {
 function User(props) {
   return <Overlap auth={props.auth} />;
 }
-
