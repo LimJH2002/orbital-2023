@@ -35,21 +35,26 @@ export const NewsItem = ({ post }) => {
               </time>
             </div>
             <div className="group relative mx-2">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300 group-hover:text-gray-500">
-                <a href={post.href}>
-                  <span className="absolute inset-0" />
+              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
                   {post.title}
-                </a>
               </h3>
             </div>
             <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2">
-              <div className="text-sm leading-6">
+              <div className="text-sm leading-6 flex">
                 <p className="font-semibold text-white">
                   <a>
                     <span className="absolute inset-0" />
                     {post.author.name}
                   </a>
                 </p>
+                {/* <button
+                  type="button"
+                  className="z-10 mx-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <a href={post.href} target="_blank">
+                    Open Original
+                  </a>
+                </button> */}
               </div>
             </div>
           </div>
@@ -69,6 +74,19 @@ export const NewsItem = ({ post }) => {
         </Modal.Header>
         <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
+          <Button
+            auto
+            flat
+            color="neutral"
+            onPress={() => {
+              setVisible(false);
+              setShowMore(false);
+            }}
+          >
+            <a href={post.href} target="_blank">
+              Open Original
+            </a>
+          </Button>
           <Button
             auto
             flat
