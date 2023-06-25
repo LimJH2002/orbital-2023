@@ -124,7 +124,10 @@ export async function setBudget(req, res) {
         console.log("budget: ",docSnap.data().budget);
         const currMonth = getMonth();
         const newSnap = await getDoc(docRef);
-        res.status(200).json(newSnap.data().budget);
+        const result = {
+            "budget":newSnap.data().budget,
+        }
+        res.status(200).json(result);
     } catch (err) {
         console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
