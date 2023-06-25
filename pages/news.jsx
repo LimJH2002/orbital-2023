@@ -1,10 +1,9 @@
 import SortingDate from "@/functions/Sorting";
-import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import NewsItem from "@/components/news-item";
 
-function News() {
+export default function News() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
@@ -42,4 +41,4 @@ function News() {
   );
 }
 
-export default dynamic(() => Promise.resolve(News), { ssr: false });
+// export default dynamic(() => Promise.resolve(News), { ssr: false });
