@@ -45,14 +45,11 @@ export default function Intro() {
           className="rounded  px-10 py-2 font-medium transition-colors text-gray-900 bg-gray-100 hover:text-gray-100 hover:bg-gray-500"
           onClick={() =>
             router.push({
-              pathname: "/welcome",
-              query: {
-                type: "next",
-              },
+              pathname: "/intro2",
             })
           }
         >
-          Get Started
+          Let's Go
         </motion.button>
       </motion.div>
     </motion.div>
