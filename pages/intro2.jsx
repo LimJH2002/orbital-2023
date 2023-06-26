@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const STAGGER_CHILD_VARIANTS = {
   hidden: { opacity: 0, y: 20 },
@@ -7,6 +8,10 @@ const STAGGER_CHILD_VARIANTS = {
 };
 
 export default function Intro2() {
+  const [passed, setPassed] = useState(false);
+  useEffect(() => {
+    window.localStorage.setItem("PASSED", JSON.stringify(passed));
+  }, [passed]);
   const router = useRouter();
 
   return (
@@ -79,11 +84,12 @@ export default function Intro2() {
         <motion.button
           variants={STAGGER_CHILD_VARIANTS}
           className="rounded  px-10 py-2 font-medium transition-colors text-gray-900 bg-gray-100 hover:text-gray-100 hover:bg-gray-500"
-          onClick={() =>
+          onClick={() => {
             router.push({
               pathname: "/",
-            })
-          }
+            });
+            setPassed(true);
+          }}
         >
           Start My Journey
         </motion.button>

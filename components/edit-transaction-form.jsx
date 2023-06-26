@@ -18,6 +18,7 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
     title: transaction.title,
     type: transaction.type,
     category: transaction.category,
+    currency: transaction.currency,
     amount: transaction.amount,
     date: transaction.date,
     id: transaction.id,
@@ -158,7 +159,7 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
                       id="currency"
                       name="currency"
                       defaultValue={transaction.currency}
-                      // onChange={setFormData}
+                      onChange={setFormData}
                       className="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
                     >
                       <option>SGD</option>
