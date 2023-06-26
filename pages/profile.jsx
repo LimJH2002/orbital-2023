@@ -22,11 +22,16 @@ export default function Profile() {
   const [fileName, setFileName] = useState("No file chosen");
   const [username, setUsername] = useState();
   const { currentUser } = useAuth();
-  const uid = currentUser ? currentUser.uid : "master";
-  // console.log(user)
+  const [thisUid, setThisUid] = useState("");
+  useEffect(() => {
+    if(currentUser) {
+    setThisUid(currentUser.uid);
+    }
+  }, [currentUser]);
+  
   const getUsername = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/user?userId=" + uid, {
+    const response = await fetch("/api/user?userId=" + thisUid, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -34,15 +39,14 @@ export default function Profile() {
     }).then((e) => e.json());
     setUsername(response);
     setIsLoading(false);
-    console.log("userData", username);
   };
 
   useEffect(() => {
     getUsername();
-  }, []);
+  }, [thisUid]);
 
   const [formData, setFormData] = useReducer(formReducer, {
-    currency: "SGD",
+    // currency: "SGD",
   });
 
   function handleChange(event) {
@@ -53,6 +57,8 @@ export default function Profile() {
     );
   }
   const usernameData = username ? username.username : "";
+  const userBudget = username ? (username.budget ? username.budget : "") : "";
+  const userCurrency = username ? (username.currency ? username.currency : "") : "";
 
   // const fetcher = (...args) => fetch(...args).then((res) => res.json());
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -62,10 +68,10 @@ export default function Profile() {
 
   const handleUserProfile = (e) => {
     e.preventDefault();
+    console.log("update profile", formData);
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
-    console.log(formData);
-    fetch("/api/user?userId=" + uid, {
+    fetch("/api/user?userId=" + thisUid, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -162,9 +168,10 @@ export default function Profile() {
                         type="number"
                         name="budget"
                         id="budget"
+                        
                         onChange={setFormData}
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                        defaultValue=""
+                        defaultValue={userBudget}
                       />
                     </div>
                   </div>
@@ -182,10 +189,10 @@ export default function Profile() {
                       id="currency"
                       name="currency"
                       onChange={setFormData}
-                      defaultValue={username}
+                      defaultValue={userCurrency}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black"
                     >
-                      {console.log("aaaaa", username)}
+                      {/* {console.log("aaaaa", username)} */}
                       <option value="SGD">Singapore Dollar</option>
                       <option value="MYR">Malaysian Ringgit</option>
                       <option value="USD">United States Dollar</option>

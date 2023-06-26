@@ -22,7 +22,9 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
   const [formData, setFormData] = useReducer(formReducer, {
     type: "Money-in",
     category: "Food",
+
     currency: "SGD"
+
   });
   // setFormData({type:"Money-in"});
   console.log(formData);
@@ -32,7 +34,7 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
     e.preventDefault();
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
-    // console.log(formData);
+    console.log(formData);
     // setLists([...lists, formData]);
     fetch("/api/list?userId=" + uid, {
       method: "POST",
