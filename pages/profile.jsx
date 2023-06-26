@@ -7,6 +7,7 @@ import { useReducer } from "react";
 import useSWR from "swr";
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 const formReducer = (state, event) => {
   return {
@@ -17,6 +18,7 @@ const formReducer = (state, event) => {
 
 export default function Profile() {
   const auth = getAuth();
+  const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState("No file chosen");
@@ -204,6 +206,7 @@ export default function Profile() {
               <div className="mt-8 flex">
                 <button
                   type="submit"
+                  onClick={()=>router.reload()}
                   className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 >
                   Save
