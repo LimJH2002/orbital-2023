@@ -9,10 +9,8 @@ export async function getList(req, res) {
     try {
         const docRef = doc(db, 'list', currentUser.uid);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap);
         res.status(200).json(docSnap.data());
     } catch (err) {
-        console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
     }
 }
@@ -23,7 +21,6 @@ export async function getUserList(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         
-        // console.log(docSnap.data());
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
@@ -40,10 +37,8 @@ export async function getUserList(req, res) {
             });
         }
         const docSnap = await getDoc(docRef);
-        console.log("transactions: ",docSnap.data().transactions)
         res.status(200).json(docSnap.data().transactions);
     } catch (err) {
-        console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
     }
 }
@@ -79,7 +74,6 @@ export async function addTransaction(req, res) {
         // }
         const docSnap = await getDoc(docRef);
         const n = docSnap.data().count;
-        console.log(n);
         await updateDoc(docRef, {
             transactions: arrayUnion({...formData, "id": n})
         })
@@ -87,7 +81,6 @@ export async function addTransaction(req, res) {
         const newSnap = await getDoc(docRef);
         res.status(200).json(newSnap.data().transactions);
     } catch (err) {
-        console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
     }
 }
@@ -100,7 +93,6 @@ export async function updateTransaction(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
-        console.log("update:", formData)
         if (!formData.hasOwnProperty('id')) {
             throw "Invalid input";
             
@@ -111,10 +103,8 @@ export async function updateTransaction(req, res) {
             // && formData.title === t.title
             // && formData.amount === t.amount && formData.type === t.type
             // && formData.category === t.category && formData.date === t.date;
-            // console.log(bool);
             return bool;
         })
-        console.log("tr: ", transaction);
 
         await updateDoc(docRef, {
             transactions: arrayRemove({...transaction[0]})
@@ -125,7 +115,6 @@ export async function updateTransaction(req, res) {
         const newSnap = await getDoc(docRef);
         res.status(200).json(newSnap.data().transactions);
     } catch (err) {
-        // console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
     }
 }
@@ -138,26 +127,20 @@ export async function deleteTransaction(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
-        console.log("delete: ", formData)
-        // console.log(req);
         const getSnap = await getDoc(docRef);
         const transaction = getSnap.data().transactions.filter(t => {
             const bool = formData.id === t.id && formData.title === t.title
             && formData.amount === t.amount && formData.type === t.type
             && formData.category === t.category && formData.date === t.date;
-            console.log(bool);
             return bool;
         })
-        console.log("tr: ", transaction);
 
         await updateDoc(docRef, {
             transactions: arrayRemove({...transaction[0]})
         })
         const newSnap = await getDoc(docRef);
-        console.log(newSnap.data().transactions)
         res.status(200).json(newSnap.data().transactions);
     } catch (err) {
-        console.log(err);
         res.status(404)
     }
 }

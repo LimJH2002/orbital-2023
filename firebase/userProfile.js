@@ -56,6 +56,7 @@ export async function updateUserProfile(req, res) {
   const { userId } = req.query;
   try {
     const formData = req.body;
+    console.log("hi");
     const docRef = doc(db, "users", userId);
     const getSnap = await getDoc(docRef);
     if (!getSnap.data()) {
@@ -72,7 +73,7 @@ export async function updateUserProfile(req, res) {
         budget: 0,
       });
     }
-    console.log(formData);
+    console.log("update",formData);
     const docSnap = await getDoc(docRef);
     if (formData.username) {
       await updateDoc(docRef, {
