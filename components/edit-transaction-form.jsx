@@ -39,7 +39,7 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
     router.reload();
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
     const deleteData = {
       title: transaction.title,
@@ -52,7 +52,8 @@ export default function EditTransactionForm({ transaction, closeWindow }) {
     console.log("deleteData", deleteData);
     if (Object.keys(deleteData).length == 0)
       return console.log("Don't have Form Data");
-    fetch("/api/list?userId=" + uid, {
+      
+    await fetch("/api/list?userId=" + uid, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

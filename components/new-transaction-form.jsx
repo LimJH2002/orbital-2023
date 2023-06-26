@@ -22,21 +22,19 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
   const [formData, setFormData] = useReducer(formReducer, {
     type: "Money-in",
     category: "Food",
-
-    currency: "SGD"
-
+    currency: "SGD",
   });
   // setFormData({type:"Money-in"});
   console.log(formData);
   // const { data, error, isLoading, mutate } = useSWR('/api/list?userId=' + uid, fetcher);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
     console.log(formData);
     // setLists([...lists, formData]);
-    fetch("/api/list?userId=" + uid, {
+    await fetch("/api/list?userId=" + uid, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,10 +43,6 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
     });
     closeWindow();
     router.reload();
-
-    // setLists('');
-
-    // Table();
   };
 
   return (

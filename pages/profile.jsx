@@ -26,11 +26,11 @@ export default function Profile() {
   const { currentUser } = useAuth();
   const [thisUid, setThisUid] = useState("");
   useEffect(() => {
-    if(currentUser) {
-    setThisUid(currentUser.uid);
+    if (currentUser) {
+      setThisUid(currentUser.uid);
     }
   }, [currentUser]);
-  
+
   const getUsername = async () => {
     setIsLoading(true);
     const response = await fetch("/api/user?userId=" + thisUid, {
@@ -60,7 +60,11 @@ export default function Profile() {
   }
   const usernameData = username ? username.username : "";
   const userBudget = username ? (username.budget ? username.budget : "") : "";
-  const userCurrency = username ? (username.currency ? username.currency : "") : "";
+  const userCurrency = username
+    ? username.currency
+      ? username.currency
+      : ""
+    : "";
 
   // const fetcher = (...args) => fetch(...args).then((res) => res.json());
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -73,6 +77,7 @@ export default function Profile() {
     console.log("update profile", formData);
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
+
     await fetch("/api/user?userId=" + thisUid, {
       method: "POST",
       headers: {
@@ -82,7 +87,6 @@ export default function Profile() {
     });
     router.reload();
   };
-
 
   if (loading || isLoading) return <Loading />;
 
@@ -171,7 +175,6 @@ export default function Profile() {
                         type="number"
                         name="budget"
                         id="budget"
-                        
                         onChange={setFormData}
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
                         defaultValue={userBudget}
