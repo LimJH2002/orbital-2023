@@ -41,6 +41,7 @@ export async function getUserProfile(req, res) {
         newSnap.data().currency == undefined
           ? "SGD"
           : newSnap.data().currency,
+        budget: newSnap.data().budget,
     };
     console.log("api getUser", userData);
     res.status(200).json(userData);
@@ -81,6 +82,11 @@ export async function updateUserProfile(req, res) {
     if (formData.currency) {
       await updateDoc(docRef, {
         currency: formData.currency,
+      });
+    }
+    if (formData.budget) {
+      await updateDoc(docRef, {
+        budget: formData.budget,
       });
     }
     const newSnap = await getDoc(docRef);
