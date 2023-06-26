@@ -22,6 +22,7 @@ export default function NewTransactionForm({ closeWindow, onSave }) {
   const [formData, setFormData] = useReducer(formReducer, {
     type: "Money-in",
     category: "Food",
+    currency: "SGD"
   });
   // setFormData({type:"Money-in"});
   console.log(formData);
