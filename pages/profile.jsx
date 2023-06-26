@@ -68,12 +68,12 @@ export default function Profile() {
   // console.log("err", error);
   // if (!userData) return <div>Loading...</div>
 
-  const handleUserProfile = (e) => {
+  const handleUserProfile = async (e) => {
     e.preventDefault();
     console.log("update profile", formData);
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
-    fetch("/api/user?userId=" + thisUid, {
+    await fetch("/api/user?userId=" + thisUid, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

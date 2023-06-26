@@ -14,7 +14,7 @@ export default function Register() {
   const { signup } = useAuth();
   const formik = useFormik({
     initialValues: {
-      username: '',
+      // username: '',
       email: '',
       password: '',
       cpassword: '',
@@ -27,15 +27,15 @@ export default function Register() {
 
   async function createUser(values) {
     await signup(values.email, values.password)
-    fetch("/api/list?userId=" + uid, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username:values.username
-      }),
-    });
+    // fetch("/api/list?userId=" + uid, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     username:values.username
+    //   }),
+    // });
   }
 
   return (
@@ -66,7 +66,7 @@ export default function Register() {
               <HiOutlineUser size={25} />
             </span>
           </div> */}
-          {formik.errors.username && formik.touched.username ? <span className="text-rose-500">{formik.errors.username}</span> : <></>}
+          {/* {formik.errors.username && formik.touched.username ? <span className="text-rose-500">{formik.errors.username}</span> : <></>} */}
           <div className={styles.input_group}>
             <input
               type="email"
