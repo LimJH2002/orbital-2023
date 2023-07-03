@@ -1,15 +1,26 @@
-import {React, useEffect} from 'react'
+import { React, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "./loading";
 
 const Bank = () => {
   const router = useRouter();
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+
   useEffect(() => {
     router.push("/comingSoon");
   });
-  return (
-    <div></div>
-  )
-}
+
+  if (loading) return <Loading />;
+
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
+
+  return <div></div>;
+};
 
 export default Bank;
