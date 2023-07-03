@@ -14,7 +14,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Table() {
   const { currentUser } = useAuth();
-  console.log(currentUser ? currentUser.uid : 10);
+  // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
