@@ -8,18 +8,18 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import login_validate from "../lib/validate";
 import { useRouter } from "next/router";
-import { useAuth } from "@/context/AuthContext"; 
+import { useAuth } from "@/context/AuthContext";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "./loading";
 
 export default function Login() {
-  
   const router = useRouter();
   const { googleSignIn, githubSignIn, login } = useAuth();
 
   const emailSignIn = async (formik) => {
-    console.log(formik.email, formik.password)
-    return await login(formik.email, formik.password)
+    console.log(formik.email, formik.password);
+    return await login(formik.email, formik.password);
   };
-
 
   const [show, setShow] = useState(false);
   const formik = useFormik({

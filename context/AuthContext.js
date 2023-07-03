@@ -28,14 +28,14 @@ export function AuthProvider({ children }) {
 
   function signup(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
-    .then(router.push("/"))
-    .catch((err) => {
-      if (err.code == "auth/email-already-in-use") {
-        alert("Email Exist");
-        console.log("redirect");
-        // formik.resetForm();
-      }
-    });
+      .then(router.push("/"))
+      .catch((err) => {
+        if (err.code == "auth/email-already-in-use") {
+          alert("Email Exist");
+          console.log("redirect");
+          // formik.resetForm();
+        }
+      });
     return;
   }
 
@@ -91,7 +91,11 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
       setLoading(false);
-      router.push(router.asPath);
+      if (router.asPath !== "/login" && router.asPath !== "/register") {
+        router.push(router.asPath);
+      } else {
+        router.push("/");
+      }
     });
     return unsubscribe;
   }, []);
