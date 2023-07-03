@@ -1,10 +1,16 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   ScaleIcon,
   BanknotesIcon,
   FireIcon,
   LightBulbIcon,
 } from "@heroicons/react/24/outline";
+import useSWR from "swr";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 
 const cards = [
   {
@@ -34,6 +40,42 @@ const cards = [
 ];
 
 export default function Card() {
+  const { currentUser } = useAuth();
+  const [uid, setUid] = useState("");
+  const [summary, setSummary] = useState(cards);
+  const [error, setError] = useState("");
+  const [flag, setFlag] = useState(false);
+  useEffect(() => {
+    if (currentUser) {
+      setUid(currentUser.uid);
+      setFlag(true);
+    }
+  }, [currentUser]);
+
+  const getSummary = async () => {
+    const response = await fetch("/api/dashboard?userId=" + uid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((e) => e.json());
+    const newSummary = cards;
+    newSummary[0].amount = "SGD " + response.budgetLeft;
+    newSummary[1].amount = "SGD " + response.moneyIn;
+    newSummary[2].amount = "SGD " + response.moneyOut;
+    newSummary[3].amount = "SGD " + response.daily;
+    console.log("os", summary)
+    setSummary(newSummary);
+    console.log("ns", newSummary)
+  }
+  // useEffect(() => {
+  //   getSummary();
+  // }, [currentUser]);
+  if (flag) {
+    getSummary();
+  }
+  console.log("sum", summary);
+
   return (
     <Fragment>
       <div className="min-h-full">
@@ -43,7 +85,7 @@ export default function Card() {
             <div className="mt-8">
               <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {/* Card */}
-                {cards.map((card) => (
+                {summary.map((card) => (
                   <div
                     key={card.name}
                     className="bg-white overflow-visible shadow rounded-lg"
