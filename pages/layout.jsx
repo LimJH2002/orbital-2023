@@ -9,6 +9,7 @@ const Layout = (props) => {
       <Sidebar
         collapsed={collapsed}
         setSidebarCollapsed={setSidebarCollapsed}
+        auth={props.auth}
       />
       <div
         className={`transition-spacing duration-300 ease-in-out ${
