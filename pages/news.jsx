@@ -2,10 +2,16 @@ import SortingDate from "@/functions/Sorting";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import NewsItem from "@/components/news-item";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export default function News() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/news")
@@ -16,9 +22,14 @@ export default function News() {
       });
   }, []);
 
-  if (isLoading) return <Loading />;
-  if (!data) return <Loading />;
+  if (isLoading && loading) return <Loading />;
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
 
+  if (!data) return <Loading />;
+  
   return (
     <div className="py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
