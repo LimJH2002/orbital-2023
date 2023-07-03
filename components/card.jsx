@@ -65,7 +65,7 @@ export default function Card() {
     newSummary[2].amount = "SGD " + response.moneyOut;
     newSummary[3].amount = "SGD " + response.daily;
     console.log("os", summary)
-    setSummary(newSummary);
+    setSummary(() => newSummary);
     console.log("ns", newSummary)
   }
   // useEffect(() => {
