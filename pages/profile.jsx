@@ -90,6 +90,11 @@ export default function Profile() {
 
   if (loading || isLoading) return <Loading />;
 
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
+
   return (
     <Fragment>
       <main className="pl-10">
