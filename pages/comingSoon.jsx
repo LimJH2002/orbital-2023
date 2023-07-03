@@ -1,7 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "./loading";
 
 export default function comingSoon() {
+  const router = useRouter();
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) return <Loading />;
+
+  if (!user) {
+    router.push("/login");
+    return <div>Please sign in to continue</div>;
+  }
+
   return (
     <div className="bg-gray-900 mx-auto h-screen flex flex-col md:flex-row justify-between items-center">
       <div className="flex flex-col gap-5">
