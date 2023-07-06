@@ -18,7 +18,6 @@ export async function getList(req, res) {
 // GET: http://localhost:3000/api/list/1
 export async function getUserList(req, res) {
     const { userId } = req.query;
-    console.log(userId)
     try {
         const docRef = doc(db, 'users', userId);
         
