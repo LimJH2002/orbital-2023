@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -39,8 +40,14 @@
     "tailwindcss-animate": "^1.0.6"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "autoprefixer": "^10.4.14",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1",
+    "node-mocks-http": "^1.12.2",
     "postcss": "^8.4.23",
+    "supertest": "^6.3.3",
     "tailwindcss": "^3.3.2"
   }
 }

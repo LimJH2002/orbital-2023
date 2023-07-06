@@ -56,7 +56,9 @@ export async function updateUserProfile(req, res) {
   const { userId } = req.query;
   try {
     const formData = req.body;
-    console.log("hi");
+    if (!formData.hasOwnProperty('name') || !formData.hasOwnProperty('currency')) {
+      throw 'Missing Fields';
+    }
     const docRef = doc(db, "users", userId);
     const getSnap = await getDoc(docRef);
     if (!getSnap.data()) {
