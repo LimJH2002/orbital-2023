@@ -130,6 +130,9 @@ export async function deleteTransaction(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         const formData = req.body;
+        if (!formData.hasOwnProperty('amount') && !formData.hasOwnProperty('category') && !formData.hasOwnProperty('date') && !formData.hasOwnProperty('title') && !formData.hasOwnProperty('type')) {
+            throw "Missing transaction";
+        }
         const getSnap = await getDoc(docRef);
         const transaction = getSnap.data().transactions.filter(t => {
             const bool = formData.id === t.id && formData.title === t.title

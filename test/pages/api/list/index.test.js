@@ -130,7 +130,7 @@ describe("PATCH /api/list", () => {
 describe("PUT /api/list", () => {
     it("should response with a 200 status", async () => {
         const { req, res } = createMocks({
-            method: 'PATCH',
+            method: 'PUT',
             query: {
                 userId: "master",
               
@@ -153,7 +153,7 @@ describe("PUT /api/list", () => {
 
     it("should response with a 404 status (missing body)", async () => {
         const { req, res } = createMocks({
-            method: 'PATCH',
+            method: 'PUT',
             query: {
                 userId: "master",
             }
