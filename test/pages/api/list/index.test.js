@@ -9,6 +9,7 @@ import { createMocks } from 'node-mocks-http';
 
 describe("GET /api/list", () => {
     it("should response with a 200 status", async () => {
+        
         const { req, res } = createMocks({
             method: 'GET',
             // params: { userId: "master" },
