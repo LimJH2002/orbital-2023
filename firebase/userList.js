@@ -18,6 +18,7 @@ export async function getList(req, res) {
 // GET: http://localhost:3000/api/list/1
 export async function getUserList(req, res) {
     const { userId } = req.query;
+    console.log(userId)
     try {
         const docRef = doc(db, 'users', userId);
         
@@ -51,7 +52,9 @@ export async function addTransaction(req, res) {
     try {
         const formData = req.body;
         const docRef = doc(db, 'users', userId);
-        
+        if (!formData.hasOwnProperty('amount') && !formData.hasOwnProperty('category') && !formData.hasOwnProperty('date') && !formData.hasOwnProperty('title') && !formData.hasOwnProperty('type')) {
+            throw "Missing transaction";
+        }
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
