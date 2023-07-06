@@ -91,6 +91,10 @@ export async function setBudget(req, res) {
         const docRef = doc(db, 'users', userId);
         const getSnap = await getDoc(docRef);
         const formData = req.body;
+        console.log("form", formData)
+        if (!formData.hasOwnProperty('budget')) {
+            throw "Missing body";
+        }
         if (!getSnap.data()) {
             await setDoc(docRef, {
                 uid:userId,
@@ -129,7 +133,7 @@ export async function setBudget(req, res) {
         }
         res.status(200).json(result);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(404).json({ error: "Error while fetching data"});
     }
 }

@@ -33,7 +33,7 @@ describe("GET /api/list", () => {
             }
         });
         await handler(req, res);
-        console.log(res.body)
+        // console.log(res.body)
         
     })
 
@@ -71,7 +71,7 @@ describe("POST /api/list", () => {
         });
         await handler(req, res);
         expect(res._getStatusCode()).toBe(200);
-        console.log(res._getData());
+        // console.log(res._getData());
         
     });
     
@@ -109,7 +109,7 @@ describe("PATCH /api/list", () => {
         });
         await handler(req, res);
         expect(res._getStatusCode()).toBe(200);
-        console.log(res._getData());
+        // console.log(res._getData());
         
     });
     
@@ -147,7 +147,7 @@ describe("PUT /api/list", () => {
         });
         await handler(req, res);
         expect(res._getStatusCode()).toBe(200);
-        console.log(res._getData());
+        // console.log(res._getData());
         
     });
     
