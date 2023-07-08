@@ -22,7 +22,6 @@ export default function Profile() {
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const [fileName, setFileName] = useState("No file chosen");
   const [username, setUsername] = useState();
   const [userBudget, setUserBudget] = useState();
@@ -229,7 +228,7 @@ export default function Profile() {
               <div className="mt-8 flex">
                 <button
                   type="submit"
-                  onClick={() => router.reload()}
+                  onClick={()=>router.reload()}
                   className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 >
                   Save
