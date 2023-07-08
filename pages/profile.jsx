@@ -59,11 +59,11 @@ export default function Profile() {
     );
   }
   const usernameData = username ? username.username : "";
-  const userBudget = username ? (username.budget ? username.budget : "") : "";
+  const userBudget = username ? (username.budget ? username.budget : "1000") : "";
   const userCurrency = username
     ? username.currency
       ? username.currency
-      : ""
+      : "SGD"
     : "";
 
   // const fetcher = (...args) => fetch(...args).then((res) => res.json());
