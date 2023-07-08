@@ -1,4 +1,3 @@
-const sum = require('../../../../pages/sum');
 import handler from '../../../../pages/api/user/index';
 import { createMocks } from 'node-mocks-http';
 
