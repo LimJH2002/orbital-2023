@@ -1,6 +1,5 @@
 // import request from 'supertest'
 // import { getList } from '@/firebase/userList'
-const sum = require('../../../../pages/sum');
 
 import handler from '../../../../pages/api/list/index';
 // import handler from '../../../../pages/api/hello';
