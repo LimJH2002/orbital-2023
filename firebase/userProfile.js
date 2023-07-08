@@ -56,7 +56,7 @@ export async function updateUserProfile(req, res) {
   const { userId } = req.query;
   try {
     const formData = req.body;
-    if (!formData.hasOwnProperty('name') || !formData.hasOwnProperty('currency')) {
+    if (!formData.hasOwnProperty('username') && !formData.hasOwnProperty('currency') && !formData.hasOwnProperty('budget')) {
       throw 'Missing Fields';
     }
     const docRef = doc(db, "users", userId);
