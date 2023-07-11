@@ -3,13 +3,11 @@ import {
   CardHeader,
   CardBody,
   Typography,
-  Button,
 } from "@material-tailwind/react";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
 
 export default function BankCard(props) {
   return (
-    <Card className="flex-row mx-20 mb-5">
+    <Card className="flex-row mx-20 mb-5 rounded-2xl">
       <CardHeader
         shadow={false}
         floated={false}
