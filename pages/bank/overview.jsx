@@ -2,17 +2,13 @@ import { React, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Loading from "./loading";
+import Loading from "../loading";
 import BankTab from "@/components/bank-tab";
 
 const Bank = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
-
-  // useEffect(() => {
-  //   router.push("/comingSoon");
-  // });
 
   if (loading) return <Loading />;
 
@@ -21,7 +17,7 @@ const Bank = () => {
     return <div>Please sign in to continue</div>;
   }
 
-  return <div><BankTab /></div>;
+  return <div><BankTab id="1" /></div>;
 };
 
 export default Bank;
