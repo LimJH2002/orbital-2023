@@ -19,7 +19,7 @@ const Bank = () => {
 
   return (
     <div>
-      <BankTab id="1" />
+      <BankTab id="2" />
     </div>
   );
 };
