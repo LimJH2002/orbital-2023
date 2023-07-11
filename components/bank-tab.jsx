@@ -4,8 +4,8 @@ function classNames(...classes) {
 
 export default function BankTab(props) {
   const tabs = [
-    { name: "Bank Transactions", href: "#", current: true },
-    { name: "Link Bank", href: "#", current: false },
+    { name: "Bank Transactions", href: "#", current: props.id === "1" },
+    { name: "Link Bank", href: "#", current: props.id === "2" },
   ];
 
   return (
