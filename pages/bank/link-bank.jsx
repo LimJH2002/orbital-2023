@@ -21,7 +21,14 @@ const Bank = () => {
   return (
     <div>
       <BankTab id="2" />
-      <BankCard />
+      <BankCard
+        name="Oversea-Chinese Banking Corp. (OCBC)"
+        img=".././ocbclogo.png"
+      />
+      <BankCard
+        name="Oversea-Chinese Banking Corp. (OCBC)"
+        img=".././ocbclogo.png"
+      />
     </div>
   );
 };
