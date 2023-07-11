@@ -3,15 +3,16 @@ import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
+import BankTab from "@/components/bank-tab";
 
 const Bank = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
 
-  useEffect(() => {
-    router.push("/comingSoon");
-  });
+  // useEffect(() => {
+  //   router.push("/comingSoon");
+  // });
 
   if (loading) return <Loading />;
 
@@ -20,7 +21,7 @@ const Bank = () => {
     return <div>Please sign in to continue</div>;
   }
 
-  return <div></div>;
+  return <div><BankTab /></div>;
 };
 
 export default Bank;
