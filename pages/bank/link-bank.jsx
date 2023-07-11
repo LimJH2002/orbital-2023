@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import BankTab from "@/components/bank-tab";
+import BankCard from "@/components/ui/bank-card";
 
 const Bank = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const Bank = () => {
   return (
     <div>
       <BankTab id="2" />
+      <BankCard />
     </div>
   );
 };

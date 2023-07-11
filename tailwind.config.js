@@ -1,8 +1,9 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+const withMT = require("@material-tailwind/react/utils/withMT");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withMT({
   darkMode: ["class"],
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -94,4 +95,4 @@ module.exports = {
     require("tailwindcss-animate"),
     require("flowbite/plugin"),
   ],
-};
+});
