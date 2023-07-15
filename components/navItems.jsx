@@ -14,7 +14,7 @@ export const defaultNavItems = [
   },
   {
     label: "Bank",
-    href: "/bank/overview",
+    href: "/bank",
     icon: <AiOutlineBank className="w-6 h-6" />,
   },
   {
