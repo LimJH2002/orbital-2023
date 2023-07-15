@@ -25,10 +25,7 @@ const LinkBank = () => {
         name="Oversea-Chinese Banking Corp. (OCBC)"
         img=".././ocbclogo.png"
       />
-      <BankCard
-        name="Oversea-Chinese Banking Corp. (OCBC)"
-        img=".././ocbclogo.png"
-      />
+      <BankCard name="DBS Bank" img=".././dbslogo.png" />
     </div>
   );
 };

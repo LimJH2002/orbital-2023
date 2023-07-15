@@ -11,12 +11,12 @@ export default function BankCard(props) {
       <CardHeader
         shadow={false}
         floated={false}
-        className="w-1/5 shrink-0 m-0 rounded-r-none"
+        className="w-1/2 shrink-0 m-0 rounded-r-none"
       >
         <img
           src={props.img}
           alt={props.name + " logo"}
-          className="h-auto scale-75"
+          className="scale-75"
         />
       </CardHeader>
       <CardBody>
