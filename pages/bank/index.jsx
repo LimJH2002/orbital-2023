@@ -1,15 +1,21 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import BankTab from "@/components/bank-tab";
-import BankCard from "@/components/ui/bank-card";
+import Overview from "./overview";
+import LinkBank from "./link-bank";
 
-const LinkBank = () => {
+const Bank = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
+  const [curr, setCurr] = useState("1");
+
+  function handleState() {
+    setCurr(prev => prev == "1" ? "2" : "1");
+  }
 
   if (loading) return <Loading />;
 
@@ -20,17 +26,10 @@ const LinkBank = () => {
 
   return (
     <div>
-      {/* <BankTab id="2" /> */}
-      <BankCard
-        name="Oversea-Chinese Banking Corp. (OCBC)"
-        img=".././ocbclogo.png"
-      />
-      <BankCard
-        name="Oversea-Chinese Banking Corp. (OCBC)"
-        img=".././ocbclogo.png"
-      />
+      <BankTab id={curr} setFunc={handleState} />
+      {curr == "1" ? <Overview /> : <LinkBank />}
     </div>
   );
 };
 
-export default LinkBank;
+export default Bank;

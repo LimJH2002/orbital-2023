@@ -4,8 +4,8 @@ function classNames(...classes) {
 
 export default function BankTab(props) {
   const tabs = [
-    { name: "Overview", href: "./overview", current: props.id === "1" },
-    { name: "Link Bank", href: "./link-bank", current: props.id === "2" },
+    { name: "Overview", href: "#", current: props.id === "1" },
+    { name: "Link Bank", href: "#", current: props.id === "2" },
   ];
 
   return (
@@ -43,6 +43,7 @@ export default function BankTab(props) {
                 tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
                 "group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
               )}
+              onClick={() => props.setFunc((prev) => (prev == "1" ? "2" : "1"))}
               aria-current={tab.current ? "page" : undefined}
             >
               <span>{tab.name}</span>

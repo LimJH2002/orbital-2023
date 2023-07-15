@@ -11,7 +11,7 @@ export default function BankCard(props) {
       <CardHeader
         shadow={false}
         floated={false}
-        className="w-1/4 shrink-0 m-0 rounded-r-none"
+        className="w-1/5 shrink-0 m-0 rounded-r-none"
       >
         <img
           src={props.img}
