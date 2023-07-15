@@ -45,6 +45,7 @@ export default function BankTab(props) {
                 "group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
               )}
               aria-current={tab.current ? "page" : undefined}
+              onClick={() => props.setFunc(tab.id)}
             >
               <span>{tab.name}</span>
               <span
