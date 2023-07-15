@@ -13,8 +13,8 @@ const Bank = () => {
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
 
-  function handleState() {
-    setCurr(prev => prev == "1" ? "2" : "1");
+  function handleState(id) {
+    setCurr(id == "1" ? "1" : "2");
   }
 
   if (loading) return <Loading />;
