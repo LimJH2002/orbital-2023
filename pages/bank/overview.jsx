@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import BankTab from "@/components/bank-tab";
 
-const Bank = () => {
+const Overview = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
@@ -19,9 +19,9 @@ const Bank = () => {
 
   return (
     <div>
-      <BankTab id="1" />
+      {/* <BankTab id="1" /> */}
     </div>
   );
 };
 
-export default Bank;
+export default Overview;
