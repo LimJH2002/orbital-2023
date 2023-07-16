@@ -27,7 +27,7 @@ const Bank = () => {
   return (
     <div>
       <BankTab id={curr} setFunc={handleState} />
-      {curr == "1" ? <Overview /> : <LinkBank />}
+      {curr == "1" ? <Overview setFunc={handleState} /> : <LinkBank />}
     </div>
   );
 };
