@@ -8,44 +8,45 @@ import {
 import useSWR from "swr";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
+import Loading from "@/pages/loading";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 
 const cards = [
   {
     name: "Budget Left",
     icon: ScaleIcon,
-    amount: "SGD 123.23",
+    amount: "SGD 0",
     lastMonth: "20",
   },
   {
     name: "Money In",
     icon: BanknotesIcon,
-    amount: "SGD 100.55",
+    amount: "SGD 0",
     lastMonth: "-20",
   },
   {
     name: "Money Out",
     icon: FireIcon,
-    amount: "SGD 200.65",
+    amount: "SGD 0",
     lastMonth: "50",
   },
   {
     name: "Suggested Daily Spending",
     icon: LightBulbIcon,
-    amount: "SGD 10.44",
+    amount: "SGD 0",
     lastMonth: "-3",
   },
 ];
 
-export default function Card() {
+export default function Card(props) {
   const { currentUser } = useAuth();
   const [uid, setUid] = useState("");
   const [summary, setSummary] = useState(cards);
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
   const [fetched, setFetched] = useState(false);
+
   useEffect(() => {
     if (currentUser) {
       setUid(currentUser.uid);
@@ -60,7 +61,7 @@ export default function Card() {
         "Content-Type": "application/json",
       },
     }).then((e) => e.json());
-    const newSummary = summary ;
+    const newSummary = summary;
     newSummary[0].amount = "SGD " + response.budgetLeft;
     newSummary[1].amount = "SGD " + response.moneyIn;
     newSummary[2].amount = "SGD " + response.moneyOut;
@@ -68,17 +69,15 @@ export default function Card() {
     setFetched(true);
     // setSummary(() => newSummary);
     setSummary(newSummary);
-  }
+  };
+
   useEffect(() => {
     if (flag) {
-    getSummary();
+      getSummary();
     }
-  }, []);
- 
-  if (flag) {
-    getSummary();
-  }
+  });
 
+  if (!fetched) return <Loading />;
 
   return (
     <Fragment>

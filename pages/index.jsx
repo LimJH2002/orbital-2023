@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
-import { useEffect } from "react";
 
 export default function Home() {
   const auth = getAuth();
@@ -24,7 +23,7 @@ export default function Home() {
 
   if (!passedIntro) {
     router.push("/intro");
-    console.log(passed)
+    console.log(passed);
     return <div>You're still a newbie!</div>;
   }
 
