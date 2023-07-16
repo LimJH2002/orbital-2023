@@ -31,7 +31,7 @@ export default function BankCard(props) {
           <br />
           View Transactions, Label Transactions.
         </Typography>
-        <a href="#" className="inline-block">
+        <a href={props.redirect} target="_blank" className="inline-block">
           <button
             type="button"
             onClick={()=>setLink(prev => !prev)}
