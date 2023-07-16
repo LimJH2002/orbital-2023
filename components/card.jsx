@@ -45,6 +45,7 @@ export default function Card() {
   const [summary, setSummary] = useState(cards);
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
+  const [fetched, setFetched] = useState(false);
   useEffect(() => {
     if (currentUser) {
       setUid(currentUser.uid);
@@ -59,18 +60,25 @@ export default function Card() {
         "Content-Type": "application/json",
       },
     }).then((e) => e.json());
-    const newSummary = cards;
+    const newSummary = summary ;
     newSummary[0].amount = "SGD " + response.budgetLeft;
     newSummary[1].amount = "SGD " + response.moneyIn;
     newSummary[2].amount = "SGD " + response.moneyOut;
     newSummary[3].amount = "SGD " + response.daily;
-    setSummary(() => newSummary);
+    setFetched(true);
+    // setSummary(() => newSummary);
+    setSummary(newSummary);
   }
+  useEffect(() => {
+    if (flag) {
+    getSummary();
+    }
+  }, []);
  
   if (flag) {
     getSummary();
   }
-  console.log("sum", summary);
+
 
   return (
     <Fragment>
