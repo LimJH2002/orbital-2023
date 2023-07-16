@@ -10,7 +10,7 @@ export default function BankCard(props) {
   const [Link, setLink] = useState(false);
 
   return (
-    <div class="p-5 flex flex-col mx-20 mb-5 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div class="p-5 flex flex-col mx-20 mb-5 items-center bg-white border border-gray-200 rounded-xl shadow md:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       <img
         class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-96 m-9"
         src={props.img}
