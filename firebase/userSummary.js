@@ -64,11 +64,11 @@ export async function getUserSummary(req, res) {
             const daily = budgetLeft / (32 - today.getDate());
             
             const updatedSummary = {
-                budgetLeft:budgetLeft,
-                daily:daily,
+                budgetLeft:budgetLeft.toFixed(2),
+                daily:daily.toFixed(2),
                 date:currMonth,
-                moneyIn:moneyIn,
-                moneyOut:moneyOut,
+                moneyIn:moneyIn.toFixed(2),
+                moneyOut:moneyOut.toFixed(2),
             }
             await updateDoc(docRef, {
                 summary:updatedSummary,
