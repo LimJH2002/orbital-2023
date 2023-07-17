@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Loading from "@/pages/loading";
 
 export default function Dashboard(props) {
-
   return (
     <div className="min-h-full">
       <div className="bg-gray-900 pb-28">
