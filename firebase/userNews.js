@@ -46,7 +46,9 @@ export async function addNews(req, res) {
         const docSnap = await getDoc(docRef);
         const n = docSnap.data().newsCount;
         await updateDoc(docRef, {
-            savedNews: arrayUnion({...article, "id": n})
+            savedNews: arrayUnion({...article, 
+                // "id": n
+            })
         })
         await updateDoc(docRef, {newsCount:n+1});
         console.log("news: ", docSnap.data().savedNews);

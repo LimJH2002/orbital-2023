@@ -4,12 +4,34 @@ import dynamic from "next/dynamic";
 import { Modal, Button, Text } from "@nextui-org/react";
 import CutWord from "@/functions/CutWord";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { useAuth } from "@/context/AuthContext";
+
 
 export const NewsItem = ({ post, show, setShow }) => {
   const { visible, setVisible, bindings } = useModal();
   const [showMore, setShowMore] = useState(false);
   const [saved, setSaved] = useState(false);
   const Content = dynamic(() => import("./news-body"));
+  console.log("showPosst", post);
+  const { currentUser } = useAuth();
+  const uid = currentUser.uid;
+
+  const handleSave = async (e) => {
+    // e.preventDefault();
+    if (Object.keys(post).length == 0)
+      return console.log("Don't have post Data");
+    console.log(post);
+    // setLists([...lists, formData]);
+    await fetch("/api/savedNews?userId=" + uid, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    // closeWindow();
+    // router.reload();
+  };
 
   return (
     <Fragment>
@@ -122,6 +144,7 @@ export const NewsItem = ({ post, show, setShow }) => {
               onClick={() => {
                 setShow(true);
                 setSaved(true);
+                handleSave();
               }}
             >
               <BsBookmark className="text-black" />
