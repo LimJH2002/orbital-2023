@@ -195,7 +195,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
               <p className="pl-2">Saved</p>
             </Button>
           )}
-          <Button
+          {post.href && <Button
             auto
             flat
             color="neutral"
@@ -208,7 +208,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
             <a href={post.href} target="_blank">
               Open Original
             </a>
-          </Button>
+          </Button>}
           <Button
             auto
             flat
