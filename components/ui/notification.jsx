@@ -38,7 +38,7 @@ export default function Notification(props) {
                       Successfully saved!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      Anyone with a link can now view this file.
+                      You can now view your news in the saved tab.
                     </p>
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">
