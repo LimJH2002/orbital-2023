@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
+import { Fragment } from "react";
 
 export default function Home() {
   const auth = getAuth();
@@ -28,7 +29,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <Fragment>
       <Head>
         <title>Dashboard</title>
         <link rel="icon" sizes="any" href="/LogoF.ico"></link>
@@ -36,7 +37,7 @@ export default function Home() {
       </Head>
 
       {User({ auth, currentUser })}
-    </>
+    </Fragment>
   );
 }
 

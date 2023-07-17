@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from "react";
+import Head from "next/head";
+import { Fragment, React, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -25,10 +26,18 @@ const Bank = () => {
   }
 
   return (
-    <div>
-      <BankTab id={curr} setFunc={handleState} />
-      {curr == "1" ? <Overview setFunc={handleState} /> : <LinkBank />}
-    </div>
+    <Fragment>
+      <Head>
+        <title>Bank</title>
+        <link rel="icon" sizes="any" href="/LogoF.ico"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <div>
+        <BankTab id={curr} setFunc={handleState} />
+        {curr == "1" ? <Overview setFunc={handleState} /> : <LinkBank />}
+      </div>
+    </Fragment>
   );
 };
 

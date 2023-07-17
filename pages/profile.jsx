@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Fragment, useState } from "react";
 import Image from "next/image";
 import { getAuth } from "firebase/auth";
@@ -59,7 +60,11 @@ export default function Profile() {
     );
   }
   const usernameData = username ? username.username : "";
-  const userBudget = username ? (username.budget ? username.budget : "1000") : "";
+  const userBudget = username
+    ? username.budget
+      ? username.budget
+      : "1000"
+    : "";
   const userCurrency = username
     ? username.currency
       ? username.currency
@@ -97,6 +102,12 @@ export default function Profile() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Profile</title>
+        <link rel="icon" sizes="any" href="/LogoF.ico"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
       <main className="pl-10">
         {/* Settings forms */}
         <div className="divide-y divide-white/5">
