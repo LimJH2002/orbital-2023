@@ -3,11 +3,12 @@ import { useModal } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 import { Modal, Button, Text } from "@nextui-org/react";
 import CutWord from "@/functions/CutWord";
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
-export const NewsItem = ({ post, setShow }) => {
+export const NewsItem = ({ post, show, setShow }) => {
   const { visible, setVisible, bindings } = useModal();
   const [showMore, setShowMore] = useState(false);
+  const [saved, setSaved] = useState(false);
   const Content = dynamic(() => import("./news-body"));
 
   return (
@@ -41,10 +42,23 @@ export const NewsItem = ({ post, setShow }) => {
                   {post.date}
                 </time>
               </div>
-              <BsBookmark
-                className="mt-5 mx-2 z-10 text-gray-300"
-                onClick={() => setShow(true)}
-              />
+              {!saved ? (
+                <BsBookmark
+                  className="mt-5 mx-2 z-10 text-gray-300"
+                  onClick={() => {
+                    setShow(true);
+                    setSaved(true);
+                  }}
+                />
+              ) : (
+                <BsBookmarkFill
+                  className="mt-5 mx-2 z-10 text-gray-300"
+                  onClick={() => {
+                    setShow(false);
+                    setSaved(false);
+                  }}
+                />
+              )}
             </div>
 
             <div
@@ -99,6 +113,35 @@ export const NewsItem = ({ post, setShow }) => {
         </Modal.Header>
         <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
+          {!saved ? (
+            <Button
+              auto
+              flat
+              color="neutral"
+              className="hover:bg-slate-100"
+              onClick={() => {
+                setShow(true);
+                setSaved(true);
+              }}
+            >
+              <BsBookmark className="text-black" />
+              <p className="pl-2">Save</p>
+            </Button>
+          ) : (
+            <Button
+              auto
+              flat
+              color="neutral"
+              className="hover:bg-slate-100"
+              onClick={() => {
+                setShow(false);
+                setSaved(false);
+              }}
+            >
+              <BsBookmarkFill className="text-black" />
+              <p className="pl-2">Saved</p>
+            </Button>
+          )}
           <Button
             auto
             flat
