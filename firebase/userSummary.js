@@ -63,7 +63,7 @@ export async function getUserSummary(req, res) {
       }
       const today = new Date();
       const budgetLeft = (parseFloat(docSnap.data().budget) - moneyOut).toFixed(2);
-      const daily = budgetLeft / (32 - today.getDate());
+      const daily = (budgetLeft / (32 - today.getDate())).toFixed(2);
 
       const updatedSummary = {
         budgetLeft: budgetLeft,
