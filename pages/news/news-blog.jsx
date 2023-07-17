@@ -1,12 +1,12 @@
 import SortingDate from "@/functions/Sorting";
 import { useState, useEffect } from "react";
-import Loading from "./loading";
+import Loading from "../loading";
 import NewsItem from "@/components/news-item";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 
-export default function News() {
+export default function NewsBlog() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
