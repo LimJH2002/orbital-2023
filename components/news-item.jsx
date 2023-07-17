@@ -64,7 +64,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
                   {post.date}
                 </time>
               </div>
-              {!save || !saved ? (
+              {!saved ? (
                 <BsBookmark
                   className="mt-5 mx-2 z-10 text-gray-300"
                   onClick={() => {
@@ -135,7 +135,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
         </Modal.Header>
         <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
-          {!save || !saved ? (
+          {!saved ? (
             <Button
               auto
               flat
