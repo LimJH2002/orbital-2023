@@ -1,4 +1,4 @@
-import { getSavedNews } from "@/firebase/userNews";
+import { addNews, getSavedNews } from "@/firebase/userNews";
 
 export default async function handler(req, res) {
     const { method } = req;
@@ -8,6 +8,7 @@ export default async function handler(req, res) {
             getSavedNews(req, res);
             break;
         case 'POST':
+            addNews(req, res);
             break;
         default : 
             res.setHeader('Allow', ['POST']);
