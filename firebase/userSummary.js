@@ -6,76 +6,75 @@ import { month } from "@/data/month-year";
 // GET: http://localhost:3000/api/dashboard/1
 export async function getUserSummary(req, res) {
   const { userId } = req.query;
-  try {
-    const docRef = doc(db, "users", userId);
-
-    const getSnap = await getDoc(docRef);
-    if (!getSnap.data()) {
-      await setDoc(docRef, {
-        uid: userId,
-        count: 0,
-        summary: {
-          budgetLeft: 0,
-          daily: 0,
-          date: "",
-          moneyIn: 0,
-          moneyOut: 0,
-        },
-        budget: 0,
-      });
-    }
-    if (!getSnap.data().summary) {
-      await updateDoc(docRef, {
-        summary: {
-          budgetLeft: 0,
-          daily: 0,
-          date: "",
-          moneyIn: 0,
-          moneyOut: 0,
-        },
-        budget: 0,
-      });
-    }
-    if (!getSnap.data().budget) {
-      await updateDoc(docRef, {
-        budget: 0,
-      });
-    }
-    const docSnap = await getDoc(docRef);
-    console.log("summary: ", docSnap.data().summary);
-    const currMonth = getMonth();
-    // if (docSnap.data().summary.date != currMonth) {
-    if (true) {
-      const transactions = docSnap.data().transactions;
-      let moneyIn = 0;
-      let moneyOut = 0;
-      const n = transactions ? transactions.length : 0;
-      for (let i = 0; i < n; i++) {
-        if (transactions[i].date.substring(0, 7) == currMonth) {
-          if (transactions[i].type == "Money-out") {
-            moneyOut += parseFloat(transactions[i].amount);
-            moneyOut = moneyOut.toFixed(2);
-          } else {
-            moneyIn += parseFloat(transactions[i].amount);
-            moneyIn = moneyIn.toFixed(2)
-          }
+    try {
+        const docRef = doc(db, 'users', userId);
+        
+        const getSnap = await getDoc(docRef);
+        if (!getSnap.data()) {
+            await setDoc(docRef, {
+                uid:userId,
+                count:0,
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
+            });
         }
-      }
-      const today = new Date();
-      const budgetLeft = (parseFloat(docSnap.data().budget) - moneyOut).toFixed(2);
-      const daily = (budgetLeft / (32 - today.getDate())).toFixed(2);
+        if (!getSnap.data().summary) {
+            await updateDoc(docRef, {
+                summary:{
+                    budgetLeft:0,
+                    daily:0,
+                    date:"",
+                    moneyIn:0,
+                    moneyOut:0,
+                },
+                budget:0
+            });
+        }
+        if (!getSnap.data().budget) {
+            await updateDoc(docRef, {
+                budget:0
+            });
+        }
+        const docSnap = await getDoc(docRef);
+        console.log("summary: ",docSnap.data().summary);
+        const currMonth = getMonth();
+        // if (docSnap.data().summary.date != currMonth) {
+        if (true) {
+            const transactions = docSnap.data().transactions;
+            let moneyIn = 0;
+            let moneyOut = 0;
+            const n = transactions ? transactions.length : 0;
+            for(let i = 0; i < n; i++) {
+                if (transactions[i].date.substring(0,7) == currMonth) {
+                    if (transactions[i].type == "Money-out") {
+                        moneyOut += parseFloat(transactions[i].amount);
+                    } else {
+                        moneyIn += parseFloat(transactions[i].amount);
+                    }
+                }
+            }
+            const today = new Date();
+            const budgetLeft = parseFloat(docSnap.data().budget) - moneyOut;
+            const daily = budgetLeft / (32 - today.getDate());
+            
+            const updatedSummary = {
+                budgetLeft:budgetLeft.toFixed(2),
+                daily:daily.toFixed(2),
+                date:currMonth,
+                moneyIn:moneyIn.toFixed(2),
+                moneyOut:moneyOut.toFixed(2),
+            }
+            await updateDoc(docRef, {
+                summary:updatedSummary,
+            })
+        }
 
-      const updatedSummary = {
-        budgetLeft: budgetLeft,
-        daily: daily,
-        date: currMonth,
-        moneyIn: moneyIn,
-        moneyOut: moneyOut,
-      };
-      await updateDoc(docRef, {
-        summary: updatedSummary,
-      });
-    }
     const newSnap = await getDoc(docRef);
     res.status(200).json(newSnap.data().summary);
   } catch (err) {
