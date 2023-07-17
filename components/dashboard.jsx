@@ -10,7 +10,6 @@ export default function Dashboard(props) {
   const { currentUser } = useAuth();
   const [name, setName] = useState("");
   const [uid, setUid] = useState("");
-  console.log("uuid", uid)
 
   useEffect(() => {
     if (currentUser) {
@@ -34,8 +33,6 @@ export default function Dashboard(props) {
     }
   },
   [uid])
-
-
 
   return (
     <div className="min-h-full">
