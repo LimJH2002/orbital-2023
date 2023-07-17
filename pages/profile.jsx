@@ -26,6 +26,7 @@ export default function Profile() {
   const [username, setUsername] = useState();
   const { currentUser } = useAuth();
   const [thisUid, setThisUid] = useState("");
+
   useEffect(() => {
     if (currentUser) {
       setThisUid(currentUser.uid);
