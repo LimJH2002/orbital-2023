@@ -3,8 +3,9 @@ import { useModal } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 import { Modal, Button, Text } from "@nextui-org/react";
 import CutWord from "@/functions/CutWord";
+import { BsBookmark } from "react-icons/bs";
 
-export const NewsItem = ({ post }) => {
+export const NewsItem = ({ post, setShow }) => {
   const { visible, setVisible, bindings } = useModal();
   const [showMore, setShowMore] = useState(false);
   const Content = dynamic(() => import("./news-body"));
@@ -28,11 +29,18 @@ export const NewsItem = ({ post }) => {
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
           </div>
           <div className="max-w-xl">
-            <div className="mt-8 flex items-center gap-x-4 text-xs mx-2">
-              <time dateTime={post.datetime} className="text-gray-300">
-                {post.date}
-              </time>
+            <div className="flex flex-row">
+              <div className="mt-8 flex items-center gap-x-4 text-xs mx-2">
+                <time dateTime={post.datetime} className="text-gray-300">
+                  {post.date}
+                </time>
+              </div>
+              <BsBookmark
+                className="mt-8 mx-2 z-10 text-gray-300"
+                onClick={() => setShow(true)}
+              />
             </div>
+
             <div className="group relative mx-2 text-left">
               <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
                 {CutWord(post.title)}
