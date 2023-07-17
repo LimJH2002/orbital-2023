@@ -7,11 +7,13 @@ export default function Dashboard(props) {
       <div className="bg-gray-900 pb-28">
         <header className="py-10">
           <div className="flex flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-            <div className="w-48 ml-auto">
+            <h1 className="text-3xl font-bold text-white">
+              Greetings, <br /> User{" "}
+            </h1>
+            <div className="w-48 ml-auto flex items-center">
               <button
                 onClick={() => props.auth.signOut()}
-                className="px-12 py-1 rounded-sm bg-gray-700 text-gray-50"
+                className="px-12 py-2 rounded-sm bg-gray-700 hover:bg-gray-800 text-gray-50"
               >
                 Logout
               </button>
