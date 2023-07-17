@@ -12,15 +12,15 @@ export const NewsItem = ({ post, setShow }) => {
 
   return (
     <Fragment>
-      <button
-        onClick={() => {
-          setVisible(true);
-          setShowMore(true);
-        }}
-        className="flex flex-col items-start bg-gray-800 rounded-2xl hover:bg-gray-700"
-      >
+      <button className="flex flex-col items-start bg-gray-800 rounded-2xl hover:bg-gray-700">
         <article>
-          <div className="relative w-full">
+          <div
+            className="relative w-full"
+            onClick={() => {
+              setVisible(true);
+              setShowMore(true);
+            }}
+          >
             <img
               src={post.imageUrl}
               alt="Thumbnail"
@@ -30,23 +30,41 @@ export const NewsItem = ({ post, setShow }) => {
           </div>
           <div className="max-w-xl">
             <div className="flex flex-row">
-              <div className="mt-8 flex items-center gap-x-4 text-xs mx-2">
+              <div
+                className="mt-5 flex items-center gap-x-4 text-xs mx-2"
+                onClick={() => {
+                  setVisible(true);
+                  setShowMore(true);
+                }}
+              >
                 <time dateTime={post.datetime} className="text-gray-300">
                   {post.date}
                 </time>
               </div>
               <BsBookmark
-                className="mt-8 mx-2 z-10 text-gray-300"
+                className="mt-5 mx-2 z-10 text-gray-300"
                 onClick={() => setShow(true)}
               />
             </div>
 
-            <div className="group relative mx-2 text-left">
+            <div
+              className="group relative mx-2 text-left"
+              onClick={() => {
+                setVisible(true);
+                setShowMore(true);
+              }}
+            >
               <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-300">
                 {CutWord(post.title)}
               </h3>
             </div>
-            <div className="relative mt-8 flex items-center gap-x-4 mx-2 my-2 text-left">
+            <div
+              className="relative mt-8 flex items-center gap-x-4 mx-2 my-2 text-left"
+              onClick={() => {
+                setVisible(true);
+                setShowMore(true);
+              }}
+            >
               <div className="text-sm leading-6 absolute inset-x-0 bottom-0">
                 <p className="font-semibold text-white">
                   <a>
