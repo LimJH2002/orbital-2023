@@ -6,6 +6,7 @@ import Loading from "@/pages/loading";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard(props) {
+
   const { currentUser } = useAuth();
   const [name, setName] = useState("");
   const [uid, setUid] = useState("");
@@ -33,6 +34,7 @@ export default function Dashboard(props) {
     }
   },
   [uid])
+
 
 
   return (

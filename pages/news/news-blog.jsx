@@ -1,16 +1,18 @@
 import SortingDate from "@/functions/Sorting";
 import { useState, useEffect } from "react";
-import Loading from "./loading";
+import Loading from "../loading";
 import NewsItem from "@/components/news-item";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
+import Notification from "@/components/ui/notification";
 
-export default function News() {
+export default function NewsBlog() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
+  const [show, setShow] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,10 +31,11 @@ export default function News() {
   }
 
   if (!data) return <Loading />;
-  
+
   return (
-    <div className="py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="pb-20 px-20">
+      <Notification show={show} setShow={setShow} />
+      <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Here comes the tea
@@ -42,9 +45,15 @@ export default function News() {
           </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {SortingDate(data).map((post) => (
-            <NewsItem post={post} key={post.id} />
+            <NewsItem
+              post={post}
+              key={post.id}
+              show={show}
+              setShow={setShow}
+              save={false}
+            />
           ))}
         </div>
       </div>
