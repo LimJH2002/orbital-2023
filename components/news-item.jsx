@@ -70,6 +70,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
                   onClick={() => {
                     setShow(true);
                     setSaved(true);
+                    handleSave();
                   }}
                 />
               ) : (
