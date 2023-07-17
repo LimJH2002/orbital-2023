@@ -1,7 +1,7 @@
 import Card from "./card";
 import Table from "./table";
 
-export default function Overlap(props) {
+export default function Dashboard(props) {
   return (
     <div className="min-h-full">
       <div className="bg-gray-900 pb-28">

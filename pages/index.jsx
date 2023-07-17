@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Overlap from "@/components/overlap-banner";
+import Dashboard from "@/components/dashboard";
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -43,5 +43,5 @@ export default function Home() {
 
 //Authorize User
 function User(props) {
-  return <Overlap auth={props.auth} />;
+  return <Dashboard auth={props.auth} />;
 }
