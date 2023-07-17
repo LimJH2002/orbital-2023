@@ -73,6 +73,7 @@ export async function getUserSummary(req, res) {
             await updateDoc(docRef, {
                 summary:updatedSummary,
             })
+        }
 
     const newSnap = await getDoc(docRef);
     res.status(200).json(newSnap.data().summary);
