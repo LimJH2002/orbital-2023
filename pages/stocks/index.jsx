@@ -6,14 +6,24 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import StocksTab from "@/components/stock-tab";
 
-const Bank = () => {
+const Main = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
 
   function handleState(id) {
-    setCurr(id == "1" ? "1" : "2");
+    setCurr(
+      id == "1"
+        ? "1"
+        : id == "2"
+        ? "2"
+        : id == "3"
+        ? "3"
+        : id == "4"
+        ? "4"
+        : "5"
+    );
   }
 
   if (loading) return <Loading />;
@@ -33,10 +43,20 @@ const Bank = () => {
 
       <div>
         <StocksTab id={curr} setFunc={handleState} />
-        {curr == "1" ? <div setFunc={handleState} /> : <div />}
+        {curr == "1" ? (
+          <div setFunc={handleState} />
+        ) : curr == "2" ? (
+          <div setFunc={handleState} />
+        ) : curr == "3" ? (
+          <div setFunc={handleState} />
+        ) : curr == "4" ? (
+          <div setFunc={handleState} />
+        ) : (
+          <div />
+        )}
       </div>
     </Fragment>
   );
 };
 
-export default Bank;
+export default Main;
