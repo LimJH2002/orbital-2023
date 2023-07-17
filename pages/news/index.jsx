@@ -27,7 +27,7 @@ const News = () => {
   return (
     <div>
       <NewsTab id={curr} setFunc={handleState} />
-      {curr == "1" ? <NewsBlog setFunc={handleState} /> : <div />}
+      {curr == "1" ? <NewsBlog /> : <div />}
     </div>
   );
 };
