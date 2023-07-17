@@ -6,6 +6,7 @@ import CutWord from "@/functions/CutWord";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 
 export const NewsItem = ({ post, show, setShow, save }) => {
@@ -13,10 +14,12 @@ export const NewsItem = ({ post, show, setShow, save }) => {
   const [showMore, setShowMore] = useState(false);
   const [saved, setSaved] = useState(save);
   const Content = dynamic(() => import("./news-body"));
-  console.log("showPosst", post);
+  console.log("showPost", post);
   const { currentUser } = useAuth();
   // const uid = currentUser.uid;
   const [uid, setUid] = useState("");
+  const router = useRouter();
+
 
   useEffect(() => {
     if (currentUser) {
@@ -40,6 +43,22 @@ export const NewsItem = ({ post, show, setShow, save }) => {
     // closeWindow();
     // router.reload();
   };
+
+  const handleDelete = async (e) => {
+    if (Object.keys(post).length == 0)
+      return console.log("Don't have post Data");
+    console.log(post);
+    await fetch("/api/savedNews?userId=" + uid, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    // closeWindow();
+    // router.reload();
+  };
+
 
   return (
     <Fragment>
@@ -87,6 +106,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
                   onClick={() => {
                     setShow(false);
                     setSaved(false);
+                    handleDelete();
                   }}
                 />
               )}
@@ -168,13 +188,14 @@ export const NewsItem = ({ post, show, setShow, save }) => {
               onClick={() => {
                 setShow(false);
                 setSaved(false);
+                handleDelete();
               }}
             >
               <BsBookmarkFill className="text-black" />
               <p className="pl-2">Saved</p>
             </Button>
           )}
-          <Button
+          {post.href && <Button
             auto
             flat
             color="neutral"
@@ -187,7 +208,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
             <a href={post.href} target="_blank">
               Open Original
             </a>
-          </Button>
+          </Button>}
           <Button
             auto
             flat
