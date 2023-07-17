@@ -107,6 +107,7 @@ export const NewsItem = ({ post, setShow }) => {
               setVisible(false);
               setShowMore(false);
             }}
+            className="hover:bg-slate-100"
           >
             <a href={post.href} target="_blank">
               Open Original
