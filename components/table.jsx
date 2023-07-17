@@ -8,12 +8,14 @@ import SelectDate from "./select-date";
 import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
+import Toggle from "./ui/toggle";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Table() {
   const { currentUser } = useAuth();
+  const [preferred, setPreferred] = useState(false);
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
@@ -63,7 +65,7 @@ export default function Table() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
+      <div className="sm:flex sm:items-center sm:justify-end">
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
         </div>
@@ -83,6 +85,13 @@ export default function Table() {
           <NewTransaction />
         </div>
       </div>
+
+      <Toggle
+        desc={"Show Preferred Currency"}
+        enabled={preferred}
+        setEnabled={setPreferred}
+      />
+
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
