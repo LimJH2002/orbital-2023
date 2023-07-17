@@ -31,7 +31,7 @@ export default function NewsBlog() {
   }
 
   if (!data) return <Loading />;
-  
+
   return (
     <div className="pb-20 px-20">
       <Notification show={show} setShow={setShow} />
@@ -47,7 +47,13 @@ export default function NewsBlog() {
 
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {SortingDate(data).map((post) => (
-            <NewsItem post={post} key={post.id} show={show} setShow={setShow} />
+            <NewsItem
+              post={post}
+              key={post.id}
+              show={show}
+              setShow={setShow}
+              save={false}
+            />
           ))}
         </div>
       </div>
