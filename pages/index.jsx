@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
 import { Fragment } from "react";
+import { loadBundle } from "firebase/firestore";
 
 export default function Home() {
   const auth = getAuth();
@@ -36,12 +37,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {User({ auth, currentUser })}
+      {User({ auth, currentUser, loading })}
     </Fragment>
   );
 }
 
 //Authorize User
 function User(props) {
-  return <Dashboard auth={props.auth} />;
+  return <Dashboard auth={props.auth} currentUser={props.currentUser} loading={props.loading} />;
 }
