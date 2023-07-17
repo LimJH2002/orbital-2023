@@ -9,7 +9,6 @@ export async function getUserSummary(req, res) {
     try {
         const docRef = doc(db, 'users', userId);
         
-        // console.log(docSnap.data());
         const getSnap = await getDoc(docRef);
         if (!getSnap.data()) {
             await setDoc(docRef, {
@@ -48,21 +47,20 @@ export async function getUserSummary(req, res) {
         // if (docSnap.data().summary.date != currMonth) {
         if (true) {
             const transactions = docSnap.data().transactions;
-            var moneyIn = 0;
-            var moneyOut = 0;
+            let moneyIn = 0;
+            let moneyOut = 0;
             const n = transactions ? transactions.length : 0;
             for(let i = 0; i < n; i++) {
                 if (transactions[i].date.substring(0,7) == currMonth) {
-                    console.log(currMonth);
                     if (transactions[i].type == "Money-out") {
-                        moneyOut += parseInt(transactions[i].amount);
+                        moneyOut += parseFloat(transactions[i].amount);
                     } else {
-                        moneyIn += parseInt(transactions[i].amount);
+                        moneyIn += parseFloat(transactions[i].amount);
                     }
                 }
             }
             const today = new Date();
-            const budgetLeft = parseInt(docSnap.data().budget) - moneyOut;
+            const budgetLeft = parseFloat(docSnap.data().budget) - moneyOut;
             const daily = budgetLeft / (32 - today.getDate());
             
             const updatedSummary = {
