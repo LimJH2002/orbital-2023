@@ -8,35 +8,34 @@ import { useRouter } from "next/router";
 import Notification from "@/components/ui/notification";
 import { useAuth } from "@/context/AuthContext";
 
-
 export default function SavedNews() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
   const { currentUser } = useAuth();
   // const uid = currentUser.uid;
-  
+
   const [user, loading] = useAuthState(auth);
   const [show, setShow] = useState(false);
   const router = useRouter();
   const [uid, setUid] = useState("");
 
   useEffect(() => {
-    if (currentUser){
-    setUid(currentUser.uid)
-    console.log(uid)
+    if (currentUser) {
+      setUid(currentUser.uid);
+      console.log(uid);
     }
-  }, [currentUser])
+  }, [currentUser]);
 
   useEffect(() => {
     if (uid) {
-      console.log(uid)
-    fetch("/api/savedNews?userId=" + uid)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
+      console.log(uid);
+      fetch("/api/savedNews?userId=" + uid)
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data);
+          setLoading(false);
+        });
     }
   }, [uid]);
 
