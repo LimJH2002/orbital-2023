@@ -5,6 +5,7 @@ import { Modal, Button, Text } from "@nextui-org/react";
 import CutWord from "@/functions/CutWord";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 
 export const NewsItem = ({ post, show, setShow, save }) => {
@@ -14,7 +15,14 @@ export const NewsItem = ({ post, show, setShow, save }) => {
   const Content = dynamic(() => import("./news-body"));
   console.log("showPosst", post);
   const { currentUser } = useAuth();
-  const uid = currentUser.uid;
+  // const uid = currentUser.uid;
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+    setUid(currentUser.uid)
+    }
+  }, [currentUser])
 
   const handleSave = async (e) => {
     // e.preventDefault();
