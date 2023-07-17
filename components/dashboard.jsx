@@ -1,5 +1,6 @@
 import Card from "./card";
 import Table from "./table";
+import Greetings from "@/functions/Greetings";
 
 export default function Dashboard(props) {
   return (
@@ -8,7 +9,7 @@ export default function Dashboard(props) {
         <header className="py-10">
           <div className="flex flex-row max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-white">
-              Greetings, <br /> User{" "}
+              {Greetings()}, <br /> User
             </h1>
             <div className="w-48 ml-auto flex items-center">
               <button
