@@ -6,17 +6,21 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import Notification from "@/components/ui/notification";
+import { useAuth } from "@/context/AuthContext";
+
 
 export default function SavedNews() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
+  const { currentUser } = useAuth();
+  const uid = currentUser.uid;
   const [user, loading] = useAuthState(auth);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/news")
+    fetch("/api/savedNews?userId=" + uid)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
