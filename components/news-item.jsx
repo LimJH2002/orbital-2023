@@ -7,10 +7,10 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useAuth } from "@/context/AuthContext";
 
 
-export const NewsItem = ({ post, show, setShow }) => {
+export const NewsItem = ({ post, show, setShow, save }) => {
   const { visible, setVisible, bindings } = useModal();
   const [showMore, setShowMore] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(save);
   const Content = dynamic(() => import("./news-body"));
   console.log("showPosst", post);
   const { currentUser } = useAuth();
@@ -64,7 +64,7 @@ export const NewsItem = ({ post, show, setShow }) => {
                   {post.date}
                 </time>
               </div>
-              {!saved ? (
+              {!save || !saved ? (
                 <BsBookmark
                   className="mt-5 mx-2 z-10 text-gray-300"
                   onClick={() => {
@@ -135,7 +135,7 @@ export const NewsItem = ({ post, show, setShow }) => {
         </Modal.Header>
         <Modal.Body>{showMore && <Content post={post} />}</Modal.Body>
         <Modal.Footer>
-          {!saved ? (
+          {!save || !saved ? (
             <Button
               auto
               flat

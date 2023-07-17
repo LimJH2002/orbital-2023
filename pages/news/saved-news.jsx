@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import Notification from "@/components/ui/notification";
 
-export default function NewsBlog() {
+export default function SavedNews() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const auth = getAuth();
@@ -38,10 +38,10 @@ export default function NewsBlog() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Here comes the tea
+            Here comes your saved teas
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-300">
-            Keep in touch with the latest news.
+            Keep track of what you're interested in!
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export default function NewsBlog() {
               key={post.id}
               show={show}
               setShow={setShow}
-              save={false}
+              save={true}
             />
           ))}
         </div>

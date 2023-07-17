@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import NewsTab from "@/components/news-tab";
 import NewsBlog from "./news-blog";
+import SavedNews from "./saved-news";
 
 
 const News = () => {
@@ -27,7 +28,7 @@ const News = () => {
   return (
     <div>
       <NewsTab id={curr} setFunc={handleState} />
-      {curr == "1" ? <NewsBlog /> : <div />}
+      {curr == "1" ? <NewsBlog /> : <SavedNews />}
     </div>
   );
 };
