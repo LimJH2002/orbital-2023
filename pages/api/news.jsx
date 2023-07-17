@@ -28,7 +28,10 @@ export default async function handler(req, res) {
     title: news.content.title,
     date: news.content.pubDate.substring(0, 10),
     datetime: news.content.pubDate,
-    href: news.content.previewUrl,
+    href:
+      news.content.previewUrl !== null
+        ? news.content.previewUrl
+        : news.content.clickThroughUrl.url,
     imageUrl:
       news.content.thumbnail == undefined
         ? "https://s.yimg.com/ny/api/res/1.2/WZPUwNQc9NaXkNltlrghSQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtjZj13ZWJw/https://s.yimg.com/uc/fin/img/non-sub-report-thumb.png"
