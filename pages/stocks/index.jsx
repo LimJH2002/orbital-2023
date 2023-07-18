@@ -7,6 +7,7 @@ import Loading from "../loading";
 import StocksTab from "@/components/stock-tab";
 import EconomicCalendarWidget from "./economic-calendar";
 import ForexCrossRatesWidget from "./forex-cross-rates";
+import CryptoMarketWidget from "./crypto-market";
 
 const Main = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const Main = () => {
         ) : curr == "2" ? (
           <div setFunc={handleState} />
         ) : curr == "3" ? (
-          <div setFunc={handleState} />
+          <CryptoMarketWidget />
         ) : curr == "4" ? (
           <EconomicCalendarWidget />
         ) : (
