@@ -19,7 +19,7 @@ const Bank = () => {
   const query = router.query;
   useEffect(() => {
     if (query) {
-      setToken(query.access_token);
+      setToken(query.token);
     }
   }, [query])
 
@@ -34,7 +34,7 @@ const Bank = () => {
   }
 
   useEffect(() => {
-    console.log("access", access_token)
+    console.log("access", token)
     if (token == access) {
       setLinkedBank();
     }
