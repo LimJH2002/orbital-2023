@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Loading from "../loading";
 
 const EconomicCalendar = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.EconomicCalendar),
@@ -22,7 +23,7 @@ export default function EconomicCalendarWidget() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (height === 0) return null; // or a loading spinner, etc.
+  if (height === 0) return <Loading />; // or a loading spinner, etc.
 
   return (
     <div className="mx-20">
