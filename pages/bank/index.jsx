@@ -35,10 +35,10 @@ const Bank = () => {
 
   useEffect(() => {
     console.log("access", access_token)
-    if (access_token == access) {
+    if (token == access) {
       setLinkedBank();
     }
-  }, [access_token])
+  }, [token])
 
   function handleState(id) {
     setCurr(id == "1" ? "1" : "2");
