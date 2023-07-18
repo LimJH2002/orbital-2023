@@ -9,12 +9,21 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+
 import { convert_preferred } from "@/lib/convert";
+
+import axios from "axios";
+import TransformBankTransactions from "@/functions/TransformBankTransactions";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const bankFetcher = (url, token) =>
+  axios
+    .get(url, { headers: { authorization: "Bearer " + token } })
+    .then((res) => res.data);
+const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
-export default function Table() {
+export default function Table(props) {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
   const [userProfile, setUserProfile] = useState();
@@ -22,6 +31,7 @@ export default function Table() {
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
+
 
   const getUserProfile = async () => {
     const response = await fetch("/api/user?userId=" + uid, {
@@ -38,6 +48,7 @@ export default function Table() {
   }, [])
   
   const isLoading = !data && !error && !userProfile;
+
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
@@ -79,7 +90,12 @@ export default function Table() {
   // Check loading
   if (isLoading) return <Loading />;
 
-  const transactions = data === undefined ? [] : data;
+  let transactions = data === undefined ? [] : data;
+
+  if (props.bank && props.bankTransactions) {
+    transactions = TransformBankTransactions(props.bankTransactions.results.responseList);
+  }
+
   const sortedTransactions = SortingDate(transactions);
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
@@ -89,7 +105,7 @@ export default function Table() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center sm:justify-end">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
+          <h1 className="text-xl font-semibold text-gray-900">{props.bank ? "Bank Transactions" : "Transactions"}</h1>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-16">
           {/* <button
@@ -104,15 +120,17 @@ export default function Table() {
             setSelectedMonth={setSelectedMonth}
             setSelectedYear={setSelectedYear}
           />
-          <NewTransaction />
+          {!props.bank && <NewTransaction />}
         </div>
       </div>
 
-      <Toggle
-        desc={"Show Preferred Currency"}
-        enabled={preferred}
-        setEnabled={setPreferred}
-      />
+      {!props.bank && (
+        <Toggle
+          desc={"Show Preferred Currency"}
+          enabled={preferred}
+          setEnabled={setPreferred}
+        />
+      )}
 
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -184,7 +202,9 @@ export default function Table() {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            <EditTransaction transaction={...transaction} />
+                            {!props.bank && (
+                              <EditTransaction transaction={...transaction} />
+                            )}
                           </td>
                         </tr>
                       )

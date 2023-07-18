@@ -21,7 +21,13 @@ export async function getUserProfile(req, res) {
           moneyOut: 0,
         },
         budget: 0,
+        linkedBank: false,
       });
+    }
+    if (!getSnap.data().linkedBank) {
+      await updateDoc(docRef, {
+        linkedBank: false
+      })
     }
     console.log(getSnap.data());
     // if (!getSnap.data().username) {
@@ -42,6 +48,7 @@ export async function getUserProfile(req, res) {
           ? "SGD"
           : newSnap.data().currency,
         budget: newSnap.data().budget,
+        linkedBank: newSnap.data().linkedBank
     };
     console.log("api getUser", userData);
     res.status(200).json(userData);
@@ -56,7 +63,7 @@ export async function updateUserProfile(req, res) {
   const { userId } = req.query;
   try {
     const formData = req.body;
-    if (!formData.hasOwnProperty('username') && !formData.hasOwnProperty('currency') && !formData.hasOwnProperty('budget')) {
+    if (!formData.hasOwnProperty('username') && !formData.hasOwnProperty('currency') && !formData.hasOwnProperty('budget') && !formData.hasOwnProperty('linkedBank')) {
       throw 'Missing Fields';
     }
     const docRef = doc(db, "users", userId);
@@ -88,11 +95,15 @@ export async function updateUserProfile(req, res) {
       });
     }
     if (formData.budget) {
-
-        await updateDoc(docRef, {
-          budget: formData.budget,
-        });
-      }
+      await updateDoc(docRef, {
+        budget: formData.budget,
+      });
+    }
+    if (formData.hasOwnProperty('linkedBank')) {
+      await updateDoc(docRef, {
+        linkedBank: formData.linkedBank,
+      });
+    }
 
     const newSnap = await getDoc(docRef);
     const updatedData = {
