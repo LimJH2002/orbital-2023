@@ -216,7 +216,7 @@ export default function Table(props) {
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
                             {!props.bank && (
-                              <EditTransaction transaction={...transaction} />
+                              <EditTransaction transaction={transaction} />
                             )}
                           </td>
                         </tr>
