@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import StocksTab from "@/components/stock-tab";
+import EconomicCalendarWidget from "./economic-calendar";
 
 const Main = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const Main = () => {
         ) : curr == "3" ? (
           <div setFunc={handleState} />
         ) : curr == "4" ? (
-          <div setFunc={handleState} />
+          <EconomicCalendarWidget setFunc={handleState} />
         ) : (
           <div />
         )}
