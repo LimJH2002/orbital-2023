@@ -71,10 +71,11 @@ export default function Card(props) {
       },
     }).then((e) => e.json());
     const newSummary = summary;
-    newSummary[0].amount = "SGD " + response.budgetLeft;
-    newSummary[1].amount = "SGD " + response.moneyIn;
-    newSummary[2].amount = "SGD " + response.moneyOut;
-    newSummary[3].amount = "SGD " + response.daily;
+    const currency = response.currency;
+    newSummary[0].amount = currency + " " + response.budgetLeft;
+    newSummary[1].amount = currency + " " + response.moneyIn;
+    newSummary[2].amount = currency + " " + response.moneyOut;
+    newSummary[3].amount = currency + " " + response.daily;
     setFetched(true);
     // setSummary(() => newSummary);
     setSummary(newSummary);

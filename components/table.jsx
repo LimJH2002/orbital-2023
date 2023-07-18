@@ -9,6 +9,9 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+
+import { convert_preferred } from "@/lib/convert";
+
 import axios from "axios";
 import TransformBankTransactions from "@/functions/TransformBankTransactions";
 
@@ -23,36 +26,29 @@ const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 export default function Table(props) {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
+  const [userProfile, setUserProfile] = useState();
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
-  const isLoading = !data && !error;
-  const [bankData, setBankData] = useState();
 
-  // const { bankData, bankError } = useSWR(["/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023", token], bankFetcher);
 
-  const getBankTransactions = async () => {
-    // setIsLoading(true);
-    const response = await fetch(
-      "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      }
-    ).then((e) => e.json());
-    setBankData(response);
-    // setIsLoading(false);
-  };
+  const getUserProfile = async () => {
+    const response = await fetch("/api/user?userId=" + uid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((e) => e.json());
+    setUserProfile(response)
+  }
+
   useEffect(() => {
-    getBankTransactions();
-  }, []);
+    getUserProfile()
+  }, [])
+  
+  const isLoading = !data && !error && !userProfile;
 
-  console.log("data");
-  // console.log(bankData.results.responseList)
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
@@ -63,6 +59,11 @@ export default function Table(props) {
   const [selectedYear, setSelectedYear] = useState(
     data2 !== null ? JSON.parse(data2) : years[0]
   );
+
+  useEffect(() => {
+    console.log("preferred", preferred);
+    console.log(userProfile)
+  }, [preferred]) 
 
   useEffect(() => {
     window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
@@ -194,7 +195,8 @@ export default function Table(props) {
                           </td>
                           {/* Default value for currency is SGD */}
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {transaction.currency || "SGD"} {transaction.amount}
+                            {/* {transaction.currency || "SGD"} {transaction.amount} */}
+                            {userProfile && convert_preferred(preferred, userProfile.currency, transaction.currency, transaction.amount)}
                           </td>
                           <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                             {transaction.date}
