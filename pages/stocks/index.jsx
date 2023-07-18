@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import StocksTab from "@/components/stock-tab";
 import EconomicCalendarWidget from "./economic-calendar";
+import ForexCrossRatesWidget from "./forex-cross-rates";
 
 const Main = () => {
   const router = useRouter();
@@ -51,9 +52,9 @@ const Main = () => {
         ) : curr == "3" ? (
           <div setFunc={handleState} />
         ) : curr == "4" ? (
-          <EconomicCalendarWidget setFunc={handleState} />
+          <EconomicCalendarWidget />
         ) : (
-          <div />
+          <ForexCrossRatesWidget />
         )}
       </div>
     </Fragment>
