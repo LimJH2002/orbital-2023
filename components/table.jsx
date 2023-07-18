@@ -13,10 +13,13 @@ import axios from "axios";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
-const bankFetcher = (url, token) => axios.get(url, { headers: { authorization: "Bearer " + token } }).then((res) => res.data);
+const bankFetcher = (url, token) =>
+  axios
+    .get(url, { headers: { authorization: "Bearer " + token } })
+    .then((res) => res.data);
 const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
-export default function Table() {
+export default function Table(props) {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
   // console.log(currentUser ? currentUser.uid : 10);
@@ -30,23 +33,25 @@ export default function Table() {
 
   const getBankTransactions = async () => {
     // setIsLoading(true);
-    const response = await fetch("/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-      },
-    }).then((e) => e.json());
+    const response = await fetch(
+      "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    ).then((e) => e.json());
     setBankData(response);
     // setIsLoading(false);
   };
   useEffect(() => {
-    getBankTransactions()
-  },[])
+    getBankTransactions();
+  }, []);
 
-
-  console.log("data")
-  console.log(bankData.results.responseList)
+  console.log("data");
+  // console.log(bankData.results.responseList)
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
@@ -83,7 +88,27 @@ export default function Table() {
   // Check loading
   if (isLoading) return <Loading />;
 
-  const transactions = data === undefined ? [] : data;
+  let transactions = data === undefined ? [] : data;
+  const bankTransactions = {
+    results: {
+      success: true,
+      responseList: [
+        {
+          amount: "10",
+          debitCreditIndicator: "credit",
+          desciption: "Transacrtion A",
+          transactionDate: "2023-07-11",
+          month: "July",
+          currencyCode: "SGD",
+        },
+      ],
+    },
+  };
+
+  if (props.bank) {
+    transactions = bankTransactions;
+  }
+
   const sortedTransactions = SortingDate(transactions);
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
@@ -108,15 +133,17 @@ export default function Table() {
             setSelectedMonth={setSelectedMonth}
             setSelectedYear={setSelectedYear}
           />
-          <NewTransaction />
+          {!props.bank && <NewTransaction />}
         </div>
       </div>
 
-      <Toggle
-        desc={"Show Preferred Currency"}
-        enabled={preferred}
-        setEnabled={setPreferred}
-      />
+      {!props.bank && (
+        <Toggle
+          desc={"Show Preferred Currency"}
+          enabled={preferred}
+          setEnabled={setPreferred}
+        />
+      )}
 
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -187,7 +214,7 @@ export default function Table() {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            <EditTransaction transaction={...transaction} />
+                            {!props.bank && <EditTransaction transaction={...transaction} />}
                           </td>
                         </tr>
                       )
