@@ -18,10 +18,11 @@ const Bank = () => {
   const [token, setToken] = useState();
   const query = router.query;
   useEffect(() => {
+    console.log("q", query)
     if (query) {
-      setToken(query.token);
+      setToken(query.access_token);
     }
-  }, [query])
+  }, [user])
 
   const setLinkedBank = async () => {
     const response = await fetch("/api/user?userId=" + user.uid, {
