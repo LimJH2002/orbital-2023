@@ -23,7 +23,7 @@ export default function StocksTab(props) {
           name="tabs"
           className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
           defaultValue={tabs.find((tab) => tab.current).name}
-          onChange={() => props.setFunc((prev) => (prev == "1" ? "2" : "1"))}
+          // onChange={() => props.setFunc((prev) => (prev == "1" ? "2" : "1"))}
         >
           {tabs.map((tab) => (
             <option key={tab.name}>{tab.name}</option>
