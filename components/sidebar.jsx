@@ -21,6 +21,7 @@ const Sidebar = (props) => {
         collapsed={props.collapsed}
         setCollapsed={() => props.setSidebarCollapsed((prev) => !prev)}
         auth={props.auth}
+        pathname={props.pathname}
       />
     </div>
   );

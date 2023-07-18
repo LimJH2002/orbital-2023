@@ -10,7 +10,7 @@ import { defaultNavItems } from "./navItems";
 import { GoSignOut } from "react-icons/go";
 import { useRouter } from "next/router";
 
-const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
+const SidebarContent = ({ collapsed, setCollapsed, auth, pathname }) => {
   // use the correct icon depending on the state.
   const Icon = collapsed ? ChevronDoubleRightIcon : ChevronDoubleLeftIcon;
   const router = useRouter();
@@ -66,6 +66,7 @@ const SidebarContent = ({ collapsed, setCollapsed, auth }) => {
                   className={cn({
                     "text-indigo-100 hover:bg-gray-800 flex": true, //colors
                     "transition-colors duration-300": true, //animation
+                    "bg-gray-800": pathname === item.href,
                     "rounded-md p-2 mx-3 gap-4 ": !collapsed,
                     "rounded-full p-2 mx-3 w-10 h-10": collapsed,
                   })}
