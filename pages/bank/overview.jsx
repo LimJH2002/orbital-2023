@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import { TbCashBanknoteOff } from "react-icons/tb";
+import Table from "@/components/table";
 
 const Overview = (props) => {
   const router = useRouter();
@@ -17,7 +18,19 @@ const Overview = (props) => {
     return <div>Please sign in to continue</div>;
   }
 
-  return (
+  return true ? (
+    // Show Transactions if linked
+    <div className="mt-10 mx-10">
+        <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+          {/* Replace start */}
+          <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+            <Table bank={false} />
+          </div>
+          {/* /Replace end */}
+        </div>
+      </div>
+  ) : (
+    // Idle state
     <div className="px-20">
       <button
         type="button"
