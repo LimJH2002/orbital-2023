@@ -9,16 +9,10 @@ import Table from "@/components/table";
 const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 const Overview = (props) => {
-  const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(true);
   const [userLinkBank, setUserLinkBank] = useState(false);
-
-  if (!user) {
-    router.push("/login");
-    return <div>Please sign in to continue</div>;
-  }
 
   const bankTransactions = {
     results: {
