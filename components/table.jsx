@@ -90,21 +90,7 @@ export default function Table(props) {
   if (isLoading) return <Loading />;
 
   let transactions = data === undefined ? [] : data;
-  const bankTransactions = {
-    results: {
-      success: true,
-      responseList: [
-        {
-          amount: "10",
-          debitCreditIndicator: "credit",
-          desciption: "Transacrtion A",
-          transactionDate: "2023-07-11",
-          month: "July",
-          currencyCode: "SGD",
-        },
-      ],
-    },
-  };
+  const bankTransactions = TransformBankTransactions(props.bankTransactions.results.responseList);
 
   if (props.bank) {
     transactions = bankTransactions;
@@ -119,7 +105,7 @@ export default function Table(props) {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center sm:justify-end">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Transactions</h1>
+          <h1 className="text-xl font-semibold text-gray-900">{props.bank ? "Bank Transactions" : "Transactions"}</h1>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-16">
           {/* <button
@@ -215,7 +201,9 @@ export default function Table(props) {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            {!props.bank && <EditTransaction transaction={...transaction} />}
+                            {!props.bank && (
+                              <EditTransaction transaction={...transaction} />
+                            )}
                           </td>
                         </tr>
                       )
