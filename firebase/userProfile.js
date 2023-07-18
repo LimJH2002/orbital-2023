@@ -21,7 +21,13 @@ export async function getUserProfile(req, res) {
           moneyOut: 0,
         },
         budget: 0,
+        linkedBank: false,
       });
+    }
+    if (!getSnap.data().linkedBank) {
+      await updateDoc(docRef, {
+        linkedBank: false
+      })
     }
     console.log(getSnap.data());
     // if (!getSnap.data().username) {
@@ -42,6 +48,7 @@ export async function getUserProfile(req, res) {
           ? "SGD"
           : newSnap.data().currency,
         budget: newSnap.data().budget,
+        linkedBank: newSnap.data().linkedBank
     };
     console.log("api getUser", userData);
     res.status(200).json(userData);
