@@ -27,28 +27,31 @@ export default function Table(props) {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
   const [userProfile, setUserProfile] = useState();
+  const [isLoading2, setIsLoading2] = useState(true);
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
 
-
   const getUserProfile = async () => {
-    const response = await fetch("/api/user?userId=" + uid, {
+    fetch("/api/user?userId=" + uid, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((e) => e.json());
-    setUserProfile(response)
-  }
+    })
+      .then((e) => e.json())
+      .then((e) => {
+        setUserProfile(e);
+        setIsLoading2(false);
+      });
+  };
 
   useEffect(() => {
-    getUserProfile()
-  }, [])
-  
-  const isLoading = !data && !error && !userProfile;
+    getUserProfile();
+  }, []);
 
+  const isLoading = !data && !error && !userProfile;
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
@@ -62,8 +65,8 @@ export default function Table(props) {
 
   useEffect(() => {
     console.log("preferred", preferred);
-    console.log(userProfile)
-  }, [preferred]) 
+    console.log(userProfile);
+  }, [preferred]);
 
   useEffect(() => {
     window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
@@ -88,12 +91,14 @@ export default function Table(props) {
   //Filter Mechanism End
 
   // Check loading
-  if (isLoading) return <Loading />;
+  if (isLoading || isLoading2) return <Loading />;
 
   let transactions = data === undefined ? [] : data;
 
   if (props.bank && props.bankTransactions) {
-    transactions = TransformBankTransactions(props.bankTransactions.results.responseList);
+    transactions = TransformBankTransactions(
+      props.bankTransactions.results.responseList
+    );
   }
 
   const sortedTransactions = SortingDate(transactions);
@@ -105,7 +110,9 @@ export default function Table(props) {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center sm:justify-end">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">{props.bank ? "Bank Transactions" : "Transactions"}</h1>
+          <h1 className="text-xl font-semibold text-gray-900">
+            {props.bank ? "Bank Transactions" : "Transactions"}
+          </h1>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-16">
           {/* <button
@@ -196,7 +203,13 @@ export default function Table(props) {
                           {/* Default value for currency is SGD */}
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {/* {transaction.currency || "SGD"} {transaction.amount} */}
-                            {userProfile && convert_preferred(preferred, userProfile.currency, transaction.currency, transaction.amount)}
+                            {userProfile &&
+                              convert_preferred(
+                                preferred,
+                                userProfile.currency,
+                                transaction.currency,
+                                transaction.amount
+                              )}
                           </td>
                           <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                             {transaction.date}
