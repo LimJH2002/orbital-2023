@@ -17,7 +17,7 @@ const LinkBank = () => {
         img=".././ocbclogo.png"
         redirect="https://api.ocbc.com/ocbcauthentication/api/oauth2/authorize?client_id=BIupf899blqp6taidPc0wjCJ6foa&redirect_uri=https://orbital-2023.vercel.app/bank&scope=transactional"
       />
-      <BankCard name="DBS Bank" img=".././dbslogo.png" />
+      <BankCard name="DBS Bank" img=".././dbslogo.png" soon={true} />
     </div>
   );
 };
