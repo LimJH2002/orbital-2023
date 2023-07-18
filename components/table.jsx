@@ -178,7 +178,7 @@ export default function Table() {
                           {/* Default value for currency is SGD */}
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {/* {transaction.currency || "SGD"} {transaction.amount} */}
-                            {convert_preferred(preferred, userProfile.currency, transaction.currency, transaction.amount)}
+                            {userProfile && convert_preferred(preferred, userProfile.currency, transaction.currency, transaction.amount)}
                           </td>
                           <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                             {transaction.date}

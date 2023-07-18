@@ -2,6 +2,7 @@ import { db } from "@/firebase/firebaseApp";
 import { useAuth } from "@/context/AuthContext";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { month } from "@/data/month-year";
+import { convert_preferred_amount } from "@/lib/convert";
 
 // GET: http://localhost:3000/api/dashboard/1
 export async function getUserSummary(req, res) {
@@ -42,8 +43,9 @@ export async function getUserSummary(req, res) {
             });
         }
         const docSnap = await getDoc(docRef);
-        console.log("summary: ",docSnap.data().summary);
+        console.log("summary: ", docSnap.data().summary);
         const currMonth = getMonth();
+        const preferredCurrency = docSnap.data().currency ? docSnap.data().currency : "SGD";
         // if (docSnap.data().summary.date != currMonth) {
         if (true) {
             const transactions = docSnap.data().transactions;
@@ -52,10 +54,11 @@ export async function getUserSummary(req, res) {
             const n = transactions ? transactions.length : 0;
             for(let i = 0; i < n; i++) {
                 if (transactions[i].date.substring(0,7) == currMonth) {
+                  const convertedAmount = convert_preferred_amount(true, preferredCurrency, transactions[i].currency, transactions[i].amount);
                     if (transactions[i].type == "Money-out") {
-                        moneyOut += parseFloat(transactions[i].amount);
+                        moneyOut += parseFloat(convertedAmount);
                     } else {
-                        moneyIn += parseFloat(transactions[i].amount);
+                        moneyIn += parseFloat(convertedAmount);
                     }
                 }
             }
@@ -69,6 +72,8 @@ export async function getUserSummary(req, res) {
                 date:currMonth,
                 moneyIn:moneyIn.toFixed(2),
                 moneyOut:moneyOut.toFixed(2),
+                currency:preferredCurrency,
+                budget:docSnap.data().budget
             }
             await updateDoc(docRef, {
                 summary:updatedSummary,
