@@ -9,9 +9,12 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+import axios from "axios";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const bankFetcher = (url, token) => axios.get(url, { headers: { authorization: "Bearer " + token } }).then((res) => res.data);
+const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 export default function Table() {
   const { currentUser } = useAuth();
@@ -21,6 +24,29 @@ export default function Table() {
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
   const isLoading = !data && !error;
+  const [bankData, setBankData] = useState();
+
+  // const { bankData, bankError } = useSWR(["/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023", token], bankFetcher);
+
+  const getBankTransactions = async () => {
+    // setIsLoading(true);
+    const response = await fetch("/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    }).then((e) => e.json());
+    setBankData(response);
+    // setIsLoading(false);
+  };
+  useEffect(() => {
+    getBankTransactions()
+  },[])
+
+
+  console.log("data")
+  console.log(bankData.results.responseList)
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");

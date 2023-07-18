@@ -13,6 +13,8 @@ const Bank = () => {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
+  const query = router.query;
+
 
   function handleState(id) {
     setCurr(id == "1" ? "1" : "2");
