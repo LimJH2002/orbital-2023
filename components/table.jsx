@@ -33,6 +33,10 @@ export default function Table() {
   );
 
   useEffect(() => {
+    console.log("preferred", preferred);
+  }, [preferred]) 
+
+  useEffect(() => {
     window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
   }, [selectedMonth]);
 
