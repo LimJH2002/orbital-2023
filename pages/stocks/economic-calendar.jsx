@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { EconomicCalendar } from "react-tradingview-embed";
 import dynamic from "next/dynamic";
 
-// const EconomicCalendar = dynamic(
-//   () => import("react-tradingview-embed").then((mod) => mod.EconomicCalendar),
-//   { ssr: false }
-// );
+const EconomicCalendar = dynamic(
+  () => import("react-tradingview-embed").then((mod) => mod.EconomicCalendar),
+  { ssr: false }
+);
 
 export default function EconomicCalendarWidget() {
   const [height, setHeight] = useState(0);
