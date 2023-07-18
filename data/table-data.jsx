@@ -15,7 +15,7 @@ export function label(str) {
       Transport
     </span>
   ) : str === LabelCategories[2] ? (
-    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
+    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
       Online Shopping
     </span>
   ) : str === LabelCategories[3] ? (
