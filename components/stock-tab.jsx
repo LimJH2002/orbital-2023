@@ -5,7 +5,7 @@ function classNames(...classes) {
 export default function StocksTab(props) {
   const tabs = [
     { name: "Overview", href: "#", current: props.id === "1", id: "1" },
-    { name: "Stock Market", href: "#", current: props.id === "2", id: "2" },
+    { name: "Real Time Chart", href: "#", current: props.id === "2", id: "2" },
     { name: "Crypto Market", href: "#", current: props.id === "3", id: "3" },
     { name: "Economic Calendar", href: "#", current: props.id === "4", id: "4" },
     { name: "Forex Cross Rates", href: "#", current: props.id === "5", id: "5" },
