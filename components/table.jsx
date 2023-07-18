@@ -92,7 +92,7 @@ export default function Table(props) {
 
   let transactions = data === undefined ? [] : data;
 
-  if (props.bank) {
+  if (props.bank && props.bankTransactions) {
     transactions = TransformBankTransactions(props.bankTransactions.results.responseList);
   }
 
