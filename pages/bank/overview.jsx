@@ -6,16 +6,14 @@ import Loading from "../loading";
 import { TbCashBanknoteOff } from "react-icons/tb";
 import Table from "@/components/table";
 
-
 const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 const Overview = (props) => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
-  const [userLinkBank, setUserLinkBank] = useState();
-
-  if (loading) return <Loading />;
+  const [isLoading, setIsLoading] = useState(true);
+  const [userLinkBank, setUserLinkBank] = useState(false);
 
   if (!user) {
     router.push("/login");
@@ -41,21 +39,25 @@ const Overview = (props) => {
   const [bankData, setBankData] = useState();
 
   const getUserProfile = async () => {
-    const response = await fetch("/api/user?userId=" + user.uid, {
+    fetch("/api/user?userId=" + user.uid, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((e) => e.json());
-    setUserLinkBank(response.linkedBank)
-  }
+    })
+      .then((e) => e.json())
+      .then((e) => {
+        setUserLinkBank(e.linkedBank);
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    getUserProfile()
-  }, [])
+    getUserProfile();
+  }, []);
 
   const getBankTransactions = async () => {
-    const response = await fetch(
+    fetch(
       "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
       {
         method: "GET",
@@ -64,14 +66,18 @@ const Overview = (props) => {
           Authorization: "Bearer " + token,
         },
       }
-    ).then((e) => e.json());
-    setBankData(response);
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        setBankData(e);
+      });
   };
+
   useEffect(() => {
     getBankTransactions();
   }, []);
 
-
+  if (loading || isLoading) return <Loading />;
 
   return userLinkBank ? (
     // Show Transactions if linked
