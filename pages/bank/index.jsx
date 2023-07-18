@@ -8,13 +8,37 @@ import BankTab from "@/components/bank-tab";
 import Overview from "./overview";
 import LinkBank from "./link-bank";
 
+const access = "37f35d0c-bcfe-3d07-adc7-5537936aff59";
+
 const Bank = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
+  const [token, setToken] = useState();
   const query = router.query;
+  useEffect(() => {
+    if (query) {
+      setToken(query.access_token);
+    }
+  }, [query])
 
+  const setLinkedBank = async () => {
+    const response = await fetch("/api/user?userId=" + user.uid, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({linkedBank: true}),
+    });
+  }
+
+  useEffect(() => {
+    console.log("access", access_token)
+    if (access_token == access) {
+      setLinkedBank();
+    }
+  }, [access_token])
 
   function handleState(id) {
     setCurr(id == "1" ? "1" : "2");

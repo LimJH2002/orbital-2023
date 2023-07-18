@@ -5,6 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import BankCard from "@/components/ui/bank-card";
 
+const access = "37f35d0c-bcfe-3d07-adc7-5537936aff59";
+
 const LinkBank = () => {
   const router = useRouter();
   const auth = getAuth();

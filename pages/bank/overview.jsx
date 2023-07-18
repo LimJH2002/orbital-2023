@@ -13,6 +13,7 @@ const Overview = (props) => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
+  const [userLinkBank, setUserLinkBank] = useState();
 
   if (loading) return <Loading />;
 
@@ -39,6 +40,20 @@ const Overview = (props) => {
 
   const [bankData, setBankData] = useState();
 
+  const getUserProfile = async () => {
+    const response = await fetch("/api/user?userId=" + user.uid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((e) => e.json());
+    setUserLinkBank(response.linkedBank)
+  }
+
+  useEffect(() => {
+    getUserProfile()
+  }, [])
+
   const getBankTransactions = async () => {
     const response = await fetch(
       "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
@@ -56,9 +71,9 @@ const Overview = (props) => {
     getBankTransactions();
   }, []);
 
-  console.log("data");
 
-  return true ? (
+
+  return userLinkBank ? (
     // Show Transactions if linked
     <div className="mt-10 mx-10">
       <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">

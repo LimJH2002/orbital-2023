@@ -63,7 +63,7 @@ export async function updateUserProfile(req, res) {
   const { userId } = req.query;
   try {
     const formData = req.body;
-    if (!formData.hasOwnProperty('username') && !formData.hasOwnProperty('currency') && !formData.hasOwnProperty('budget')) {
+    if (!formData.hasOwnProperty('username') && !formData.hasOwnProperty('currency') && !formData.hasOwnProperty('budget') && !formData.hasOwnProperty('linkedBank')) {
       throw 'Missing Fields';
     }
     const docRef = doc(db, "users", userId);
@@ -95,11 +95,15 @@ export async function updateUserProfile(req, res) {
       });
     }
     if (formData.budget) {
-
-        await updateDoc(docRef, {
-          budget: formData.budget,
-        });
-      }
+      await updateDoc(docRef, {
+        budget: formData.budget,
+      });
+    }
+    if (formData.hasOwnProperty('linkedBank')) {
+      await updateDoc(docRef, {
+        linkedBank: formData.linkedBank,
+      });
+    }
 
     const newSnap = await getDoc(docRef);
     const updatedData = {
