@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+import { convert_preferred } from "@/lib/convert";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -16,11 +17,27 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export default function Table() {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
+  const [userProfile, setUserProfile] = useState();
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
-  const isLoading = !data && !error;
+
+  const getUserProfile = async () => {
+    const response = await fetch("/api/user?userId=" + uid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((e) => e.json());
+    setUserProfile(response)
+  }
+
+  useEffect(() => {
+    getUserProfile()
+  }, [])
+  
+  const isLoading = !data && !error && !userProfile;
 
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
@@ -34,6 +51,7 @@ export default function Table() {
 
   useEffect(() => {
     console.log("preferred", preferred);
+    console.log(userProfile)
   }, [preferred]) 
 
   useEffect(() => {
@@ -159,7 +177,8 @@ export default function Table() {
                           </td>
                           {/* Default value for currency is SGD */}
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {transaction.currency || "SGD"} {transaction.amount}
+                            {/* {transaction.currency || "SGD"} {transaction.amount} */}
+                            {convert_preferred(preferred, userProfile.currency, transaction.currency, transaction.amount)}
                           </td>
                           <td className="whitespace-nowrap py-4 text-sm text-gray-500">
                             {transaction.date}
