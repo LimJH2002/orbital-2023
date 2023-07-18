@@ -10,9 +10,12 @@ import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
 import { convert_preferred } from "@/lib/convert";
+import axios from "axios";
 
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const bankFetcher = (url, token) => axios.get(url, { headers: { authorization: "Bearer " + token } }).then((res) => res.data);
+const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 export default function Table() {
   const { currentUser } = useAuth();
