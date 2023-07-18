@@ -26,13 +26,23 @@ export default function BankCard(props) {
           View Transactions, Label Transactions.
         </p>
         <a href={props.redirect} className="inline-block">
-          <button
-            type="button"
-            onClick={() => setLink((prev) => !prev)}
-            className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            {Link ? "Unlink" : "Link Bank"}
-          </button>
+          {props.soon ? (
+            <button
+              type="button"
+              // onClick={() => setLink((prev) => !prev)}
+              className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
+            >
+              Coming Soon
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setLink((prev) => !prev)}
+              className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              {Link ? "Unlink" : "Link Bank"}
+            </button>
+          )}
         </a>
       </div>
     </div>
