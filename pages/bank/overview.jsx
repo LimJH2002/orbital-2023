@@ -18,17 +18,33 @@ const Overview = (props) => {
     return <div>Please sign in to continue</div>;
   }
 
+  const bankTransactions = {
+    results: {
+      success: true,
+      responseList: [
+        {
+          amount: "10",
+          debitCreditIndicator: "credit",
+          description: "Transacrtion A",
+          transactionDate: "2023-07-11",
+          month: "July",
+          currencyCode: "SGD",
+        },
+      ],
+    },
+  };
+
   return true ? (
     // Show Transactions if linked
     <div className="mt-10 mx-10">
-        <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-          {/* Replace start */}
-          <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-            <Table bank={false} />
-          </div>
-          {/* /Replace end */}
+      <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+        {/* Replace start */}
+        <div className="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+          <Table bank={true} bankTransactions={bankTransactions} />
         </div>
+        {/* /Replace end */}
       </div>
+    </div>
   ) : (
     // Idle state
     <div className="px-20">
