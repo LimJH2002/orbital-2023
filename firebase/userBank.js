@@ -64,6 +64,7 @@ export async function getBankTransactionMock(req, res) {
     }
     try {
         if (req.headers.authorization != key) {
+            console.log(req.headers)
             throw "invalid key";
         }
         if (req.query.sessionToken != token) {
@@ -80,19 +81,23 @@ export async function getBankTransactionMock(req, res) {
             obj.success = false;
             obj.errorMessage = "invalid key"
             res.status(403).json(obj);
+            return;
         }
         if (err == "invalid session token") {
             obj.success = false;
             obj.errorMessage = "invalid session token"
             res.status(403).json(obj);
+            return;
         }
         if (err == "invalid account id") {
             obj.success = false;
             obj.errorMessage = "invalid account id"
             res.status(403).json(obj);
+            return;
         }
         obj.success = false;
         obj.errorMessage = "error"
         res.status(404).json(obj);
+        return;
     }
 }

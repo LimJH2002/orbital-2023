@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./loading";
 import { Fragment } from "react";
 import { loadBundle } from "firebase/firestore";
+import { useEffect } from "react";
 
 export default function Home() {
   const auth = getAuth();
@@ -13,6 +14,10 @@ export default function Home() {
   const [user, loading] = useAuthState(auth);
   const currentUser = auth.currentUser;
   const passedIntro = true;
+  // const keyword  = router.query;
+  // useEffect(() => {
+    // console.log("keyword", keyword)
+// }, [keyword])
 
   if (loading) {
     return <Loading />;
