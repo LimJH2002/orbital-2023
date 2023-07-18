@@ -87,10 +87,9 @@ export default function Table(props) {
   if (isLoading) return <Loading />;
 
   let transactions = data === undefined ? [] : data;
-  const bankTransactions = TransformBankTransactions(props.bankTransactions.results.responseList);
 
   if (props.bank) {
-    transactions = bankTransactions;
+    transactions = TransformBankTransactions(props.bankTransactions.results.responseList);
   }
 
   const sortedTransactions = SortingDate(transactions);
