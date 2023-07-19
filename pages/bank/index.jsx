@@ -15,7 +15,7 @@ const Bank = () => {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
   const query = router.query;
   useEffect(() => {
     console.log("q", query)
@@ -36,7 +36,7 @@ const Bank = () => {
 
   useEffect(() => {
     console.log("access", token)
-    if (token.length == 36) {
+    if (token && token.length == 36) {
       setLinkedBank();
     }
   }, [token])
