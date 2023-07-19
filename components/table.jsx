@@ -94,10 +94,10 @@ export default function Table(props) {
     data2 !== null ? JSON.parse(data2) : years[0]
   );
 
-  useEffect(() => {
-    console.log("preferred", preferred);
-    console.log(userProfile);
-  }, [preferred]);
+  // useEffect(() => {
+  //   console.log("preferred", preferred);
+  //   console.log(userProfile);
+  // }, [preferred]);
 
   useEffect(() => {
     window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
@@ -140,6 +140,10 @@ export default function Table(props) {
     transactions = TransformBankTransactions(
       props.bankTransactions.results.responseList
     );
+  }
+
+  if (selectedOpt && !props.bank) {
+    transactions = [...transactions, ...TransformBankTransactions(bankData.results.responseList)]
   }
 
   const sortedTransactions = SortingDate(transactions);

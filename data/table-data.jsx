@@ -3,6 +3,7 @@ export const LabelCategories = [
   "Transport",
   "Online Shopping",
   "Subscription",
+  "Bank"
 ];
 
 export function label(str) {
@@ -21,6 +22,10 @@ export function label(str) {
   ) : str === LabelCategories[3] ? (
     <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
       Subscription
+    </span>
+  ) : str === LabelCategories[4] ? (
+    <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+      Bank
     </span>
   ) : (
     <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
