@@ -25,8 +25,6 @@ const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 export default function Table(props) {
   const { currentUser } = useAuth();
-  const [preferred, setPreferred] = useState(false);
-  const [sync, setSync] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const [isLoading2, setIsLoading2] = useState(true);
   const [bankData, setBankData] = useState();
@@ -76,6 +74,16 @@ export default function Table(props) {
 
   const isLoading = !data && !error && !userProfile;
 
+  // Preferred Currency Local storage
+  const data4 = window.localStorage.getItem("PREFFERED");
+  const [preferred, setPreferred] = useState(
+    data4 !== null ? JSON.parse(data4) : false
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("PREFFERED", JSON.stringify(preferred));
+  }, [preferred]);
+
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
   const data2 = window.localStorage.getItem("YEAR_STATE");
@@ -86,10 +94,10 @@ export default function Table(props) {
     data2 !== null ? JSON.parse(data2) : years[0]
   );
 
-  useEffect(() => {
-    console.log("preferred", preferred);
-    console.log(userProfile);
-  }, [preferred]);
+  // useEffect(() => {
+  //   console.log("preferred", preferred);
+  //   console.log(userProfile);
+  // }, [preferred]);
 
   useEffect(() => {
     window.localStorage.setItem("MONTH_STATE", JSON.stringify(selectedMonth));
@@ -113,6 +121,16 @@ export default function Table(props) {
   };
   //Filter Mechanism End
 
+  // Sync Local Storage
+  const data3 = window.localStorage.getItem("SYNC");
+  const [selectedOpt, setSelectedOpt] = useState(
+    data3 !== null ? JSON.parse(data3) : false
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("SYNC", JSON.stringify(selectedOpt));
+  }, [selectedOpt]);
+
   // Check loading
   if (isLoading || isLoading2) return <Loading />;
 
@@ -124,10 +142,9 @@ export default function Table(props) {
     );
   }
 
-
-      console.log("synced", sync)
-    
-
+  if (selectedOpt && !props.bank) {
+    transactions = [...transactions, ...TransformBankTransactions(bankData.results.responseList)]
+  }
 
   const sortedTransactions = SortingDate(transactions);
 
@@ -168,10 +185,12 @@ export default function Table(props) {
       ) : (
         <Toggle
           desc={"Sync to Dashboard"}
-          enabled={sync}
-          setEnabled={setSync}
+          enabled={selectedOpt}
+          setEnabled={setSelectedOpt}
         />
       )}
+
+      {console.log("sdsffsfds", selectedOpt)}
 
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
