@@ -25,7 +25,6 @@ const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 
 export default function Table(props) {
   const { currentUser } = useAuth();
-  const [preferred, setPreferred] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const [isLoading2, setIsLoading2] = useState(true);
   const [bankData, setBankData] = useState();
@@ -75,6 +74,16 @@ export default function Table(props) {
 
   const isLoading = !data && !error && !userProfile;
 
+  // Preferred Currency Local storage
+  const data4 = window.localStorage.getItem("PREFFERED");
+  const [preferred, setPreferred] = useState(
+    data4 !== null ? JSON.parse(data4) : false
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("PREFFERED", JSON.stringify(preferred));
+  }, [preferred]);
+
   //Filter mechanism start
   const data1 = window.localStorage.getItem("MONTH_STATE");
   const data2 = window.localStorage.getItem("YEAR_STATE");
@@ -120,7 +129,7 @@ export default function Table(props) {
 
   useEffect(() => {
     window.localStorage.setItem("SYNC", JSON.stringify(selectedOpt));
-  }, [setSelectedOpt]);
+  }, [selectedOpt]);
 
   // Check loading
   if (isLoading || isLoading2) return <Loading />;
@@ -132,11 +141,6 @@ export default function Table(props) {
       props.bankTransactions.results.responseList
     );
   }
-
-
-      console.log("synced", sync)
-    
-
 
   const sortedTransactions = SortingDate(transactions);
 
