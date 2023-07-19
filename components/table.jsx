@@ -15,6 +15,8 @@ import { convert_preferred } from "@/lib/convert";
 import axios from "axios";
 import TransformBankTransactions from "@/functions/TransformBankTransactions";
 
+
+
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const bankFetcher = (url, token) =>
@@ -28,6 +30,7 @@ export default function Table(props) {
   const [preferred, setPreferred] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const [isLoading2, setIsLoading2] = useState(true);
+  const [bankData, setBankData] = useState();
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
@@ -49,6 +52,27 @@ export default function Table(props) {
 
   useEffect(() => {
     getUserProfile();
+  }, []);
+
+  const getBankTransactions = async () => {
+    fetch(
+      "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        setBankData(e);
+      });
+  };
+
+  useEffect(() => {
+    getBankTransactions();    
   }, []);
 
   const isLoading = !data && !error && !userProfile;

@@ -4,10 +4,49 @@ import {
   CardBody,
   Typography,
 } from "@material-tailwind/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
 
 export default function BankCard(props) {
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
   const [Link, setLink] = useState(false);
+  const [isLinked, setIsLinked] = useState(false);
+
+  const getUserProfile = async () => {
+    fetch("/api/user?userId=" + user.uid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((e) => e.json())
+      .then((e) => {
+        // setUserLinkBank(e.linkedBank);
+        setIsLinked(e.linkedBank);
+        console.log("bool:", e.linkedBank)
+        // setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
+  const changeLinked = async (isLink) => {
+    if (isLink) {
+      await fetch("/api/user?userId=" + user.uid, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({linkedBank: false}),
+      });
+    }
+    setIsLinked(!isLink)
+  }
+  
 
   return (
     <div class="p-5 flex flex-col mx-20 mb-5 items-center bg-white border border-gray-200 rounded-xl shadow md:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -37,10 +76,10 @@ export default function BankCard(props) {
           ) : (
             <button
               type="button"
-              onClick={() => setLink((prev) => !prev)}
+              onClick={() => changeLinked((prev) => prev)}
               className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              {Link ? "Unlink" : "Link Bank"}
+              {isLinked ? "Unlink" : "Link Bank"}
             </button>
           )}
         </a>
