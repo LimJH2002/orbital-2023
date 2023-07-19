@@ -15,8 +15,6 @@ import { convert_preferred } from "@/lib/convert";
 import axios from "axios";
 import TransformBankTransactions from "@/functions/TransformBankTransactions";
 
-
-
 // const fetcher = (uid) => fetch('/api/list?userId=' + uid).then(res => res.json());
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const bankFetcher = (url, token) =>
@@ -28,6 +26,7 @@ const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
 export default function Table(props) {
   const { currentUser } = useAuth();
   const [preferred, setPreferred] = useState(false);
+  const [sync, setSync] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const [isLoading2, setIsLoading2] = useState(true);
   const [bankData, setBankData] = useState();
@@ -72,7 +71,7 @@ export default function Table(props) {
   };
 
   useEffect(() => {
-    getBankTransactions();    
+    getBankTransactions();
   }, []);
 
   const isLoading = !data && !error && !userProfile;
@@ -125,6 +124,11 @@ export default function Table(props) {
     );
   }
 
+
+      console.log("synced", sync)
+    
+
+
   const sortedTransactions = SortingDate(transactions);
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
@@ -155,11 +159,17 @@ export default function Table(props) {
         </div>
       </div>
 
-      {!props.bank && (
+      {!props.bank ? (
         <Toggle
           desc={"Show Preferred Currency"}
           enabled={preferred}
           setEnabled={setPreferred}
+        />
+      ) : (
+        <Toggle
+          desc={"Sync to Dashboard"}
+          enabled={sync}
+          setEnabled={setSync}
         />
       )}
 
