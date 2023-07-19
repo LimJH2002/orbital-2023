@@ -8,14 +8,14 @@ import BankTab from "@/components/bank-tab";
 import Overview from "./overview";
 import LinkBank from "./link-bank";
 
-const access = "d3b9d813-85a5-3161-8c49-1bdca45dd834";
+const access = "07b1eef7-9939-3775-8242-05ab1e331ca0";
 
 const Bank = () => {
   const router = useRouter();
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
   const [curr, setCurr] = useState("1");
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
   const query = router.query;
   useEffect(() => {
     console.log("q", query)
@@ -36,7 +36,7 @@ const Bank = () => {
 
   useEffect(() => {
     console.log("access", token)
-    if (token == access) {
+    if (token && token.length == 36) {
       setLinkedBank();
     }
   }, [token])

@@ -133,6 +133,11 @@ export default function Table(props) {
     );
   }
 
+
+      console.log("synced", sync)
+    
+
+
   const sortedTransactions = SortingDate(transactions);
 
   const filteredSortedTransactions = sortedTransactions.filter(condition);
