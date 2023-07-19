@@ -12,6 +12,7 @@ const LinkBank = () => {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
 
+
   return (
     <div>
       <BankCard

@@ -8,7 +8,7 @@ import BankTab from "@/components/bank-tab";
 import Overview from "./overview";
 import LinkBank from "./link-bank";
 
-const access = "37f35d0c-bcfe-3d07-adc7-5537936aff59";
+const access = "d3b9d813-85a5-3161-8c49-1bdca45dd834";
 
 const Bank = () => {
   const router = useRouter();
