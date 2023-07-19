@@ -14,21 +14,21 @@ const Overview = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userLinkBank, setUserLinkBank] = useState(false);
 
-  const bankTransactions = {
-    results: {
-      success: true,
-      responseList: [
-        {
-          amount: "10",
-          debitCreditIndicator: "credit",
-          description: "Transacrtion A",
-          transactionDate: "2023-07-11",
-          month: "July",
-          currencyCode: "SGD",
-        },
-      ],
-    },
-  };
+  // const bankTransactions = {
+  //   results: {
+  //     success: true,
+  //     responseList: [
+  //       {
+  //         amount: "10",
+  //         debitCreditIndicator: "credit",
+  //         description: "Transacrtion A",
+  //         transactionDate: "2023-07-11",
+  //         month: "July",
+  //         currencyCode: "SGD",
+  //       },
+  //     ],
+  //   },
+  // };
 
   const [bankData, setBankData] = useState();
 

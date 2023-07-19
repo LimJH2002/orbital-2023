@@ -24,6 +24,8 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState("No file chosen");
   const [username, setUsername] = useState();
+  const [userBudget, setUserBudget] = useState();
+  const [userCurrency, setUserCurrency] = useState();
   const { currentUser } = useAuth();
   const [thisUid, setThisUid] = useState("");
 
@@ -35,19 +37,24 @@ export default function Profile() {
 
   const getUsername = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/user?userId=" + thisUid, {
+    const response = await fetch("/api/user?userId=" + user.uid, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     }).then((e) => e.json());
-    setUsername(response);
+    setUsername(response.username);
+    setUserBudget(response.budget);
+    setUserCurrency(response.currency);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getUsername();
-  }, [thisUid]);
+    if (user) {
+      getUsername();
+    }
+    
+  }, [user]);
 
   const [formData, setFormData] = useReducer(formReducer, {
     // currency: "SGD",
@@ -60,17 +67,17 @@ export default function Profile() {
         : event.target.files[0].name
     );
   }
-  const usernameData = username ? username.username : "";
-  const userBudget = username
-    ? username.budget
-      ? username.budget
-      : "1000"
-    : "";
-  const userCurrency = username
-    ? username.currency
-      ? username.currency
-      : "SGD"
-    : "";
+  // const usernameData = username ? username.username : "";
+  // const userBudget = username
+  //   ? username.budget
+  //     ? username.budget
+  //     : "1000"
+  //   : "";
+  // const userCurrency = username
+  //   ? username.currency
+  //     ? username.currency
+  //     : "SGD"
+  //   : "";
 
   // const fetcher = (...args) => fetch(...args).then((res) => res.json());
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -173,7 +180,7 @@ export default function Profile() {
                         onChange={setFormData}
                         autoComplete="username"
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                        defaultValue={usernameData}
+                        defaultValue={username}
                       />
                     </div>
                   </div>
