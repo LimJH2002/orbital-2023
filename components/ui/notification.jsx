@@ -4,7 +4,6 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function Notification(props) {
-
   return (
     <>
       {/* Global notification live region, render this permanently at the end of the document */}
@@ -35,10 +34,14 @@ export default function Notification(props) {
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">
-                      Successfully saved!
+                      {props.message === null
+                        ? "Successfully saved!"
+                        : props.message}
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      You can now view your news in the saved tab.
+                      {props.other === null
+                        ? "You can now view your news in the saved tab."
+                        : props.other}
                     </p>
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">

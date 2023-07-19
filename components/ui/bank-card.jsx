@@ -11,7 +11,6 @@ import { getAuth } from "firebase/auth";
 export default function BankCard(props) {
   const auth = getAuth();
   const [user, loading] = useAuthState(auth);
-  const [Link, setLink] = useState(false);
   const [isLinked, setIsLinked] = useState(false);
 
   const getUserProfile = async () => {
@@ -25,7 +24,7 @@ export default function BankCard(props) {
       .then((e) => {
         // setUserLinkBank(e.linkedBank);
         setIsLinked(e.linkedBank);
-        console.log("bool:", e.linkedBank)
+        console.log("bool:", e.linkedBank);
         // setIsLoading(false);
       });
   };
@@ -41,12 +40,11 @@ export default function BankCard(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({linkedBank: false}),
+        body: JSON.stringify({ linkedBank: false }),
       });
     }
-    setIsLinked(!isLink)
-  }
-  
+    setIsLinked(!isLink);
+  };
 
   return (
     <div class="p-5 flex flex-col mx-20 mb-5 items-center bg-white border border-gray-200 rounded-xl shadow md:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -64,25 +62,50 @@ export default function BankCard(props) {
           <br />
           View Transactions, Label Transactions.
         </p>
-        <a href={props.redirect} className="inline-block">
-          {props.soon ? (
-            <button
-              type="button"
-              // onClick={() => setLink((prev) => !prev)}
-              className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
-            >
-              Coming Soon
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => changeLinked((prev) => prev)}
-              className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              {isLinked ? "Unlink" : "Link Bank"}
-            </button>
-          )}
-        </a>
+        {!isLinked ? (
+          <a href={props.redirect} className="inline-block">
+            {props.soon ? (
+              <button
+                type="button"
+                // onClick={() => setLink((prev) => !prev)}
+                className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
+              >
+                Coming Soon
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => changeLinked((prev) => prev)}
+                className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Link Bank
+              </button>
+            )}
+          </a>
+        ) : (
+          <a className="inline-block">
+            {props.soon ? (
+              <button
+                type="button"
+                // onClick={() => setLink((prev) => !prev)}
+                className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
+              >
+                Coming Soon
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  changeLinked((prev) => prev);
+                  props.setShow(true);
+                }}
+                className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Unlink
+              </button>
+            )}
+          </a>
+        )}
       </div>
     </div>
   );
