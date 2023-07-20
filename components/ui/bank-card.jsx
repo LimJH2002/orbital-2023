@@ -1,9 +1,3 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
@@ -32,6 +26,10 @@ export default function BankCard(props) {
   useEffect(() => {
     getUserProfile();
   }, []);
+
+  const resetSync = () => {
+    window.localStorage.setItem("SYNC", JSON.stringify(false));
+  };
 
   const changeLinked = async (isLink) => {
     if (isLink) {
@@ -96,6 +94,7 @@ export default function BankCard(props) {
                 type="button"
                 onClick={() => {
                   changeLinked((prev) => prev);
+                  resetSync();
                   props.setShow(true);
                 }}
                 className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

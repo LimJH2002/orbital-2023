@@ -168,7 +168,11 @@ export default function Table(props) {
       <div className="sm:flex sm:items-center sm:justify-end">
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">
-            {props.bank ? "Bank Transactions" : "Transactions"}
+            {props.bank
+              ? "Bank Transactions"
+              : selectedOpt
+              ? "Combined Transactions"
+              : "Transactions"}
           </h1>
         </div>
         <div className="flex mt-4 sm:mt-0 sm:ml-16">

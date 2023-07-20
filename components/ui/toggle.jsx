@@ -8,10 +8,10 @@ function classNames(...classes) {
 export default function Toggle(props) {
 
   return (
-    <Switch.Group as="div" className="flex justify-end mt-3">
+    <Switch.Group as="div" className="flex justify-start mt-3">
       <Switch.Label
         as="span"
-        className="text-sm font-medium leading-6 text-gray-900 mx-3"
+        className="text-sm font-medium leading-6 text-gray-900 mr-3"
         passive
       >
         {props.desc}
