@@ -21,8 +21,7 @@ export default function Profile() {
   const auth = getAuth();
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState("No file chosen");
   const [username, setUsername] = useState();
   const [userBudget, setUserBudget] = useState();
@@ -54,7 +53,6 @@ export default function Profile() {
     if (user) {
       getUsername();
     }
-    
   }, [user]);
 
   const [formData, setFormData] = useReducer(formReducer, {
@@ -68,10 +66,17 @@ export default function Profile() {
         : event.target.files[0].name
     );
   }
-
-  const usernameData = username ? username.username : "";
-  const userBudget = username ? (username.budget ? username.budget : "0") : "";
-  const userCurrency = username ? (username.currency ? username.currency : "SGD") : "";
+  // const usernameData = username ? username.username : "";
+  // const userBudget = username
+  //   ? username.budget
+  //     ? username.budget
+  //     : "1000"
+  //   : "";
+  // const userCurrency = username
+  //   ? username.currency
+  //     ? username.currency
+  //     : "SGD"
+  //   : "";
 
   // const fetcher = (...args) => fetch(...args).then((res) => res.json());
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -96,7 +101,6 @@ export default function Profile() {
   };
 
   if (loading || isLoading) return <Loading />;
-  console.log("userDataaaaa", auth.currentUser);
 
   if (!user) {
     router.push("/login");
@@ -229,7 +233,6 @@ export default function Profile() {
               <div className="mt-8 flex">
                 <button
                   type="submit"
-                  onClick={() => router.reload()}
                   className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 >
                   Save
