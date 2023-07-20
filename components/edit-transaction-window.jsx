@@ -6,7 +6,7 @@ export default function EditTransaction({ transaction }) {
   return (
     <div>
       <button
-        className="text-indigo-600 hover:text-indigo-900 px-3"
+        className="text-indigo-600 hover:text-indigo-900 pr-6"
         onClick={() => setVisible(true)}
       >
         Edit Transaction

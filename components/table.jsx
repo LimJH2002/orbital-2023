@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+import TransactionItem from "./transaction-item";
 
 import { convert_preferred } from "@/lib/convert";
 
@@ -28,10 +29,18 @@ export default function Table(props) {
   const [userProfile, setUserProfile] = useState();
   const [isLoading2, setIsLoading2] = useState(true);
   const [bankData, setBankData] = useState();
+  const [exclude, setExclude] = useState([]);
   // console.log(currentUser ? currentUser.uid : 10);
   const uid = currentUser ? currentUser.uid : "master";
 
   const { data, error } = useSWR("/api/list?userId=" + uid, fetcher);
+
+  const toggleExclude = (idx) => {
+    setExclude((prevExclude) => ({
+      ...prevExclude,
+      [idx]: !prevExclude[idx],
+    }));
+  };
 
   const getUserProfile = async () => {
     fetch("/api/user?userId=" + uid, {
@@ -143,7 +152,10 @@ export default function Table(props) {
   }
 
   if (selectedOpt && !props.bank) {
-    transactions = [...transactions, ...TransformBankTransactions(bankData.results.responseList)]
+    transactions = [
+      ...transactions,
+      ...TransformBankTransactions(bankData.results.responseList),
+    ];
   }
 
   const sortedTransactions = SortingDate(transactions);
@@ -190,8 +202,6 @@ export default function Table(props) {
         />
       )}
 
-      {console.log("sdsffsfds", selectedOpt)}
-
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -237,43 +247,25 @@ export default function Table(props) {
                 <tbody className="bg-white">
                   {transactions &&
                     filteredSortedTransactions.map(
-                      (transaction, transactionIdx) => (
-                        <tr
-                          key={transaction.title}
-                          className={
-                            transactionIdx % 2 === 0 ? undefined : "bg-gray-50"
-                          }
-                        >
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                            {transaction.title}
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {transaction.type}
-                          </td>
-                          <td className=" px-3 py-4 text-sm">
-                            {label(transaction.category)}
-                          </td>
-                          {/* Default value for currency is SGD */}
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {/* {transaction.currency || "SGD"} {transaction.amount} */}
-                            {userProfile &&
-                              convert_preferred(
-                                preferred,
-                                userProfile.currency,
-                                transaction.currency,
-                                transaction.amount
-                              )}
-                          </td>
-                          <td className="whitespace-nowrap py-4 text-sm text-gray-500">
-                            {transaction.date}
-                          </td>
-                          <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            {!props.bank && (
-                              <EditTransaction transaction={transaction} />
-                            )}
-                          </td>
-                        </tr>
-                      )
+                      (transaction, transactionIdx) => {
+                        if (!exclude[transactionIdx]) {
+                          return (
+                            <TransactionItem
+                              transaction={transaction}
+                              transactionIdx={transactionIdx}
+                              userProfile={userProfile}
+                              convert_preferred={convert_preferred}
+                              preferred={preferred}
+                              bank={props.bank}
+                              selectedOpt={selectedOpt}
+                              toggleExclude={() =>
+                                toggleExclude(transactionIdx)
+                              }
+                            />
+                          );
+                        }
+                        return null;
+                      }
                     )}
                 </tbody>
               </table>
