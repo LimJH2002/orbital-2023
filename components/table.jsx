@@ -268,7 +268,7 @@ export default function Table(props) {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            {!props.bank && (
+                            {(!props.bank && transaction.category !== "Bank") && (
                               <EditTransaction transaction={transaction} />
                             )}
                           </td>
