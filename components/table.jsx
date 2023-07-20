@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { months, years } from "@/data/month-year";
 import SortingDate from "@/functions/Sorting";
 import Toggle from "./ui/toggle";
+import Exclude from "./exclude";
 
 import { convert_preferred } from "@/lib/convert";
 
@@ -143,7 +144,10 @@ export default function Table(props) {
   }
 
   if (selectedOpt && !props.bank) {
-    transactions = [...transactions, ...TransformBankTransactions(bankData.results.responseList)]
+    transactions = [
+      ...transactions,
+      ...TransformBankTransactions(bankData.results.responseList),
+    ];
   }
 
   const sortedTransactions = SortingDate(transactions);
@@ -189,8 +193,6 @@ export default function Table(props) {
           setEnabled={setSelectedOpt}
         />
       )}
-
-      {console.log("sdsffsfds", selectedOpt)}
 
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -268,7 +270,8 @@ export default function Table(props) {
                             {transaction.date}
                           </td>
                           <td className="whitespace-nowrap py-4 text-right text-sm font-medium">
-                            {(!props.bank && transaction.category !== "Bank") && (
+                            {props.bank && selectedOpt && <Exclude />}
+                            {!props.bank && transaction.category !== "Bank" && (
                               <EditTransaction transaction={transaction} />
                             )}
                           </td>
