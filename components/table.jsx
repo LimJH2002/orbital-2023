@@ -1,5 +1,3 @@
-import { label } from "@/data/table-data";
-import EditTransaction from "./edit-transaction-window";
 import NewTransaction from "./new-transaction-window";
 import { useAuth } from "@/context/AuthContext";
 import useSWR from "swr";
