@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-export default function Notification(props) {
+export default function NotificationUnlink(props) {
   return (
     <>
       {/* Global notification live region, render this permanently at the end of the document */}
@@ -34,14 +34,10 @@ export default function Notification(props) {
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">
-                      {props.message === null
-                        ? "Successfully saved!"
-                        : props.message}
+                      Successfully Unlinked!
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
-                      {props.other === null
-                        ? "You can now view your news in the saved tab."
-                        : props.other}
+                      You can link back anytime!
                     </p>
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">

@@ -4,8 +4,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
 import BankCard from "@/components/ui/bank-card";
-import Notification from "@/components/ui/notification";
-import { set } from "date-fns";
+import NotificationUnlink from "@/components/ui/notification-unlink";
 
 const access = "37f35d0c-bcfe-3d07-adc7-5537936aff59";
 
@@ -17,7 +16,7 @@ const LinkBank = () => {
 
   return (
     <div>
-      <Notification
+      <NotificationUnlink
         show={show}
         setShow={setShow}
         message="Succesfully Unlinked"

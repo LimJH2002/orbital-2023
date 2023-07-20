@@ -5,7 +5,7 @@ import NewsItem from "@/components/news-item";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
-import Notification from "@/components/ui/notification";
+import Notification from "@/components/ui/notification-news";
 
 export default function NewsBlog() {
   const [data, setData] = useState(null);

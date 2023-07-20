@@ -5,7 +5,7 @@ import NewsItem from "@/components/news-item";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
-import Notification from "@/components/ui/notification";
+import NotificationNews from "@/components/ui/notification-news";
 import { useAuth } from "@/context/AuthContext";
 import { TbNewsOff } from "react-icons/tb";
 
@@ -50,7 +50,10 @@ export default function SavedNews(props) {
 
   return (
     <div className="pb-20 px-20">
-      <Notification show={show} setShow={setShow} />
+      <NotificationNews
+        show={show}
+        setShow={setShow}
+      />
       {data.length === 0 ? (
         <div className="mt-4">
           <button
