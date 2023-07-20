@@ -1,15 +1,11 @@
-import { useState } from "react";
-
 export default function Exclude(props) {
-  const [exclude, setExclude] = useState(false);
-
   return (
     <div>
       <button
         className="text-indigo-600 hover:text-indigo-900 pr-8"
-        onClick={() => setExclude(prev => !prev)}
+        onClick={() => props.setExclude(prev => !prev)}
       >
-        {exclude ? "Include" : "Exclude"}
+        {props.exclude ? "Include" : "Exclude"}
       </button>
     </div>
   );
