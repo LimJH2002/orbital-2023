@@ -325,18 +325,41 @@ export default function Profile() {
           <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
             <div>
               <h2 className="text-base font-semibold leading-7 text-white">
+                Reset Account
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                Missed the feeling when you first logged in?
+              </p>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                You can still login using your existing credentials.
+              </p>
+            </div>
+
+            <form className="items-center flex md:col-span-2">
+              <button
+                type="submit"
+                className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
+              >
+                Yes, reset my account
+              </button>
+            </form>
+          </div>
+
+          <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+            <div>
+              <h2 className="text-base font-semibold leading-7 text-white">
                 Delete account
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-400">
                 Breaking up with us?
               </p>
               <p className="mt-1 text-sm leading-6 text-gray-400">
-                This action is not reversible. All information will be deleted
-                forever.
+                This action is not reversible. All existing information will be
+                deleted forever.
               </p>
             </div>
 
-            <form className="items-start flex md:col-span-2">
+            <form className="items-center flex md:col-span-2">
               <button
                 type="submit"
                 className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
