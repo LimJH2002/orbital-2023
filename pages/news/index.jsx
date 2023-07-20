@@ -28,7 +28,7 @@ const News = () => {
   return (
     <div>
       <NewsTab id={curr} setFunc={handleState} />
-      {curr == "1" ? <NewsBlog /> : <SavedNews />}
+      {curr == "1" ? <NewsBlog /> : <SavedNews setFunc={handleState} />}
     </div>
   );
 };
