@@ -131,13 +131,13 @@ export default function MarketOverviewWidget() {
                   setShow(true);
                 }
               }}
-              className="rounded-md bg-indigo-600 px-5 mx-3 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-indigo-600 px-5 ml-3 mt-2 pt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Add Stock
             </div>
           </div>
         </form>
-        <StocksTable stocks={symbols} setSymbols={setSymbols} />
+        <StocksTable className="mt-5" stocks={symbols} setSymbols={setSymbols} />
       </div>
     </div>
   );
