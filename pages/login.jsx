@@ -71,7 +71,7 @@ export default function Login() {
               <HiAtSymbol size={25} />
             </span>
           </div>
-          {/* {formik.errors.email && formik.touched.email ? <span className="text-rose-500">{formik.errors.email}</span> : <></>} */}
+          {formik.errors.email && formik.touched.email ? <span className="text-rose-500">{formik.errors.email}</span> : <></>}
           {/* <div className={styles.input_group}> */}
           <div
             className={`${styles.input_group} ${
@@ -94,7 +94,7 @@ export default function Login() {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {/* {formik.errors.password && formik.touched.password ? <span className="text-rose-500">{formik.errors.password}</span> : <></>} */}
+          {formik.errors.password && formik.touched.password ? <span className="text-rose-500">{formik.errors.password}</span> : <></>}
 
           <div className="input-button`">
             <button type="submit" className={styles.button}>
