@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Loading from "../loading";
 import StocksTable from "@/components/stocks-table";
+import { checkDuplicates } from "@/functions/Stocks";
+import NotificationStocks from "@/components/ui/notification-addStocks";
 
 const MarketOverview = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.MarketOverview),
@@ -11,6 +13,7 @@ const MarketOverview = dynamic(
 export default function MarketOverviewWidget() {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
+  const [show, setShow] = useState(false);
 
   const std = [
     {
@@ -25,13 +28,16 @@ export default function MarketOverviewWidget() {
   ];
 
   // Symbols Local Storage
-  const data = window.localStorage.getItem("SYMBOLS");
-  const [symbols, setSymbols] = useState(
-    data !== null ? JSON.parse(data) : false
-  );
+  let data = undefined;
+
+  if (typeof window !== "undefined") {
+    data = window.localStorage.getItem("SYMBOLS");
+  }
+
+  const [symbols, setSymbols] = useState(data ? JSON.parse(data) : std);
 
   useEffect(() => {
-    window.localStorage.setItem("PREFFERED", JSON.stringify(symbols));
+    window.localStorage.setItem("SYMBOLS", JSON.stringify(symbols));
   }, [symbols]);
 
   useEffect(() => {
@@ -53,6 +59,7 @@ export default function MarketOverviewWidget() {
 
   return (
     <div className="mx-20 flex flex-row">
+      <NotificationStocks show={show} setShow={setShow} />
       <MarketOverview
         widgetProps={{
           colorTheme: "dark",
@@ -115,14 +122,19 @@ export default function MarketOverviewWidget() {
                 placeholder="Stock Symbol"
               />
             </div>
-            <button
-              onClick={() =>
-                setSymbols((prev) => [...prev, { s: "NYSE:AMZN" }])
-              }
+            <div
+              onClick={() => {
+                if (!checkDuplicates("NYSE:AMZN", symbols)) {
+                  setSymbols((prev) => [...prev, { s: "NYSE:AMZN" }]);
+                  setShow(false);
+                } else {
+                  setShow(true);
+                }
+              }}
               className="rounded-md bg-indigo-600 px-5 mx-3 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Add Stock
-            </button>
+            </div>
           </div>
         </form>
         <StocksTable stocks={symbols} setSymbols={setSymbols} />
