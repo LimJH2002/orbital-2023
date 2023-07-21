@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Loading from "../loading";
+import StocksTable from "@/components/stocks-table";
 
 const MarketOverview = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.MarketOverview),
@@ -115,7 +116,7 @@ export default function MarketOverviewWidget() {
             </div>
             <button
               onClick={() =>
-                setSymbols((prev) => [...prev, { s: "NASDAQ:AMZN" }])
+                setSymbols((prev) => [...prev, { s: "NYSE:AMZN" }])
               }
               className="rounded-md bg-indigo-600 px-5 mx-3 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
@@ -123,7 +124,7 @@ export default function MarketOverviewWidget() {
             </button>
           </div>
         </form>
-        <div>Hiiii</div>
+        <StocksTable stocks={symbols} setSymbols={setSymbols} />
       </div>
     </div>
   );
