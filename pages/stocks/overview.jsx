@@ -14,6 +14,8 @@ export default function MarketOverviewWidget() {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
   const [show, setShow] = useState(false);
+  const [selectedExchange, setSelectedExchange] = useState("NASDAQ");
+  const [inputSymbol, setInputSymbol] = useState("");
 
   const std = [
     {
@@ -26,6 +28,24 @@ export default function MarketOverviewWidget() {
       s: "NYSE:BABA",
     },
   ];
+
+  const handleExchangeChange = (e) => {
+    setSelectedExchange(e.target.value);
+  };
+
+  const handleSymbolChange = (e) => {
+    setInputSymbol(e.target.value);
+  };
+
+  const handleAddStock = () => {
+    const newStock = `${selectedExchange}:${inputSymbol}`;
+    if (!checkDuplicates(newStock, symbols)) {
+      setSymbols((prev) => [...prev, { s: newStock }]);
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+  };
 
   // Symbols Local Storage
   let data = undefined;
@@ -108,6 +128,7 @@ export default function MarketOverviewWidget() {
                   id="exchange"
                   name="exchange"
                   autoComplete="exchange"
+                  onChange={handleExchangeChange}
                   className="h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                 >
                   <option>NASDAQ</option>
@@ -118,26 +139,24 @@ export default function MarketOverviewWidget() {
                 type="text"
                 name="symbol"
                 id="symbol"
+                onChange={handleSymbolChange}
                 className="block w-full rounded-md border-0 pl-36 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder="Stock Symbol"
               />
             </div>
             <div
-              onClick={() => {
-                if (!checkDuplicates("NYSE:AMZN", symbols)) {
-                  setSymbols((prev) => [...prev, { s: "NYSE:AMZN" }]);
-                  setShow(false);
-                } else {
-                  setShow(true);
-                }
-              }}
+              onClick={handleAddStock}
               className="rounded-md bg-indigo-600 px-5 ml-3 mt-2 pt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Add Stock
             </div>
           </div>
         </form>
-        <StocksTable className="mt-5" stocks={symbols} setSymbols={setSymbols} />
+        <StocksTable
+          className="mt-5"
+          stocks={symbols}
+          setSymbols={setSymbols}
+        />
       </div>
     </div>
   );
