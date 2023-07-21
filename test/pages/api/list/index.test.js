@@ -7,7 +7,7 @@ import { createMocks } from 'node-mocks-http';
 // const createMocks = require('node-mocks-http')
 
 describe("GET /api/list", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         
         const { req, res } = createMocks({
             method: 'GET',
@@ -17,26 +17,28 @@ describe("GET /api/list", () => {
               
             }
         });
+        // res.on('end', () => {
+        //     expect(1).toBe(1)
+        // });
         await handler(req, res);
 
-        expect(res._getStatusCode()).toBe(200);
-        
+        expect(res._getStatusCode()).toBe(200);        
     });
     
-    it("return with a correct format", async () => {
-        const { req, res } = createMocks({
-            method: 'GET',
-            query: {
-                userId: "master",
+    // it("return with a correct format", async () => {
+    //     const { req, res } = createMocks({
+    //         method: 'GET',
+    //         query: {
+    //             userId: "master",
               
-            }
-        });
-        await handler(req, res);
-        // console.log(res.body)
+    //         }
+    //     });
+    //     await handler(req, res);
+    //     // console.log(res.body)
         
-    })
+    // })
 
-    it("should response with a 404 status (invalid userId)", async () => {
+    it("Invalid userId: should response with a 404 status", async () => {
         const { req, res } = createMocks({
             method: 'GET',
             // params: { userId: "master" },
@@ -53,7 +55,7 @@ describe("GET /api/list", () => {
 })
 
 describe("POST /api/list", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'POST',
             query: {
@@ -75,7 +77,7 @@ describe("POST /api/list", () => {
     });
     
 
-    it("should response with a 404 status (missing body)", async () => {
+    it("Invalid request (missing body): should response with a 404 status (missing body)", async () => {
         const { req, res } = createMocks({
             method: 'POST',
             query: {
@@ -90,7 +92,7 @@ describe("POST /api/list", () => {
 })
 
 describe("PATCH /api/list", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'PATCH',
             query: {
@@ -113,7 +115,7 @@ describe("PATCH /api/list", () => {
     });
     
 
-    it("should response with a 404 status (missing body)", async () => {
+    it("Invalid request (missing body): should response with a 404 status", async () => {
         const { req, res } = createMocks({
             method: 'PATCH',
             query: {
@@ -128,7 +130,7 @@ describe("PATCH /api/list", () => {
 })
 
 describe("PUT /api/list", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'PUT',
             query: {
@@ -151,7 +153,7 @@ describe("PUT /api/list", () => {
     });
     
 
-    it("should response with a 404 status (missing body)", async () => {
+    it("Invalid request (missing body): should response with a 404 status", async () => {
         const { req, res } = createMocks({
             method: 'PUT',
             query: {
