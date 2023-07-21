@@ -1,4 +1,8 @@
 export default function StocksTable(props) {
+  const handleRemoveItem = (ele) => {
+    props.setSymbols(props.stocks.filter((item) => item.s !== ele.s));
+  };
+
   return (
     <div className="bg-gray-900">
       <div className="mx-auto">
@@ -33,7 +37,7 @@ export default function StocksTable(props) {
                           scope="col"
                           className="relative py-3.5 pl-3 pr-4 sm:pr-0"
                         >
-                          <span className="sr-only">Edit</span>
+                          <span className="sr-only">Remove</span>
                         </th>
                       </tr>
                     </thead>
@@ -49,10 +53,11 @@ export default function StocksTable(props) {
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                             <a
                               href="#"
+                              onClick={() => handleRemoveItem(stock)}
                               className="text-indigo-400 hover:text-indigo-300"
                             >
                               Remove
-                              <span className="sr-only">, {stock.s}</span>
+                              <span className="sr-only">{stock.s}</span>
                             </a>
                           </td>
                         </tr>
