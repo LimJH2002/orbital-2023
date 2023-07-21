@@ -10,6 +10,7 @@ import ForexCrossRatesWidget from "./forex-cross-rates";
 import CryptoMarketWidget from "./crypto-market";
 import RealTimeChartWidget from "./real-time-chart";
 import ComingSoon from "@/components/coming-soon";
+import Overview from "./overview";
 
 const Main = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const Main = () => {
       <div>
         <StocksTab id={curr} setFunc={handleState} />
         {curr == "1" ? (
-          <ComingSoon />
+          <Overview />
         ) : curr == "2" ? (
           <RealTimeChartWidget />
         ) : curr == "3" ? (
