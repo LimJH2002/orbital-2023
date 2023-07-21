@@ -11,6 +11,7 @@ const MarketOverview = dynamic(
 export default function MarketOverviewWidget() {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
+
   const std = [
     {
       s: "NASDAQ:AAPL",
@@ -24,17 +25,13 @@ export default function MarketOverviewWidget() {
   ];
 
   // Symbols Local Storage
-  const [symbols, setSymbols] = useState(std);
+  const data = window.localStorage.getItem("SYMBOLS");
+  const [symbols, setSymbols] = useState(
+    data !== null ? JSON.parse(data) : false
+  );
 
   useEffect(() => {
-    const data = window.localStorage.getItem("SYMBOLS");
-    if (data) {
-      setSymbols(JSON.parse(data));
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("SYMBOLS", JSON.stringify(symbols));
+    window.localStorage.setItem("PREFFERED", JSON.stringify(symbols));
   }, [symbols]);
 
   useEffect(() => {
