@@ -24,10 +24,14 @@ export default function MarketOverviewWidget() {
   ];
 
   // Symbols Local Storage
-  const data = window.localStorage.getItem("SYMBOLS");
-  const [symbols, setSymbols] = useState(
-    data !== null ? JSON.parse(data) : std
-  );
+  const [symbols, setSymbols] = useState(std);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("SYMBOLS");
+    if (data) {
+      setSymbols(JSON.parse(data));
+    }
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem("SYMBOLS", JSON.stringify(symbols));
