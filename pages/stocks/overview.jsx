@@ -9,8 +9,8 @@ const MarketOverview = dynamic(
 );
 
 export default function MarketOverviewWidget() {
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState(null);
   const std = [
     {
       s: "NASDAQ:AAPL",
@@ -48,7 +48,7 @@ export default function MarketOverviewWidget() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (height === 0 || width === 0) return <Loading />;
+  if (height === null || width === null) return <Loading />;
 
   return (
     <div className="mx-20 flex flex-row">
