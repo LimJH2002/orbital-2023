@@ -22,7 +22,7 @@ export default function MarketOverviewWidget() {
     },
   ];
 
-  // Preferred Currency Local storage
+  // Symbols Local Storage
   const data = window.localStorage.getItem("SYMBOLS");
   const [symbols, setSymbols] = useState(
     data !== null ? JSON.parse(data) : std
@@ -47,7 +47,7 @@ export default function MarketOverviewWidget() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (height === 0 || width === 0) return <Loading />; // or a loading spinner, etc.
+  if (height === 0 || width === 0) return <Loading />;
 
   return (
     <div className="mx-20 flex flex-row">
@@ -112,17 +112,14 @@ export default function MarketOverviewWidget() {
               placeholder="Enter Stock Symbol"
             />
           </div>
-          <div
+          <button
             onClick={() =>
-              setSymbols((prev) => {
-                prev.push({ s: "NASDAQ:AMZN" });
-                console.log(prev);
-              })
+              setSymbols((prev) => [...prev, { s: "NASDAQ:AMZN" }])
             }
             className="rounded-md bg-indigo-600 px-5 mx-3 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Add Stock
-          </div>
+          </button>
         </div>
       </form>
     </div>
