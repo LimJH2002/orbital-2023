@@ -10,6 +10,27 @@ const MarketOverview = dynamic(
 export default function MarketOverviewWidget() {
   const [height, setHeight] = useState(0);
   const [width, setWidth] = useState(0);
+  const std = [
+    {
+      s: "NASDAQ:AAPL",
+    },
+    {
+      s: "NASDAQ:TSLA",
+    },
+    {
+      s: "NYSE:BABA",
+    },
+  ];
+
+  // Preferred Currency Local storage
+  const data = window.localStorage.getItem("SYMBOLS");
+  const [symbols, setSymbols] = useState(
+    data !== null ? JSON.parse(data) : std
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("SYMBOLS", JSON.stringify(symbols));
+  }, [symbols]);
 
   useEffect(() => {
     setHeight(parseInt(window.innerHeight * 0.8));
@@ -54,17 +75,7 @@ export default function MarketOverviewWidget() {
           tabs: [
             {
               title: "Stocks",
-              symbols: [
-                {
-                  s: "NASDAQ:AAPL",
-                },
-                {
-                  s: "NASDAQ:TSLA",
-                },
-                {
-                  s: "NYSE:BABA",
-                },
-              ],
+              symbols: symbols,
             },
           ],
         }}
@@ -81,7 +92,7 @@ export default function MarketOverviewWidget() {
           <div className="relative mt-2 rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 flex items-center">
               <label htmlFor="country" className="sr-only">
-                Country
+                Symbols
               </label>
               <select
                 id="exchange"
@@ -101,12 +112,17 @@ export default function MarketOverviewWidget() {
               placeholder="Enter Stock Symbol"
             />
           </div>
-          <button
-            type="submit"
+          <div
+            onClick={() =>
+              setSymbols((prev) => {
+                prev.push({ s: "NASDAQ:AMZN" });
+                console.log(prev);
+              })
+            }
             className="rounded-md bg-indigo-600 px-5 mx-3 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Add Stock
-          </button>
+          </div>
         </div>
       </form>
     </div>
