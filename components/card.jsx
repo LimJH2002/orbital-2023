@@ -10,9 +10,14 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
 import Loading from "@/pages/loading";
 import MonthName from "@/functions/MonthName";
+import { calculate_summary } from "@/lib/summary";
+import TransformBankTransactions from "@/functions/TransformBankTransactions";
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const currMonth = MonthName();
+const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
+
 
 const desc = [
   "Money left for " + currMonth,
@@ -55,6 +60,16 @@ export default function Card(props) {
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
   const [fetched, setFetched] = useState(false);
+  const [bankData, setBankData] = useState();
+
+  const data3 = window.localStorage.getItem("SYNC");
+  const [selectedOpt, setSelectedOpt] = useState(
+    data3 !== null ? JSON.parse(data3) : false
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("SYNC", JSON.stringify(selectedOpt));
+  }, [selectedOpt]);
 
   useEffect(() => {
     if (currentUser) {
@@ -62,6 +77,27 @@ export default function Card(props) {
       setFlag(true);
     }
   }, [currentUser]);
+
+  const getBankTransactions = async () => {
+    fetch(
+      "/api/bank?sessionToken=OAuth2INB 1e28b59170ddee9e8676d02c951de80a&accountId=12345678&fromDate=01-01-2001&toDate=07-07-2023",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        setBankData(e);
+      });
+  };
+
+  useEffect(() => {
+    getBankTransactions();
+  }, []);
 
   const getSummary = async () => {
     const response = await fetch("/api/dashboard?userId=" + uid, {
@@ -72,10 +108,23 @@ export default function Card(props) {
     }).then((e) => e.json());
     const newSummary = summary;
     const currency = response.currency;
-    newSummary[0].amount = currency + " " + response.budgetLeft;
-    newSummary[1].amount = currency + " " + response.moneyIn;
-    newSummary[2].amount = currency + " " + response.moneyOut;
-    newSummary[3].amount = currency + " " + response.daily;
+    // console.log(selectedOpt, bankData)
+    if (!selectedOpt || !bankData) {
+      console.log("true", selectedOpt, bankData)
+      newSummary[0].amount = currency + " " + response.budgetLeft;
+      newSummary[1].amount = currency + " " + response.moneyIn;
+      newSummary[2].amount = currency + " " + response.moneyOut;
+      newSummary[3].amount = currency + " " + response.daily;
+    } else {
+      console.log(selectedOpt, bankData)
+      const sum = calculate_summary(response, TransformBankTransactions(bankData.results.responseList), currency, selectedOpt);
+      console.log(sum)
+      newSummary[0].amount = currency + " " + sum.budgetLeft;
+      newSummary[1].amount = currency + " " + sum.moneyIn;
+      newSummary[2].amount = currency + " " + sum.moneyOut;
+      newSummary[3].amount = currency + " " + sum.daily;
+    }
+    
     setFetched(true);
     // setSummary(() => newSummary);
     setSummary(newSummary);
@@ -85,7 +134,7 @@ export default function Card(props) {
     if (flag) {
       getSummary();
     }
-  });
+  }, [selectedOpt, bankData]);
 
   if (!fetched) return <Loading />;
 
