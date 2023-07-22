@@ -4,9 +4,9 @@ export default function StocksTable(props) {
   };
 
   return (
-    <div className="bg-gray-900 mt-9">
+    <div className="bg-gray-900 mt-9 rounded-xl">
       <div className="mx-auto">
-        <div className="bg-gray-900 py-10">
+        <div className="py-10">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
