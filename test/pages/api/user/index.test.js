@@ -2,7 +2,7 @@ import handler from '../../../../pages/api/user/index';
 import { createMocks } from 'node-mocks-http';
 
 describe("GET /api/user", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'GET',
             query: {
@@ -17,7 +17,7 @@ describe("GET /api/user", () => {
 })
 
 describe("POST /api/user", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'POST',
             query: {
@@ -33,7 +33,7 @@ describe("POST /api/user", () => {
         
     });
     
-    it("should response with a 404 status", async () => {
+    it("Invalid request(missing body): should response with a 404 status", async () => {
         const { req, res } = createMocks({
             method: 'POST',
             query: {

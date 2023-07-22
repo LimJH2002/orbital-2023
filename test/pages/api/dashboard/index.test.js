@@ -2,7 +2,7 @@ import handler from '../../../../pages/api/dashboard/index';
 import { createMocks } from 'node-mocks-http';
 
 describe("GET /api/dashboard", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'GET',
             query: {
@@ -17,7 +17,7 @@ describe("GET /api/dashboard", () => {
 })
 
 describe("PATCH /api/dashboard", () => {
-    it("should response with a 200 status", async () => {
+    it("Valid request: should response with a 200 status", async () => {
         const { req, res } = createMocks({
             method: 'PATCH',
             query: {
@@ -32,7 +32,7 @@ describe("PATCH /api/dashboard", () => {
         
     });
     
-    it("should response with a 404 status", async () => {
+    it("Missing body: should response with a 404 status", async () => {
         const { req, res } = createMocks({
             method: 'PATCH',
             query: {
