@@ -17,6 +17,7 @@ export default function MarketOverviewWidget() {
   const [show, setShow] = useState(false);
   const [selectedExchange, setSelectedExchange] = useState("NASDAQ");
   const [inputSymbol, setInputSymbol] = useState("");
+  const [firstRender, setFirstRender] = useState(true);
 
   const std = [
     {
@@ -32,16 +33,19 @@ export default function MarketOverviewWidget() {
 
   const handleExchangeChange = (e) => {
     setSelectedExchange(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSymbolClick = (e) => {
     setInputSymbol(e);
   };
 
-  useEffect(() => {
-    handleAddStock()
-  }, [inputSymbol]);
+useEffect(() => {
+  if (firstRender) {
+    setFirstRender(false);
+  } else {
+    handleAddStock();
+  }
+}, [inputSymbol]);
 
   const handleAddStock = () => {
     const newStock = `${selectedExchange}:${inputSymbol}`;
