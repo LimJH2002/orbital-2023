@@ -5,6 +5,7 @@ import StocksTable from "@/components/stocks-table";
 import { checkDuplicates } from "@/functions/Stocks";
 import NotificationStocks from "@/components/ui/notification-addStocks";
 import Searchbar from "@/components/ui/search";
+import { input } from "@material-tailwind/react";
 
 const MarketOverview = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.MarketOverview),
@@ -32,11 +33,16 @@ export default function MarketOverviewWidget() {
 
   const handleExchangeChange = (e) => {
     setSelectedExchange(e.target.value);
+    console.log(e.target.value);
   };
 
-  const handleSymbolChange = (e) => {
-    setInputSymbol(e.target.value);
+  const handleSymbolClick = (e) => {
+    setInputSymbol(e);
   };
+
+  useEffect(() => {
+    handleAddStock()
+  }, [inputSymbol]);
 
   const handleAddStock = () => {
     const newStock = `${selectedExchange}:${inputSymbol}`;
@@ -116,6 +122,7 @@ export default function MarketOverviewWidget() {
           <select
             id="exchange"
             name="exchange"
+            onChange={handleExchangeChange}
             className="mr-3 rounded-xl text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
             defaultValue="NASDAQ"
           >
@@ -123,7 +130,11 @@ export default function MarketOverviewWidget() {
             <option>NYSE</option>
           </select>
 
-          <Searchbar handleSymbolChange={handleSymbolChange} />
+          <Searchbar
+            handleSymbolClick={handleSymbolClick}
+            selectedExchange={selectedExchange}
+            symbols={symbols}
+          />
         </div>
         <StocksTable
           className="mt-5"
