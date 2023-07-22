@@ -1,13 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NASDAQ } from "@/data/nasdaq";
+import { NYSE } from "@/data/nyse";
 
 const Searchbar = (props) => {
   const [activeSearch, setActiveSearch] = useState([]);
+  const [searchValue, setSearchValue] = useState(""); // State variable for input value
+
+  useEffect(() => {
+    setSearchValue(""); // Reset the input when the exchange is switched
+    setActiveSearch([]); // Clear the search results when the exchange is switched
+  }, [props.selectedExchange]);
 
   const handleSearch = (e) => {
     const upperCaseValue = e.target.value.toUpperCase();
+    setSearchValue(upperCaseValue); // Set the input value to the state
 
     if (upperCaseValue == "") {
       setActiveSearch([]);
@@ -23,6 +31,7 @@ const Searchbar = (props) => {
           type="search"
           placeholder="Search Symbols"
           className="w-full p-4 rounded-xl bg-slate-800 text-white"
+          value={searchValue} // Controlled input
           onChange={(e) => handleSearch(e)}
         />
       </div>
@@ -32,7 +41,11 @@ const Searchbar = (props) => {
           {activeSearch.map((stock) => (
             <span
               className="hover:bg-slate-700 p-2 rounded-xl"
-              onClick={() => props.handleSymbolClick(stock)}
+              onClick={() => {
+                props.handleSymbolClick(stock);
+                setSearchValue(""); // Clear the input when a span is clicked
+                setActiveSearch([]); // Clear search results when a span is clicked
+              }}
             >
               {stock}
             </span>
