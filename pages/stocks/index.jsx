@@ -42,7 +42,7 @@ const Main = () => {
   return (
     <Fragment>
       <Head>
-        <title>Bank</title>
+        <title>Stocks</title>
         <link rel="icon" sizes="any" href="/LogoF.ico"></link>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

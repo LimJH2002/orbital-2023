@@ -111,8 +111,20 @@ export default function MarketOverviewWidget() {
         }}
       />
 
-      <div className="ml-10 bg-gray-800 rounded-xl p-3">
-        <Searchbar />
+      <div className="ml-10 bg-gray-800 rounded-xl p-3 w-full">
+        <div className="flex flex-row">
+          <select
+            id="exchange"
+            name="exchange"
+            className="mr-3 rounded-xl text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            defaultValue="NASDAQ"
+          >
+            <option>NASDAQ</option>
+            <option>NYSE</option>
+          </select>
+
+          <Searchbar handleSymbolChange={handleSymbolChange} />
+        </div>
         <StocksTable
           className="mt-5"
           stocks={symbols}

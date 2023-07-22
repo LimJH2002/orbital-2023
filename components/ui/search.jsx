@@ -17,7 +17,7 @@ const Searchbar = () => {
   };
 
   return (
-    <form className="w-96 relative">
+    <form className="relative w-full">
       <div className="relative">
         <input
           type="search"
