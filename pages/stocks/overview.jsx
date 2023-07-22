@@ -5,7 +5,6 @@ import StocksTable from "@/components/stocks-table";
 import { checkDuplicates } from "@/functions/Stocks";
 import NotificationStocks from "@/components/ui/notification-addStocks";
 import Searchbar from "@/components/ui/search";
-import { input } from "@material-tailwind/react";
 
 const MarketOverview = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.MarketOverview),
