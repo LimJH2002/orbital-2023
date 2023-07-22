@@ -4,7 +4,7 @@ export default function StocksTable(props) {
   };
 
   return (
-    <div className="bg-gray-900 mt-5">
+    <div className="bg-gray-900 mt-9">
       <div className="mx-auto">
         <div className="bg-gray-900 py-10">
           <div className="px-4 sm:px-6 lg:px-8">
@@ -15,7 +15,7 @@ export default function StocksTable(props) {
                 </h1>
               </div>
             </div>
-            <div className="mt-8 flow-root">
+            <div className="mt-10 flow-root max-h-96 overflow-auto">
               <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <table className="min-w-full divide-y divide-gray-700">
@@ -50,7 +50,7 @@ export default function StocksTable(props) {
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                             {stock.s.split(":")[0]}
                           </td>
-                          <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                          <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-0">
                             <a
                               href="#"
                               onClick={() => handleRemoveItem(stock)}
