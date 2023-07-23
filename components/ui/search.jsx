@@ -6,11 +6,13 @@ import { NYSE } from "@/data/nyse";
 
 const Searchbar = (props) => {
   const [activeSearch, setActiveSearch] = useState([]);
+  const [exchangeData, setExchangeData] = useState(NASDAQ);
   const [searchValue, setSearchValue] = useState(""); // State variable for input value
 
   useEffect(() => {
     setSearchValue(""); // Reset the input when the exchange is switched
     setActiveSearch([]); // Clear the search results when the exchange is switched
+    setExchangeData(props.selectedExchange === "NYSE" ? NYSE : NASDAQ);
   }, [props.selectedExchange]);
 
   const handleSearch = (e) => {
@@ -21,7 +23,7 @@ const Searchbar = (props) => {
       setActiveSearch([]);
       return false;
     }
-    setActiveSearch(NASDAQ.filter((w) => w.includes(upperCaseValue)));
+    setActiveSearch(exchangeData.filter((w) => w.includes(upperCaseValue)));
   };
 
   return (
