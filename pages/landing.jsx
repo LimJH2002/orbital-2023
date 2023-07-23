@@ -45,36 +45,33 @@ export default function Landing() {
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pb-32 lg:flex lg:py-12">
-        <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-32">
-          <img
-            className="h-11"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-            alt="FinForce Logo"
-          />
+        <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-24">
+          <img className="h-12" src="./Logo.png" alt="FinForce Logo" />
           <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            The All in one budgetting app
+            The All-In-One Budgetting App
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-300">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
+            A unified personal finance app equipped with real-time stock
+            tracking, open banking API integration, and customizable watchlists.
+            Plus, with a built-in news saving feature, stay ahead with the
+            latest financial trends.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <a
               href="#"
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
-              Get started
+              Register
             </a>
             <a href="#" className="text-sm font-semibold leading-6 text-white">
-              Learn more <span aria-hidden="true">→</span>
+              Existing User <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
         <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
           <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
             <img
-              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+              src="./Dashboard.png"
               alt="App screenshot"
               width={2432}
               height={1442}
