@@ -89,7 +89,7 @@ export default function MarketOverviewWidget() {
   if (height === null || width === null) return <Loading />;
 
   return (
-    <div className="mx-20 flex flex-row">
+    <div className="mx-20 md:flex md:flex-row">
       <NotificationStocks show={show} setShow={setShow} />
       <MarketOverview
         widgetProps={{
