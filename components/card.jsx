@@ -32,24 +32,28 @@ const cards = [
     icon: ScaleIcon,
     amount: "SGD 0",
     lastMonth: "20",
+    class: "h-6 w-6 text-blue-600",
   },
   {
     name: "Money In",
     icon: BanknotesIcon,
     amount: "SGD 0",
     lastMonth: "-20",
+    class: "h-6 w-6 text-lime-600",
   },
   {
     name: "Money Out",
     icon: FireIcon,
     amount: "SGD 0",
     lastMonth: "50",
+    class: "h-6 w-6 text-red-600",
   },
   {
     name: "Suggested Daily Spending",
     icon: LightBulbIcon,
     amount: "SGD 0",
     lastMonth: "-3",
+    class: "h-6 w-6 text-yellow-400",
   },
 ];
 
@@ -156,7 +160,7 @@ export default function Card(props) {
                       <div className="flex items-center">
                         <div className="flex-shrink-0">
                           <card.icon
-                            className="h-6 w-6 text-gray-500"
+                            className={card.class}
                             aria-hidden="true"
                           />
                         </div>
