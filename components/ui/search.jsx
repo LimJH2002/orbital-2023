@@ -5,8 +5,8 @@ import { NASDAQ } from "@/data/nasdaq";
 import { NYSE } from "@/data/nyse";
 
 const Searchbar = (props) => {
-  const [activeSearch, setActiveSearch] = useState([]);
   const [exchangeData, setExchangeData] = useState(NASDAQ);
+  const [activeSearch, setActiveSearch] = useState(exchangeData);
   const [searchValue, setSearchValue] = useState(""); // State variable for input value
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const Searchbar = (props) => {
     setSearchValue(upperCaseValue); // Set the input value to the state
 
     if (upperCaseValue == "") {
-      setActiveSearch([]);
-      return false;
+      setActiveSearch(exchangeData);
+      // return false;
     }
     setActiveSearch(exchangeData.filter((w) => w.includes(upperCaseValue)));
   };
@@ -34,6 +34,8 @@ const Searchbar = (props) => {
           placeholder="Search Symbols"
           className="w-full p-4 rounded-xl bg-slate-800 text-white"
           value={searchValue} // Controlled input
+          onFocus={(e) => handleSearch(e)}
+          onBlur={()=> setActiveSearch([])}
           onChange={(e) => handleSearch(e)}
         />
       </div>
