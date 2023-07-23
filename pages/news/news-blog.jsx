@@ -34,7 +34,7 @@ export default function NewsBlog() {
 
   return (
     <div className="pb-20 px-20">
-      <Notification show={show} setShow={setShow} />
+      <Notification show={show} setShow={setShow} className="relative z-20" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">

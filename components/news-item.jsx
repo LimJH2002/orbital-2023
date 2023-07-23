@@ -62,7 +62,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
       <button className="flex flex-col items-start bg-gray-800 rounded-2xl hover:bg-gray-700">
         <article>
           <div
-            className="relative w-full"
+            className="relative w-full z-10"
             onClick={() => {
               setVisible(true);
               setShowMore(true);
