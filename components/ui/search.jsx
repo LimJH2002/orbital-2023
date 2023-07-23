@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NASDAQ } from "@/data/nasdaq";
 import { NYSE } from "@/data/nyse";
+import { BINANCE } from "@/data/binance";
 
 const Searchbar = (props) => {
   const [exchangeData, setExchangeData] = useState(NASDAQ);
@@ -11,7 +12,13 @@ const Searchbar = (props) => {
   useEffect(() => {
     setSearchValue(""); // Reset the input when the exchange is switched
     setActiveSearch([]); // Clear the search results when the exchange is switched
-    setExchangeData(props.selectedExchange === "NYSE" ? NYSE : NASDAQ);
+    setExchangeData(
+      props.selectedExchange === "NYSE"
+        ? NYSE
+        : props.selectedExchange === "BINANCE"
+        ? BINANCE
+        : NASDAQ
+    );
   }, [props.selectedExchange]);
 
   const handleSearch = (e) => {

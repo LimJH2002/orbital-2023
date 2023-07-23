@@ -132,6 +132,7 @@ useEffect(() => {
           >
             <option>NASDAQ</option>
             <option>NYSE</option>
+            <option>BINANCE</option>
           </select>
 
           <Searchbar
