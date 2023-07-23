@@ -24,10 +24,10 @@ export default function MarketOverviewWidget() {
       s: "NASDAQ:AAPL",
     },
     {
-      s: "NASDAQ:TSLA",
+      s: "NYSE:BABA",
     },
     {
-      s: "NYSE:BABA",
+      s: "NASDAQ:TSLA",
     },
   ];
 
@@ -137,6 +137,7 @@ useEffect(() => {
             handleSymbolClick={handleSymbolClick}
             selectedExchange={selectedExchange}
             symbols={symbols}
+            setShow={setShow}
           />
         </div>
         <StocksTable
