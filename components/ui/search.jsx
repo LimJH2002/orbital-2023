@@ -37,7 +37,7 @@ const Searchbar = (props) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setActiveSearch([]);
-    }, 200); // delay in milliseconds
+    }, 400); // delay in milliseconds
   };
 
   return (
