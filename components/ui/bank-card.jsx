@@ -66,7 +66,7 @@ export default function BankCard(props) {
               <button
                 type="button"
                 // onClick={() => setLink((prev) => !prev)}
-                className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
+                className="rounded-full bg-gray-400 px-4 py-2.5 text-sm font-semibold text-white shadow-sm"
               >
                 Coming Soon
               </button>
