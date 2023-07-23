@@ -40,13 +40,13 @@ export default function MarketOverviewWidget() {
     setInputSymbol(e);
   };
 
-useEffect(() => {
-  if (firstRender) {
-    setFirstRender(false);
-  } else {
-    handleAddStock();
-  }
-}, [inputSymbol]);
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false);
+    } else {
+      handleAddStock();
+    }
+  }, [inputSymbol]);
 
   const handleAddStock = () => {
     const newStock = `${selectedExchange}:${inputSymbol}`;

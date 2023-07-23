@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { exchangeLogo } from "@/functions/Stocks";
+
 export default function StocksTable(props) {
   const handleRemoveItem = (ele) => {
     props.setSymbols(props.stocks.filter((item) => item.s !== ele.s));
@@ -48,7 +51,10 @@ export default function StocksTable(props) {
                             {stock.s.split(":")[1]}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                            {stock.s.split(":")[0]}
+                            <div className="flex flex-row">
+                              {exchangeLogo(stock.s.split(":")[0])}
+                              {stock.s.split(":")[0]}
+                            </div>
                           </td>
                           <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-0">
                             <a
