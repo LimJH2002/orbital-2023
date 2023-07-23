@@ -28,7 +28,7 @@ export default function MarketOverviewWidget() {
       s: "NYSE:BABA",
     },
     {
-      s: "NASDAQ:TSLA",
+      s: "BINANCE:BTCUSDT",
     },
   ];
 
@@ -152,5 +152,4 @@ export default function MarketOverviewWidget() {
       </div>
     </div>
   );
-
 }

@@ -10,7 +10,11 @@ function App({ Component, pageProps }) {
   return (
     // <SessionProvider session={pageProps.session}>
     <AuthProvider>
-      {pathname !== "/login" && pathname !== "/register" && pathname !== "/intro" && pathname !== "/intro2" ? (
+      {pathname !== "/login" &&
+      pathname !== "/register" &&
+      pathname !== "/intro" &&
+      pathname !== "/intro2" &&
+      pathname !== "/landing" ? (
         <Layout auth={auth}>
           <Component {...pageProps} />
         </Layout>
