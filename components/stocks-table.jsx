@@ -7,56 +7,59 @@ export default function StocksTable(props) {
   };
 
   return (
-    <div className="bg-gray-900 mt-9 rounded-xl">
+    <div className="bg-gray-900 mt-9 rounded-xl overflow-hidden">
       <div className="mx-auto">
         <div className="py-10">
           <div className="px-4 sm:px-6 lg:px-8">
-            <div className="sm:flex sm:items-center">
+            <div className="sm:flex sm:items-center mb-5">
               <div className="sm:flex-auto">
-                <h1 className="text-base font-semibold leading-6 text-white">
+                <h1 className="text-lg font-semibold leading-6 text-white">
                   Added Stocks
                 </h1>
               </div>
             </div>
             <div className="mt-5 max-h-96 overflow-y-scroll">
               <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
-                <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div className="inline-block min-w-full align-middle sm:px-6 lg:px-8">
                   <table className="min-w-full divide-y divide-gray-700">
                     <thead>
                       <tr>
                         <th
                           scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0"
+                          className="px-6 py-3 w-1/3 text-left text-xs font-medium text-white uppercase tracking-wider"
                         >
                           Symbol
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-white"
+                          className="px-6 py-3 w-1/3 text-left text-xs font-medium text-white uppercase tracking-wider"
                         >
                           Exchange
                         </th>
                         <th
                           scope="col"
-                          className="relative py-3.5 pl-3 pr-4 sm:pr-0"
+                          className="px-6 py-3 w-1/3 text-left text-xs font-medium uppercase tracking-wider"
                         >
-                          <span className="sr-only">Remove</span>
+                          {/* <span className="sr-only">Remove</span> */}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-800">
-                      {props.stocks.map((stock) => (
-                        <tr key={stock.s}>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                    <tbody className="bg-gray-800 divide-y divide-gray-700">
+                      {props.stocks.map((stock, index) => (
+                        <tr
+                          key={stock.s}
+                          className={`bg-${
+                            index % 2 === 0 ? "gray-700" : "gray-800"
+                          } hover:bg-gray-600`}
+                        >
+                          <td className="px-6 py-4 text-sm font-medium text-white">
                             {stock.s.split(":")[1]}
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                            <div className="flex flex-row">
-                              {exchangeLogo(stock.s.split(":")[0])}
-                              {stock.s.split(":")[0]}
-                            </div>
+                          <td className="px-6 py-4 text-sm text-gray-300 flex items-center">
+                            {exchangeLogo(stock.s.split(":")[0])}
+                            {stock.s.split(":")[0]}
                           </td>
-                          <td className="relative whitespace-nowrap py-4 text-right text-sm font-medium sm:pr-0">
+                          <td className="px-6 py-4 text-right text-sm font-medium">
                             <a
                               href="#"
                               onClick={() => handleRemoveItem(stock)}
