@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NASDAQ } from "@/data/nasdaq";
 import { NYSE } from "@/data/nyse";
 
@@ -8,6 +6,7 @@ const Searchbar = (props) => {
   const [exchangeData, setExchangeData] = useState(NASDAQ);
   const [activeSearch, setActiveSearch] = useState(exchangeData);
   const [searchValue, setSearchValue] = useState(""); // State variable for input value
+  const timeoutRef = useRef(null); // useRef to hold timeout
 
   useEffect(() => {
     setSearchValue(""); // Reset the input when the exchange is switched
@@ -26,6 +25,14 @@ const Searchbar = (props) => {
     setActiveSearch(exchangeData.filter((w) => w.includes(upperCaseValue)));
   };
 
+  // Clear search results with delay
+  const handleBlur = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveSearch([]);
+    }, 100); // delay in milliseconds
+  };
+
   return (
     <form className="relative w-full">
       <div className="relative">
@@ -35,7 +42,7 @@ const Searchbar = (props) => {
           className="w-full p-4 rounded-xl bg-slate-800 text-white"
           value={searchValue} // Controlled input
           onFocus={(e) => handleSearch(e)}
-          // onBlur={()=> setActiveSearch([])}
+          onBlur={handleBlur}
           onChange={(e) => handleSearch(e)}
         />
       </div>
