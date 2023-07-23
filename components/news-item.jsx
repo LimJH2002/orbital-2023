@@ -8,7 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-
 export const NewsItem = ({ post, show, setShow, save }) => {
   const { visible, setVisible, bindings } = useModal();
   const [showMore, setShowMore] = useState(false);
@@ -20,12 +19,11 @@ export const NewsItem = ({ post, show, setShow, save }) => {
   const [uid, setUid] = useState("");
   const router = useRouter();
 
-
   useEffect(() => {
     if (currentUser) {
-    setUid(currentUser.uid)
+      setUid(currentUser.uid);
     }
-  }, [currentUser])
+  }, [currentUser]);
 
   const handleSave = async (e) => {
     // e.preventDefault();
@@ -58,7 +56,6 @@ export const NewsItem = ({ post, show, setShow, save }) => {
     // closeWindow();
     // router.reload();
   };
-
 
   return (
     <Fragment>
@@ -93,7 +90,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
               </div>
               {!saved ? (
                 <BsBookmark
-                  className="mt-5 mx-2 z-10 text-gray-300"
+                  className="mt-5 mx-2 text-gray-300"
                   onClick={() => {
                     setShow(true);
                     setSaved(true);
@@ -102,7 +99,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
                 />
               ) : (
                 <BsBookmarkFill
-                  className="mt-5 mx-2 z-10 text-gray-300"
+                  className="mt-5 mx-2 text-gray-300"
                   onClick={() => {
                     setShow(false);
                     setSaved(false);
@@ -113,7 +110,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
             </div>
 
             <div
-              className="group relative mx-2 text-left"
+              className="group mx-2 text-left"
               onClick={() => {
                 setVisible(true);
                 setShowMore(true);
@@ -195,20 +192,22 @@ export const NewsItem = ({ post, show, setShow, save }) => {
               <p className="pl-2">Saved</p>
             </Button>
           )}
-          {post.href && <Button
-            auto
-            flat
-            color="neutral"
-            onPress={() => {
-              setVisible(false);
-              setShowMore(false);
-            }}
-            className="hover:bg-slate-100"
-          >
-            <a href={post.href} target="_blank">
-              Open Original
-            </a>
-          </Button>}
+          {post.href && (
+            <Button
+              auto
+              flat
+              color="neutral"
+              onPress={() => {
+                setVisible(false);
+                setShowMore(false);
+              }}
+              className="hover:bg-slate-100"
+            >
+              <a href={post.href} target="_blank">
+                Open Original
+              </a>
+            </Button>
+          )}
           <Button
             auto
             flat
