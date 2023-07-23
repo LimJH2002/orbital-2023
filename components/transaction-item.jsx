@@ -25,7 +25,7 @@ function TransactionItem({
       <td
         className={
           "whitespace-nowrap px-3 py-4 text-sm " +
-          (transaction.type === "Money-in" ? "text-lime-500" : "text-red-600")
+          (transaction.type === "Money-in" ? "text-lime-600" : "text-red-600")
         }
       >
         {transaction.type}
