@@ -26,7 +26,7 @@ for i in range(1, 27):  # As there are 26 pages
         # Append pairs to the all_pairs list
         all_pairs.extend(pairs)
 
-# Print all pairs
+# Print all pairs - Needs around 30 - 60 seconds to finish scraping all the data
 print(all_pairs)
 print(len(all_pairs))
 
