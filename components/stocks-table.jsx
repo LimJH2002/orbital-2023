@@ -18,8 +18,8 @@ export default function StocksTable(props) {
                 </h1>
               </div>
             </div>
-            <div className="mt-10 flow-root max-h-96 overflow-auto">
-              <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="mt-5 max-h-96 overflow-y-scroll">
+              <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <table className="min-w-full divide-y divide-gray-700">
                     <thead>
