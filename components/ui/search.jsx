@@ -55,10 +55,10 @@ const Searchbar = (props) => {
       </div>
 
       {activeSearch.length > 0 && (
-        <div className="absolute top-20 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col overflow-y-auto max-h-60 z-10">
+        <div className="absolute top-20 p-4 bg-slate-600 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col overflow-y-auto max-h-72 z-10">
           {activeSearch.map((stock) => (
             <span
-              className="hover:bg-slate-700 p-2 rounded-xl"
+              className="hover:bg-slate-500 p-2 rounded-xl"
               onClick={() => {
                 props.handleSymbolClick(stock);
                 setSearchValue(""); // Clear the input when a span is clicked
