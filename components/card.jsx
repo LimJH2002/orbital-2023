@@ -13,11 +13,9 @@ import MonthName from "@/functions/MonthName";
 import { calculate_summary } from "@/lib/summary";
 import TransformBankTransactions from "@/functions/TransformBankTransactions";
 
-
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const currMonth = MonthName();
 const token = "ae8616d7-4e78-3b77-b92e-1ac3c6685328";
-
 
 const desc = [
   "Money left for " + currMonth,
@@ -114,21 +112,38 @@ export default function Card(props) {
     const currency = response.currency;
     // console.log(selectedOpt, bankData)
     if (!selectedOpt || !bankData) {
-      console.log("true", selectedOpt, bankData)
-      newSummary[0].amount = currency + " " + response.budgetLeft;
+      // console.log("true", selectedOpt, bankData)
+      newSummary[0].amount =
+        parseFloat(response.budgetLeft) > 0
+          ? currency + " " + response.budgetLeft
+          : "Out of Budget!";
       newSummary[1].amount = currency + " " + response.moneyIn;
       newSummary[2].amount = currency + " " + response.moneyOut;
-      newSummary[3].amount = currency + " " + response.daily;
+      newSummary[3].amount =
+        parseFloat(response.daily) > 0
+          ? currency + " " + response.daily
+          : "Out of Budget!";
     } else {
-      console.log(selectedOpt, bankData)
-      const sum = calculate_summary(response, TransformBankTransactions(bankData.results.responseList), currency, selectedOpt);
-      console.log(sum)
-      newSummary[0].amount = currency + " " + sum.budgetLeft;
+      // console.log(selectedOpt, bankData);
+      const sum = calculate_summary(
+        response,
+        TransformBankTransactions(bankData.results.responseList),
+        currency,
+        selectedOpt
+      );
+      // console.log(sum)
+      newSummary[0].amount =
+        parseFloat(sum.budgetLeft) > 0
+          ? currency + " " + sum.budgetLeft
+          : "Out of Budget!";
       newSummary[1].amount = currency + " " + sum.moneyIn;
       newSummary[2].amount = currency + " " + sum.moneyOut;
-      newSummary[3].amount = currency + " " + sum.daily;
+      newSummary[3].amount =
+        parseFloat(sum.daily) > 0
+          ? currency + " " + sum.daily
+          : "Out of Budget!";
     }
-    
+
     setFetched(true);
     // setSummary(() => newSummary);
     setSummary(newSummary);
