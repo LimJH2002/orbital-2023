@@ -5,6 +5,7 @@ import StocksTable from "@/components/stocks-table";
 import { checkDuplicates } from "@/functions/Stocks";
 import NotificationStocks from "@/components/ui/notification-addStocks";
 import Searchbar from "@/components/ui/search";
+import { sortStock } from "@/functions/Stocks";
 
 const MarketOverview = dynamic(
   () => import("react-tradingview-embed").then((mod) => mod.MarketOverview),
@@ -50,7 +51,7 @@ useEffect(() => {
   const handleAddStock = () => {
     const newStock = `${selectedExchange}:${inputSymbol}`;
     if (!checkDuplicates(newStock, symbols)) {
-      setSymbols((prev) => [...prev, { s: newStock }]);
+      setSymbols((prev) => sortStock([...prev, { s: newStock }]));
       setShow(false);
     } else {
       setShow(true);

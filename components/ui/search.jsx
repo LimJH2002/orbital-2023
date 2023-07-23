@@ -35,7 +35,7 @@ const Searchbar = (props) => {
           className="w-full p-4 rounded-xl bg-slate-800 text-white"
           value={searchValue} // Controlled input
           onFocus={(e) => handleSearch(e)}
-          onBlur={()=> setActiveSearch([])}
+          // onBlur={()=> setActiveSearch([])}
           onChange={(e) => handleSearch(e)}
         />
       </div>
