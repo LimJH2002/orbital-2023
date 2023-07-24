@@ -130,39 +130,6 @@ export default function Profile() {
 
             <form className="md:col-span-2" onSubmit={handleUserProfile}>
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
-                <div className="col-span-full flex items-center gap-x-8">
-                  <Image
-                    src={user.photoURL ? user.photoURL : "/DefaultAvatar.png"}
-                    alt="Profile Picture"
-                    width={1000}
-                    height={1000}
-                    className="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover"
-                  />
-                  <div>
-                    <input
-                      id="user-photo"
-                      name="user-photo"
-                      type="file"
-                      accept=".png, .jpg"
-                      onChange={handleChange}
-                      hidden={true}
-                    />
-                    <label
-                      type="button"
-                      htmlFor="user-photo"
-                      className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
-                    >
-                      Change Avatar
-                    </label>
-                    <span id="file-chosen" className="px-2 text-white text-sm">
-                      {fileName}
-                    </span>
-                    <p className="mt-2 text-xs leading-5 text-gray-400">
-                      JPG or PNG only.
-                    </p>
-                  </div>
-                </div>
-
                 <div className="col-span-full">
                   <label
                     htmlFor="username"
