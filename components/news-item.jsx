@@ -13,7 +13,7 @@ export const NewsItem = ({ post, show, setShow, save }) => {
   const [showMore, setShowMore] = useState(false);
   const [saved, setSaved] = useState(save);
   const Content = dynamic(() => import("./news-body"));
-  console.log("showPost", post);
+  // console.log("showPost", post);
   const { currentUser } = useAuth();
   // const uid = currentUser.uid;
   const [uid, setUid] = useState("");

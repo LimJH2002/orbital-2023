@@ -29,7 +29,7 @@ export async function getUserProfile(req, res) {
         linkedBank: false
       })
     }
-    console.log(getSnap.data());
+    // console.log(getSnap.data());
     // if (!getSnap.data().username) {
     //     await updateDoc(docRef, {
     //         username:"",
@@ -50,7 +50,7 @@ export async function getUserProfile(req, res) {
         budget: newSnap.data().budget,
         linkedBank: newSnap.data().linkedBank
     };
-    console.log("api getUser", userData);
+    // console.log("api getUser", userData);
     res.status(200).json(userData);
   } catch (err) {
     console.log(err);
@@ -82,7 +82,7 @@ export async function updateUserProfile(req, res) {
         budget: 0,
       });
     }
-    console.log("update",formData);
+    // console.log("update",formData);
     const docSnap = await getDoc(docRef);
     if (formData.username) {
       await updateDoc(docRef, {

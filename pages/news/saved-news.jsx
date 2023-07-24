@@ -24,13 +24,13 @@ export default function SavedNews(props) {
   useEffect(() => {
     if (currentUser) {
       setUid(currentUser.uid);
-      console.log(uid);
+      // console.log(uid);
     }
   }, [currentUser]);
 
   useEffect(() => {
     if (uid) {
-      console.log(uid);
+      // console.log(uid);
       fetch("/api/savedNews?userId=" + uid)
         .then((res) => res.json())
         .then((data) => {

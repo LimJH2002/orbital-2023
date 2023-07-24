@@ -43,7 +43,7 @@ export async function getUserSummary(req, res) {
             });
         }
         const docSnap = await getDoc(docRef);
-        console.log("summary: ", docSnap.data().summary);
+        // console.log("summary: ", docSnap.data().summary);
         const currMonth = getMonth();
         const preferredCurrency = docSnap.data().currency ? docSnap.data().currency : "SGD";
         // if (docSnap.data().summary.date != currMonth) {
@@ -95,7 +95,7 @@ export async function setBudget(req, res) {
     const docRef = doc(db, "users", userId);
     const getSnap = await getDoc(docRef);
     const formData = req.body;
-    console.log("form", formData);
+    // console.log("form", formData);
     if (!formData.hasOwnProperty("budget")) {
       throw "Missing body";
     }
@@ -129,7 +129,7 @@ export async function setBudget(req, res) {
       budget: formData.budget,
     });
     const docSnap = await getDoc(docRef);
-    console.log("budget: ", docSnap.data().budget);
+    // console.log("budget: ", docSnap.data().budget);
     const currMonth = getMonth();
     const newSnap = await getDoc(docRef);
     const result = {

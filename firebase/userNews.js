@@ -19,7 +19,7 @@ export async function getSavedNews(req, res) {
             });
         }
         const docSnap = await getDoc(docRef);
-        console.log("news: ", docSnap.data().savedNews);
+        // console.log("news: ", docSnap.data().savedNews);
         res.status(200).json(docSnap.data().savedNews);
     } catch (err) {
       console.log(err);
@@ -51,7 +51,7 @@ export async function addNews(req, res) {
             })
         })
         await updateDoc(docRef, {newsCount:n+1});
-        console.log("news: ", docSnap.data().savedNews);
+        // console.log("news: ", docSnap.data().savedNews);
         const newSnap = await getDoc(docRef);
         res.status(200).json(newSnap.data().savedNews);
     } catch (err) {
@@ -64,7 +64,7 @@ export async function deleteSavedNews(req, res) {
     const { userId } = req.query;
       try {
         const article = req.body;
-        console.log("ar", article)
+        // console.log("ar", article)
         const docRef = doc(db, 'users', userId);
         const getSnap = await getDoc(docRef);
         if (!getSnap.data().savedNews) {
@@ -99,7 +99,7 @@ export async function deleteSavedNews(req, res) {
             savedNews: arrayRemove(article)
         })
         await updateDoc(docRef, {newsCount:n+1});
-        console.log("news: ", docSnap.data().savedNews);
+        // console.log("news: ", docSnap.data().savedNews);
         const newSnap = await getDoc(docRef);
         res.status(200).json(newSnap.data().savedNews);
     } catch (err) {

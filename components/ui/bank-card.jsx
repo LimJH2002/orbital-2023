@@ -18,7 +18,7 @@ export default function BankCard(props) {
       .then((e) => {
         // setUserLinkBank(e.linkedBank);
         setIsLinked(e.linkedBank);
-        console.log("bool:", e.linkedBank);
+        // console.log("bool:", e.linkedBank);
         // setIsLoading(false);
       });
   };
