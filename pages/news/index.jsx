@@ -1,13 +1,12 @@
-import { Fragment, React, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import NewsTab from "@/components/news-tab";
 import { getAuth } from "firebase/auth";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { Fragment, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../loading";
-import NewsTab from "@/components/news-tab";
 import NewsBlog from "./news-blog";
 import SavedNews from "./saved-news";
-import Head from "next/head";
-
 
 const News = () => {
   const router = useRouter();

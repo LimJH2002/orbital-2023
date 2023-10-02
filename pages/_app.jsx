@@ -1,7 +1,7 @@
-import "@/styles/globals.css";
 import { AuthProvider } from "@/context/AuthContext";
-import { useRouter } from "next/router";
+import "@/styles/globals.css";
 import { getAuth } from "firebase/auth";
+import { useRouter } from "next/router";
 import Layout from "./layout";
 
 function App({ Component, pageProps }) {
